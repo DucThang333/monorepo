@@ -1,0 +1,11 @@
+{
+    "name": "@package/prettier-config",
+    "version": "0.0.0",
+    "private": true,
+    "exports": {
+        "./prettier-config": "./prettierrc.js"
+    },
+    "devDependencies": {
+        "prettier": "3.5.1"
+    }
+}

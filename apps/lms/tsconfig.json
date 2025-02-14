@@ -1,0 +1,41 @@
+{
+  "extends": "@package/typescript-config",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {},
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "exclude": [
+    "**/node_modules",
+    "**/.*/*",
+    "dist"
+  ],
+  "include": [
+    "**/*.cjs",
+    "**/*.js",
+    "**/*.json",
+    "**/*.jsx",
+    "**/*.mjs",
+    "**/*.mts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".eslintrc.*",
+    ".next/types/**/*.ts"
+  ]
+}

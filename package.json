@@ -1,0 +1,9 @@
+{
+    "name": "IZONE",
+    "type": "module",
+    "workspaces": [
+      "packages/*"
+    ],
+    "license": "MIT",
+    "private": true
+  }
