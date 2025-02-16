@@ -6,17 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "tailwind": {
     "baseColor": "slate",
     "cssVariables": true
   },
-  "exports":{
-    "./component/*":"./src/components/*.tsx",
-    "./lib/*":"./src/components/*.ts",
-    "./chart/*":"./src/components/charts/*.tsx",
-    "./icon/*":"./src/components/icons/index.tsx"
+  "exports": {
+    "./component/*": "./src/components/*.tsx",
+    "./lib/*": "./src/components/*.ts",
+    "./chart/*": "./src/components/charts/*.tsx",
+    "./icon/*": "./src/components/icons/index.tsx"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
@@ -66,6 +68,14 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "3.2.4",
+    "@storybook/addon-essentials": "8.5.6",
+    "@storybook/addon-interactions": "8.5.6",
+    "@storybook/addon-onboarding": "8.5.6",
+    "@storybook/blocks": "8.5.6",
+    "@storybook/nextjs": "8.5.6",
+    "@storybook/react": "8.5.6",
+    "@storybook/test": "8.5.6",
     "@types/lodash.merge": "^4.6.9",
     "@types/node": "^20",
     "@types/numeral": "^2.0.5",
@@ -77,8 +87,10 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^9.20.1",
     "eslint-config-next": "14.0.3",
+    "eslint-plugin-storybook": "^0.11.3",
     "postcss": "^8",
     "react-html-props": "^2.0.3",
+    "storybook": "8.5.6",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
