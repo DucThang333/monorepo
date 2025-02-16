@@ -36,3 +36,6 @@ dist/
 .next/
 out/
 coverage/
+
+
+package-lock.json
