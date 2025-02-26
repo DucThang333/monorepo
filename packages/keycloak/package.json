@@ -1,13 +1,13 @@
 {
-    "name": "@package/keycloak",    
-    "version": "0.0.0",
-    "license": "ISC",
-    "exports": {
-      ".": "./index.ts",
-      "./type": "./type.ts" 
-    },
-    "dependencies": {
-      "keycloak-js": "^26.0.7"
-    }
+  "name": "@package/keycloak",
+  "version": "0.0.0",
+  "license": "ISC",
+  "exports": {
+    ".": "./index.ts",
+    "./type": "./type.ts"
+  },
+  "dependencies": {
+    "@react-keycloak/web": "^3.4.0",
+    "keycloak-js": "^26.0.7"
+  }
 }
-  

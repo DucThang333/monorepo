@@ -11,6 +11,7 @@
   "dependencies": {
     "@package/keycloak": "workspace:*",
     "@package/tailwind-config": "workspace:*",
+    "@package/auth": "workspace:*",
     "@react-router/fs-routes": "^7.2.0",
     "@react-router/node": "^7.2.0",
     "@react-router/serve": "^7.2.0",
@@ -19,7 +20,8 @@
     "npm": "^11.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.2.0"
+    "react-router": "^7.2.0",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@react-router/dev": "^7.2.0",
