@@ -8,8 +8,9 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import "./style.css";
-import { ReactKeycloakProvider } from "@react-keycloak/web"
+import {ReactKeycloakProvider } from "@package/keycloak"
 import keycloak from "~/libs/keycloak"
+import { useEffect } from "react";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -43,11 +44,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <ReactKeycloakProvider authClient={keycloak}>
-    <Outlet />
-  </ReactKeycloakProvider>;
+  useEffect(()=>{
+    if(!keycloak.didInitialize){
+      keycloak.init()
+    }   
+  },[])
 
-
+  return <Outlet />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
