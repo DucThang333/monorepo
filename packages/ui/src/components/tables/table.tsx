@@ -12,7 +12,7 @@ type TableParams<T> = {
     query:DefinedUseQueryResult<T[], any>,
     columnFilters?:ColumnFiltersState
 }
-export function Table<T>({
+export function     Table<T>({
     columns,
     query,
     flexRender,

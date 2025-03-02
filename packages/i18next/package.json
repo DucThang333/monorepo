@@ -1,0 +1,13 @@
+{
+  "name": "@package/i18next",
+  "version": "0.0.0",
+  "license": "ISC",
+  "exports": {
+    ".": "./index.ts",
+    "./i18n": "./src/index.ts"
+  },
+  "dependencies": {
+    "i18next": "^24.2.2",
+    "react-i18next": "^15.4.1"
+  }
+}
