@@ -1,0 +1,15 @@
+{
+  "name": "@package/auth",
+  "version": "1.0.0",
+  "license": "ISC",
+  "exports": {
+    "./type": "./src/type.ts",
+    "./repositories": "./src/repositories.ts",
+    "./provider": "./src/provider.tsx"
+  },
+  "dependencies": {
+    "@package/keycloak": "workspace:*",
+    "@package/store": "workspace:*",
+    "react": "^19.0.0"
+  }
+}

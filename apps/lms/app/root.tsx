@@ -44,12 +44,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  useEffect(()=>{
-    if(!keycloak.didInitialize){
-      keycloak.init()
-    }   
-  },[])
-
   return <Outlet />;
 }
 

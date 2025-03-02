@@ -1,0 +1,13 @@
+{
+    "name": "@package/store",
+    "version": "0.0.0",
+    "private": true,
+    "exports": {
+        ".": "./index.ts",
+        "./auth": "./src/authStore.ts"
+    },
+    "dependencies": {
+        "@package/typescript-config": "workspace:*",
+        "zustand": "^5.0.3"
+    }
+}

@@ -3,5 +3,7 @@ packages:
   - "apps/*"
   # all packages in direct subdirs of packages/
   - "packages/*"
-    # all packages in direct subdirs of packages/configs
+  # all packages in direct subdirs of packages/configs
   - "packages/configs/*"
+  # all packages in direct subdirs of packages/core
+  - "packages/core/*"

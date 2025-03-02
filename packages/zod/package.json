@@ -1,0 +1,11 @@
+{
+    "name": "@package/zod",
+    "version": "0.0.0",
+    "private": true,
+    "exports": {
+        ".": "./index.ts"
+    },
+    "dependencies": {
+        "zod": "^3.24.2"
+    }
+}
