@@ -1,0 +1,14 @@
+{
+  "name": "@package/cli",
+  "version": "0.0.0",
+  "license": "ISC",
+  "scripts": {
+    "generate": "plop --plopfile plopfile.js"
+  },
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "plop": "^4.0.1"
+  }
+}

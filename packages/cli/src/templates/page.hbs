@@ -1,0 +1,25 @@
+import { useState, useEffect } from "react"; import { fetch{{pascalCase name}}s } from "@/api/{{camelCase
+  name
+}}Api"; export default function
+{{pascalCase name}}Page() { const [data, setData] = useState([]); useEffect(() => { fetch{{pascalCase
+  name
+}}s().then(setData); }, []); return (
+<div>
+  <h1>{{pascalCase name}} Management</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {data.map((item) => (
+      <tr key='{item.id}'>
+        <td>{item.id}</td>
+        <td>{item.name}</td>
+      </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+); }

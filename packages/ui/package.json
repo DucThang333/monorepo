@@ -21,8 +21,9 @@
     "./icon/*": "./src/components/icons/index.tsx"
   },
   "dependencies": {
-    "@package/query":"workspace:*",
-    "@package/i18next":"workspace:*",
+    "@package/i18next": "workspace:*",
+    "@package/query": "workspace:*",
+    "@package/tailwind-config": "workspace:*",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -78,6 +79,7 @@
     "@storybook/nextjs": "8.5.6",
     "@storybook/react": "8.5.6",
     "@storybook/test": "8.5.6",
+    "@tailwindcss/postcss": "^4.0.14",
     "@types/lodash.merge": "^4.6.9",
     "@types/node": "^20",
     "@types/numeral": "^2.0.5",

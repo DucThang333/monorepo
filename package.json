@@ -1,9 +1,14 @@
 {
-    "name": "IZONE",
-    "type": "module",
-    "workspaces": [
-      "packages/*"
-    ],
-    "license": "MIT",
-    "private": true
-  }
+  "name": "IZONE",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "generate": "pnpm --filter @package/cli run generate",
+    "format": "pnpm prettierrc",
+    "storybook": "pnpm --filter @package/ui run storybook"
+  },
+  "license": "MIT",
+  "private": true
+}
