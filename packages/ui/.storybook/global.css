@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme{
+    /* color */
+    --color-primary: var(--color-primary);
+    --color-primary-light: var(--color-primary-light);
+    --color-primary-dark: var(--color-primary-dark);
+    --color-primary-foreground: var(--color-primary-foreground);
+    --color-secondary: var(--color-secondary);
+    --color-secondary-light: var(--color-secondary-light);
+    --color-secondary-dark: var(--color-secondary-dark);
+    --color-secondary-foreground: var(--color-secondary-foreground);
+    --color-accent: var(--color-accent);
+    --color-accent-light: var(--color-accent-light);
+    --color-accent-dark: var(--color-accent-dark);
+    --color-accent-foreground: var(--color-accent-foreground);
+    --color-destructive: var(--color-destructive);
+    --color-destructive-light: var(--color-destructive-light);
+    --color-destructive-dark: var(--color-destructive-dark);
+    --color-destructive-foreground: var(--color-destructive-foreground);
+    --color-background: var(--color-background);
+
+    /* color border */
+    --color-border: var(--color-border);
+    --color-border-light: var(--color-border-light);
+    --color-border-dark: var(--color-border-dark);
+    --color-border-accent: var(--color-border-accent);
+    --color-border-accent-light: var(--color-border-accent-light);
+    --color-border-accent-dark: var(--color-border-accent-dark);
+
+    /* text color */
+    --color-text: var(--color-text);
+    --color-text-light: var(--color-text-light);
+    --color-text-dark: var(--color-text-dark);
+    --color-text-primary-foreground: var(--color-text-primary-foreground);
+
+    /* text font family */
+    --font-anton: 'anton', sans-serif;
+    --font-caveat-brush: 'Caveat-brush', sans-serif;
+    --font-e-b-garamond: 'e-b-garamond', sans-serif;
+    --font-lobster: 'lobster', sans-serif;
+    --font-poppins: 'poppins', sans-serif;
+    --font-nunito: 'nunito', sans-serif;
+    --font-oswald: 'oswald', sans-serif;
+    --font-montserrat: 'montserrat', sans-serif;
+    --font-jet-brains-mono: 'Jet-brains-mono', sans-serif;
+}
+
+:root {
+    /* color */
+    --color-primary: #b5b5b5;
+    --color-primary-light: #ccc;
+    --color-primary-dark: #888;
+    --color-primary-foreground: #FFFFFF;
+    --color-secondary: #0054a6;
+    --color-secondary-light: #448ccb;
+    --color-secondary-dark: #004a80;
+    --color-secondary-foreground: #cde3fd;
+    --color-accent: #ece1d1;
+    --color-accent-light: #fffcf6;
+    --color-accent-dark: #e1cca6;
+    --color-accent-foreground: #6b4d1f;
+    --color-destructive: #e60606;
+    --color-destructive-light: #FCA5A5;
+    --color-destructive-dark: #991B1B;
+    --color-destructive-foreground: #f1ebeb;
+    --color-background: #efefef;
+
+    /* color border */
+    --color-border: #D1D5DB;
+    --color-border-light: #E5E7EB;
+    --color-border-dark: #9CA3AF;
+    --color-border-input: #9CA3AF;
+
+    /* color text */
+    --color-text: #111827;
+    --color-text-light: #6B7280;
+    --color-text-dark: #374151;
+}
+
+
+
+@font-face {
+    font-family: 'anton';
+    src: url('/fonts/Anton-Regular.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Caveat-brush';
+    src: url('/fonts/CaveatBrush-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'e-b-garamond';
+    src: url('/fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'lobster';
+    src: url('/fonts/Lobster-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'poppins';
+    src: url('/fonts/Poppins.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'nunito';
+    src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'oswald';
+    src: url('/fonts/Oswald-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Jet-brains-mono';
+    src: url('/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+}
+
+
+
+* {
+    font-family: "nunito", sans-serif,"mono","montserrat";
+}

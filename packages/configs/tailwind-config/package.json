@@ -1,16 +1,11 @@
 {
   "name": "@package/tailwind-config",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "exports": {
-    ".": "./index.ts",
-    "./tailwind": "./tailwind.config.js"
+    "./style": "./index.ts"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.6",
-    "tailwindcss": "^4.0.6"
-  },
-  "devDependencies": {
-    "tailwindcss-animated": "^2.0.0"
+    "tailwindcss": "^4.0.17"
   }
 }

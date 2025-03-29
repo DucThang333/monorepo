@@ -1,1 +1,1 @@
-export * from "tailwindcss"
+import "./style.css";
