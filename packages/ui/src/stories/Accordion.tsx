@@ -4,14 +4,14 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/accordion";
+} from "@/components/Accordion";
 
 /** Primary UI component for user interaction */
 export const AccordionExample = () => {
   return (
     <div className="max-w-xl mx-auto p-6 bg-[#f8fafc] rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-[#1e293b]">FAQ</h2>
-      <Accordion type="single" collapsible className="w-full space-y-3">
+      <Accordion type="multiple" collapsible className="w-full space-y-3">
         <AccordionItem
           value="item-1"
           className="border border-[#e2e8f0] rounded-lg bg-white hover:bg-[#f8fafc] transition-colors"

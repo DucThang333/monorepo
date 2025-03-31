@@ -1,8 +1,8 @@
 import {
   HoverCard as HoverCardBase,
   HoverCardContent,
-  HoverCardTrigger
-} from "@/components/hover-card";
+  HoverCardTrigger,
+} from "@/components/inits/hover-card";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -54,4 +54,4 @@ export function HoverCard({
   );
 }
 
-export { HoverCardTrigger, HoverCardContent }
+export { HoverCardTrigger, HoverCardContent };

@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
   NavigationMenuIndicator,
-} from "../navigation-menu";
+} from "../inits/navigation-menu";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -34,10 +34,8 @@ export function NavigationMenu({
       )}
       {...props}
     >
-      <NavigationMenuList 
-        className={cn(
-          orientation === "vertical" && "flex-col space-y-2"
-        )}
+      <NavigationMenuList
+        className={cn(orientation === "vertical" && "flex-col space-y-2")}
       >
         {children}
       </NavigationMenuList>

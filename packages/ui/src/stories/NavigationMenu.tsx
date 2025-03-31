@@ -6,7 +6,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
   NavigationMenuLink,
-} from "@/components/navigation-menu";
+} from "@/components/inits/navigation-menu";
 import { cn } from "@/lib/utils";
 
 /** Primary UI component for user interaction */
@@ -45,7 +45,9 @@ export const NavigationMenuExample = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-[#f8fafc] rounded-xl shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-[#1e293b]">Navigation Menu</h2>
+      <h2 className="text-2xl font-bold mb-4 text-[#1e293b]">
+        Navigation Menu
+      </h2>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

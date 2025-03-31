@@ -14,7 +14,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
-} from "../context-menu";
+} from "../inits/context-menu";
 import React from "react";
 import { cn } from "@/lib/utils";
 

@@ -13,8 +13,8 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuRadioGroup
-} from "@/components/dropdown-menu";
+  DropdownMenuRadioGroup,
+} from "@/components/inits/dropdown-menu";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -45,12 +45,17 @@ export function DropdownMenu({
   ...props
 }: DropdownMenuProps) {
   return (
-    <DropdownMenuBase open={open} onOpenChange={onOpenChange} modal={modal} dir={dir}>
+    <DropdownMenuBase
+      open={open}
+      onOpenChange={onOpenChange}
+      modal={modal}
+      dir={dir}
+    >
       <DropdownMenuTrigger className={className} {...props}>
         {children}
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
-        className={cn("min-w-[12rem]", contentClassName)} 
+      <DropdownMenuContent
+        className={cn("min-w-[12rem]", contentClassName)}
         align={align}
         side={side}
       >
@@ -74,5 +79,5 @@ export {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuRadioGroup
-}
+  DropdownMenuRadioGroup,
+};

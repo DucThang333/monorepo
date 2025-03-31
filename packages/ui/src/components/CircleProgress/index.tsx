@@ -1,6 +1,4 @@
-import {
-  CircleProgress as CircleProgressBase
-} from "@/components/circle-progress";
+import { CircleProgress as CircleProgressBase } from "@/components/inits/circle-progress";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -9,7 +7,13 @@ export interface CircleProgressProps {
   max?: number;
   size?: "sm" | "md" | "lg";
   showValue?: boolean;
-  color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  color?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
   className?: string;
 }
 
@@ -25,7 +29,7 @@ export function CircleProgress({
   const sizeClasses = {
     sm: "h-16 w-16",
     md: "h-24 w-24",
-    lg: "h-32 w-32"
+    lg: "h-32 w-32",
   };
 
   const colorClasses = {
@@ -34,7 +38,7 @@ export function CircleProgress({
     secondary: "text-secondary",
     success: "text-green-500",
     warning: "text-yellow-500",
-    danger: "text-destructive"
+    danger: "text-destructive",
   };
 
   return (

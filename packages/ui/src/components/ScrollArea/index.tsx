@@ -1,7 +1,4 @@
-import {
-  ScrollArea as ScrollAreaBase,
-  ScrollBar
-} from "../scroll-area";
+import { ScrollArea as ScrollAreaBase, ScrollBar } from "../inits/scroll-area";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -36,16 +33,10 @@ export function ScrollArea({
         {children}
       </div>
       {(orientation === "vertical" || orientation === "both") && (
-        <ScrollBar 
-          orientation="vertical" 
-          className={scrollbarClassName}
-        />
+        <ScrollBar orientation="vertical" className={scrollbarClassName} />
       )}
       {(orientation === "horizontal" || orientation === "both") && (
-        <ScrollBar 
-          orientation="horizontal"
-          className={scrollbarClassName}
-        />
+        <ScrollBar orientation="horizontal" className={scrollbarClassName} />
       )}
     </ScrollAreaBase>
   );

@@ -9,7 +9,7 @@ import {
   AlertDialogFooter,
   AlertDialogAction,
   AlertDialogCancel,
-} from "@/components/alert-dialog";
+} from "@/components/inits/alert-dialog";
 import { Button } from "@/components/button";
 
 /** Primary UI component for user interaction */

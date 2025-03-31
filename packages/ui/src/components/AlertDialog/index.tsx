@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/alert-dialog";
+} from "@/components/inits/alert-dialog";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 

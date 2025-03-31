@@ -1,7 +1,7 @@
 import {
   RadioGroup as RadioGroupBase,
-  RadioGroupItem
-} from "../radio-group";
+  RadioGroupItem,
+} from "../inits/radio-group";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "../label";
@@ -60,7 +60,10 @@ export function RadioGroup({
             disabled={option.disabled || disabled}
           />
           <div className="space-y-1 leading-none">
-            <Label htmlFor={`${name}-${option.value}`} className="cursor-pointer">
+            <Label
+              htmlFor={`${name}-${option.value}`}
+              className="cursor-pointer"
+            >
               {option.label}
             </Label>
             {option.description && (

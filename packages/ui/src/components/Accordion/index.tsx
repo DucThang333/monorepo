@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/accordion";
+} from "@/components/inits/accordion";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +17,7 @@ export type AccordionProps = {
   itemClassName?: string;
   triggerClassName?: string;
   contentClassName?: string;
+  type?: "single" | "multiple";
 };
 
 export function Accordion(props: AccordionProps) {
@@ -26,15 +27,12 @@ export function Accordion(props: AccordionProps) {
     itemClassName,
     triggerClassName,
     contentClassName,
+    type = "multiple",
     ...rest
   } = props;
 
   return (
-    <AccordionDefault
-      type="multiple"
-      className={cn("w-full", className)}
-      {...rest}
-    >
+    <AccordionDefault type={type} className={cn("w-full", className)} {...rest}>
       {items.map((item) => (
         <AccordionItem
           key={item.value}

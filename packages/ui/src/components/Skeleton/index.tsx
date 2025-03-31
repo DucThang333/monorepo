@@ -1,6 +1,4 @@
-import {
-  Skeleton as SkeletonBase
-} from "../skeleton";
+import { Skeleton as SkeletonBase } from ".";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -21,13 +19,21 @@ export function Skeleton({
   ...props
 }: SkeletonProps) {
   const style: React.CSSProperties = {
-    width: width ? (typeof width === 'number' ? `${width}px` : width) : undefined,
-    height: height ? (typeof height === 'number' ? `${height}px` : height) : undefined,
+    width: width
+      ? typeof width === "number"
+        ? `${width}px`
+        : width
+      : undefined,
+    height: height
+      ? typeof height === "number"
+        ? `${height}px`
+        : height
+      : undefined,
   };
-  
+
   // Default variant has no specific styling, other variants have predefined sizes
   let variantClass = "";
-  
+
   switch (variant) {
     case "card":
       variantClass = "h-48 w-full rounded-lg";
@@ -45,14 +51,10 @@ export function Skeleton({
       variantClass = "h-10 w-full rounded-md";
       break;
   }
-  
+
   return (
     <SkeletonBase
-      className={cn(
-        variantClass,
-        !animated && "animate-none",
-        className
-      )}
+      className={cn(variantClass, !animated && "animate-none", className)}
       style={style}
       {...props}
     />
