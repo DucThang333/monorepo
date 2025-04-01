@@ -1,14 +1,12 @@
-import React from 'react';
-import { ControllerRenderProps, FieldErrors, FieldValues } from 'react-hook-form';
+import React from "react";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../select';
-import { Label } from '../label';
-import { cn } from '../../lib/utils';
+  ControllerRenderProps,
+  FieldErrors,
+  FieldValues,
+} from "react-hook-form";
+import { Select } from "@/components/select";
+import { Label } from "@/components/inits/label";
+import { cn } from "../../lib/utils";
 
 export interface SelectOption {
   label: string;
@@ -32,14 +30,13 @@ export function FormSelect({
   label,
   description,
   options,
-  placeholder = 'Select an option',
+  placeholder = "Select an option",
   error,
   className,
 }: FormSelectProps) {
   // Get error from either explicit error prop or from form state errors
-  const fieldError = 
-    error || 
-    (formState?.errors[field.name]?.message as string | undefined);
+  const fieldError =
+    error || (formState?.errors[field.name]?.message as string | undefined);
 
   return (
     <div className="space-y-2">
@@ -55,23 +52,10 @@ export function FormSelect({
         defaultValue={field.value}
         onValueChange={field.onChange}
         name={field.name}
-      >
-        <SelectTrigger 
-          id={field.name}
-          className={cn(fieldError && "border-destructive", className)}
-          ref={field.ref}
-          onBlur={field.onBlur}
-        >
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+        options={options}
+        placeholder={placeholder}
+        className={className}
+      />
       {description && !fieldError && (
         <p className="text-sm text-muted-foreground">{description}</p>
       )}

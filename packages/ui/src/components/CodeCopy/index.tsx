@@ -1,4 +1,3 @@
-import { CodeCopy as CodeCopyBase } from "@/components/inits/code-copy";
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Copy, Check } from "lucide-react";

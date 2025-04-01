@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
-} from "@/components/card";
+  CardTitle,
+} from "@/components/inits/card";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +23,7 @@ export function Card({
   const variantClasses = {
     default: "bg-card shadow-sm",
     bordered: "border bg-background",
-    ghost: "border-none bg-transparent shadow-none"
+    ghost: "border-none bg-transparent shadow-none",
   };
 
   return (
@@ -33,4 +33,4 @@ export function Card({
   );
 }
 
-export { CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+export { CardHeader, CardFooter, CardTitle, CardDescription, CardContent };

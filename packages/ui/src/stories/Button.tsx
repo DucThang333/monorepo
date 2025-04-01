@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonProps } from "../components/Button";
+import { Button, ButtonProps } from "@/components/button";
 
 /** Primary UI component for user interaction */
 export type ButtonComponentProps = ButtonProps;

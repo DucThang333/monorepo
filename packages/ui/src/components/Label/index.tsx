@@ -1,10 +1,9 @@
-import {
-  Label as LabelBase
-} from "@/components/label";
+import { Label as LabelBase } from "@/components/inits/label";
 import React from "react";
 import { cn } from "@/lib/utils";
 
-export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface LabelProps
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
   required?: boolean;
   optional?: boolean;
 }
@@ -26,7 +25,9 @@ export function Label({
     >
       {children}
       {required && <span className="ml-1 text-destructive">*</span>}
-      {optional && <span className="ml-1 text-muted-foreground text-xs">(optional)</span>}
+      {optional && (
+        <span className="ml-1 text-muted-foreground text-xs">(optional)</span>
+      )}
     </LabelBase>
   );
 }

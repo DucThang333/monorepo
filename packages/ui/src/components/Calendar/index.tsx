@@ -1,13 +1,13 @@
-import {
-  Calendar as CalendarBase
-} from "@/components/calendar";
+import { Calendar as CalendarBase } from "@/components/inits/calendar";
 import React from "react";
 import { cn } from "@/lib/utils";
 
 export interface CalendarProps {
   mode?: "single" | "range" | "multiple";
   selected?: Date | Date[] | { from: Date; to: Date };
-  onSelect?: (value: Date | Date[] | { from: Date; to: Date } | undefined) => void;
+  onSelect?: (
+    value: Date | Date[] | { from: Date; to: Date } | undefined
+  ) => void;
   disabled?: boolean;
   className?: string;
   initialFocus?: boolean;

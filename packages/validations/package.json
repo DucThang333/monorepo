@@ -5,11 +5,13 @@
   "exports": {
     "./username": "./src/username.ts",
     "./password": "./src/password.ts",
-    "./email": "./src/email.ts"
+    "./email": "./src/email.ts",
+    "./libs/zod": "./libs/zod.ts",
+    "./libs/resolver": "./libs/resolver.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.0",
     "@package/typescript-config": "workspace:*",
-    "@package/zod": "workspace:*"
-  },
-  "devDependencies": {}
+    "zod": "^3.24.2"
+  }
 }

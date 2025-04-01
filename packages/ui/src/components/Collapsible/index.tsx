@@ -1,8 +1,8 @@
 import {
   Collapsible as CollapsibleBase,
   CollapsibleContent,
-  CollapsibleTrigger
-} from "@/components/collapsible";
+  CollapsibleTrigger,
+} from "@/components/inits/collapsible";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
@@ -40,7 +40,12 @@ export function Collapsible({
       {...props}
     >
       <div className="flex items-center justify-between">
-        <CollapsibleTrigger className={cn("flex items-center gap-2 font-medium", triggerClassName)}>
+        <CollapsibleTrigger
+          className={cn(
+            "flex items-center gap-2 font-medium",
+            triggerClassName
+          )}
+        >
           {title}
           <span className="collapsible-icon">{icon}</span>
         </CollapsibleTrigger>
@@ -52,4 +57,4 @@ export function Collapsible({
   );
 }
 
-export { CollapsibleContent, CollapsibleTrigger }
+export { CollapsibleContent, CollapsibleTrigger };

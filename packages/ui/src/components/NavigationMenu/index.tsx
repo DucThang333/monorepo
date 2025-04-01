@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
   NavigationMenuIndicator,
-} from "../inits/navigation-menu";
+} from "@/components/inits/navigation-menu";
 import React from "react";
 import { cn } from "@/lib/utils";
 

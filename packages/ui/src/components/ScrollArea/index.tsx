@@ -1,4 +1,7 @@
-import { ScrollArea as ScrollAreaBase, ScrollBar } from "../inits/scroll-area";
+import {
+  ScrollArea as ScrollAreaBase,
+  ScrollBar,
+} from "@/components/inits/scroll-area";
 import React from "react";
 import { cn } from "@/lib/utils";
 

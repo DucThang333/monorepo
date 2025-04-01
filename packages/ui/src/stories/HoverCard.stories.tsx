@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { HoverCard } from "../components/HoverCard";
-import { Button } from "../components/button";
+import { HoverCard } from "../components/hoverCard";
+import { Button } from "@/components/button";
 import { Avatar } from "../components/avatar";
 
 const meta = {

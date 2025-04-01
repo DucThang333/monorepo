@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { 
+import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuCheckboxItem,
@@ -11,8 +11,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem
-} from "../components/DropdownMenu";
+  DropdownMenuRadioItem,
+} from "../components/dropdownMenu";
 import { Button } from "../components/button";
 
 const meta = {
@@ -85,9 +85,7 @@ export const WithShortcuts: Story = {
         <DropdownMenuItem>
           New Window <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
         </DropdownMenuItem>
-        <DropdownMenuItem disabled>
-          New Incognito Window
-        </DropdownMenuItem>
+        <DropdownMenuItem disabled>New Incognito Window</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           Save Page As... <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
@@ -110,12 +108,8 @@ export const WithCheckboxes: Story = {
         <DropdownMenuCheckboxItem checked>
           Show Toolbar
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem>
-          Show Bookmarks Bar
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem>
-          Show Full URLs
-        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem>Show Bookmarks Bar</DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem>Show Full URLs</DropdownMenuCheckboxItem>
       </>
     ),
     align: "start",
@@ -132,15 +126,9 @@ export const WithRadioItems: Story = {
         <DropdownMenuLabel>Theme</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value="light">
-          <DropdownMenuRadioItem value="light">
-            Light
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">
-            Dark
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">
-            System
-          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </>
     ),

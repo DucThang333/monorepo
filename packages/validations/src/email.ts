@@ -1,4 +1,4 @@
-import { z } from "@package/zod";
+import { z } from "zod";
 
 const emailSchema = z.string().email({ message: "Invalid email address" });
 
@@ -12,5 +12,4 @@ const validateEmail = (email: string) => {
   return { success: true };
 };
 
-
-export {validateEmail}
+export { validateEmail };

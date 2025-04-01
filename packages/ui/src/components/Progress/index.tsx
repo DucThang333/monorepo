@@ -1,6 +1,4 @@
-import {
-  Progress as ProgressBase
-} from "../progress";
+import { Progress as ProgressBase } from "@/components/inits/progress";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +23,7 @@ export function Progress({
   ...props
 }: ProgressProps) {
   const percentage = Math.min(Math.max(0, (value / max) * 100), 100);
-  
+
   const variantClasses = {
     default: "bg-primary",
     success: "bg-green-500",
@@ -33,14 +31,15 @@ export function Progress({
     warning: "bg-yellow-500",
     danger: "bg-destructive",
   };
-  
+
   const sizeClasses = {
     sm: "h-1",
     md: "h-2.5",
     lg: "h-4",
   };
-  
-  const formatValue = valueFormat || ((val, maximum) => `${Math.round((val / maximum) * 100)}%`);
+
+  const formatValue =
+    valueFormat || ((val, maximum) => `${Math.round((val / maximum) * 100)}%`);
 
   return (
     <div className="w-full space-y-1.5">
@@ -50,8 +49,8 @@ export function Progress({
         className={cn(sizeClasses[size], className)}
         {...props}
       >
-        <div 
-          className={cn("h-full transition-all", variantClasses[variant])} 
+        <div
+          className={cn("h-full transition-all", variantClasses[variant])}
           style={{ width: `${percentage}%` }}
         />
       </ProgressBase>

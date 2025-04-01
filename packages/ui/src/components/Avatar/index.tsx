@@ -1,8 +1,8 @@
 import {
   Avatar as AvatarBase,
   AvatarFallback,
-  AvatarImage
-} from "@/components/avatar";
+  AvatarImage,
+} from "@/components/inits/avatar";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +26,7 @@ export function Avatar({
     sm: "h-8 w-8",
     md: "h-10 w-10",
     lg: "h-12 w-12",
-    xl: "h-16 w-16"
+    xl: "h-16 w-16",
   };
 
   return (
@@ -37,4 +37,4 @@ export function Avatar({
   );
 }
 
-export { AvatarImage, AvatarFallback }
+export { AvatarImage, AvatarFallback };

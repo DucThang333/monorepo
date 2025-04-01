@@ -7,8 +7,8 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut
-} from "@/components/command";
+  CommandShortcut,
+} from "@/components/inits/command";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
@@ -37,9 +37,7 @@ export function Command({
       {...props}
     >
       <CommandInput placeholder={placeholder} />
-      <CommandList>
-        {children}
-      </CommandList>
+      <CommandList>{children}</CommandList>
     </CommandBase>
   );
 }
@@ -60,9 +58,7 @@ export function CommandBar({
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput placeholder={placeholder} />
-      <CommandList>
-        {children}
-      </CommandList>
+      <CommandList>{children}</CommandList>
     </CommandDialog>
   );
 }
@@ -75,5 +71,5 @@ export {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut
-}
+  CommandShortcut,
+};

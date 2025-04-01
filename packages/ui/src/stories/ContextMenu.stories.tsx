@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { 
+import {
   ContextMenu,
   ContextMenuItem,
   ContextMenuCheckboxItem,
@@ -11,8 +11,8 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
-  ContextMenuRadioItem
-} from "../components/ContextMenu";
+  ContextMenuRadioItem,
+} from "../components/contextMenu";
 
 const meta = {
   title: "ContextMenu",
@@ -94,12 +94,8 @@ export const WithCheckboxes: Story = {
         <ContextMenuCheckboxItem checked>
           Show Hidden Files
         </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem>
-          Show File Extensions
-        </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem>
-          Show Path Bar
-        </ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem>Show File Extensions</ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem>Show Path Bar</ContextMenuCheckboxItem>
       </>
     ),
   },
@@ -117,18 +113,12 @@ export const WithRadioItems: Story = {
         <ContextMenuLabel>Sort By</ContextMenuLabel>
         <ContextMenuSeparator />
         <ContextMenuRadioGroup value="name">
-          <ContextMenuRadioItem value="name">
-            Name
-          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="name">Name</ContextMenuRadioItem>
           <ContextMenuRadioItem value="date">
             Date Modified
           </ContextMenuRadioItem>
-          <ContextMenuRadioItem value="size">
-            Size
-          </ContextMenuRadioItem>
-          <ContextMenuRadioItem value="type">
-            Type
-          </ContextMenuRadioItem>
+          <ContextMenuRadioItem value="size">Size</ContextMenuRadioItem>
+          <ContextMenuRadioItem value="type">Type</ContextMenuRadioItem>
         </ContextMenuRadioGroup>
       </>
     ),

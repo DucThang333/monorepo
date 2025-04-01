@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/Accordion";
+} from "@/components/accordion";
 
 /** Primary UI component for user interaction */
 export const AccordionExample = () => {

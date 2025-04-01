@@ -1,6 +1,4 @@
-import {
-  Separator as SeparatorBase
-} from "../separator";
+import { Separator as SeparatorBase } from "@/components/inits/separator";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +23,7 @@ export function Separator({
     muted: "bg-muted",
     accent: "bg-primary/20",
   };
-  
+
   const thicknessClasses = {
     thin: orientation === "horizontal" ? "h-px" : "w-px",
     normal: orientation === "horizontal" ? "h-[1px]" : "w-[1px]",

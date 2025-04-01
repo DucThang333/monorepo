@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "watch": "npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch",
-    "storybook": "concurrently \"npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch\" \"storybook dev -p 6006\""
+    "storybook": "storybook dev -p 6006",
+    "tailwind:watch": "npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch",
+    "storybook:watch": "concurrently \"npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch\" \"storybook dev -p 6006\""
   },
   "exports": {
     "./component/*": "./src/components/*/index.ts",
@@ -15,6 +17,7 @@
   "dependencies": {
     "@package/i18next": "workspace:*",
     "@package/query": "workspace:*",
+    "@package/validation": "workspace:*",
     "@package/tailwind-config": "workspace:*",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",

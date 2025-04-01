@@ -3,9 +3,12 @@ import { Checkbox } from "@/components/checkbox";
 
 /** Primary UI component for user interaction */
 export const CheckboxExample = () => {
+  console.log("CheckboxExample");
   return (
     <div className="max-w-xl mx-auto p-6 bg-[#f8fafc] rounded-xl shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-[#1e293b]">Checkbox Component</h2>
+      <h2 className="text-2xl font-bold mb-4 text-[#1e293b]">
+        Checkbox Component
+      </h2>
       <div className="space-y-6">
         <div className="flex items-center space-x-2">
           <Checkbox id="terms" />
@@ -16,7 +19,7 @@ export const CheckboxExample = () => {
             Accept terms and conditions
           </label>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <Checkbox id="marketing" defaultChecked />
           <label
@@ -26,7 +29,7 @@ export const CheckboxExample = () => {
             Receive marketing emails
           </label>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <Checkbox id="disabled" disabled />
           <label
@@ -36,9 +39,11 @@ export const CheckboxExample = () => {
             Disabled option
           </label>
         </div>
-        
+
         <div className="border rounded-md p-4 bg-white">
-          <div className="mb-3 text-sm font-medium">Select your preferred contact methods:</div>
+          <div className="mb-3 text-sm font-medium">
+            Select your preferred contact methods:
+          </div>
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
               <Checkbox id="email" />

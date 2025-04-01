@@ -7,7 +7,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/select";
+} from "@/components/inits/select";
 import { cn } from "@/lib/utils";
 
 export type SelectOption = {
@@ -57,15 +57,19 @@ export function Select(props: SelectProps) {
         </SelectTrigger>
         <SelectContent className={contentClassName}>
           <SelectGroup>
-            {options.map((option) => (
-              <SelectItem
-                key={option.value}
-                value={option.value}
-                disabled={option.disabled}
-              >
-                {option.label}
-              </SelectItem>
-            ))}
+            {options?.length > 0 ? (
+              options?.map((option) => (
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  disabled={option.disabled}
+                >
+                  {option.label}
+                </SelectItem>
+              ))
+            ) : (
+              <div>no option</div>
+            )}
           </SelectGroup>
         </SelectContent>
       </SelectDefault>

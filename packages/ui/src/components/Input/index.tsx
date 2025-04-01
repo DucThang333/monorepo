@@ -1,22 +1,15 @@
-import {
-  Input as InputBase
-} from "@/components/input";
+import { Input as InputBase } from "@/components/inits/input";
 import React from "react";
 import { cn } from "@/lib/utils";
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
   error?: boolean;
   hint?: string;
 }
 
-export function Input({
-  className,
-  icon,
-  error,
-  hint,
-  ...props
-}: InputProps) {
+export function Input({ className, icon, error, hint, ...props }: InputProps) {
   return (
     <div className="relative">
       {icon && (
@@ -33,10 +26,12 @@ export function Input({
         {...props}
       />
       {hint && (
-        <p className={cn(
-          "mt-1 text-xs",
-          error ? "text-destructive" : "text-muted-foreground"
-        )}>
+        <p
+          className={cn(
+            "mt-1 text-xs",
+            error ? "text-destructive" : "text-muted-foreground"
+          )}
+        >
           {hint}
         </p>
       )}

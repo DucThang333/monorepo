@@ -1,7 +1,7 @@
 import {
   RadioGroup as RadioGroupBase,
   RadioGroupItem,
-} from "../inits/radio-group";
+} from "@/components/inits/radio-group";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "../label";

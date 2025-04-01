@@ -1,6 +1,4 @@
-import {
-  Switch as SwitchBase
-} from "../switch";
+import { Switch as SwitchBase } from "@/components/inits/switch";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -41,7 +39,7 @@ export function Switch({
     md: "h-5 w-9",
     lg: "h-6 w-11",
   };
-  
+
   const thumbSizeClasses = {
     sm: "h-3 w-3",
     md: "h-4 w-4",
@@ -65,9 +63,11 @@ export function Switch({
           className
         )}
         {...props}
-        style={{
-          "--thumb-size": thumbSizeClasses[size].split(" ")[1],
-        } as React.CSSProperties}
+        style={
+          {
+            "--thumb-size": thumbSizeClasses[size].split(" ")[1],
+          } as React.CSSProperties
+        }
       />
       {(label || description || error) && (
         <div className="space-y-1 leading-none">

@@ -1,6 +1,4 @@
-import {
-  Slider as SliderBase
-} from "../slider";
+import { Slider as SliderBase } from "@/components/inits/slider";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -43,18 +41,19 @@ export function Slider({
     primary: "bg-primary",
     secondary: "bg-secondary",
   };
-  
+
   const thicknessClasses = {
     thin: "h-1.5",
     normal: "h-2",
     thick: "h-3",
   };
-  
-  const formatValue = valueDisplay || ((val) => 
-    val.length === 1 
-      ? val[0].toString() 
-      : `${val[0]} - ${val[val.length - 1]}`
-  );
+
+  const formatValue =
+    valueDisplay ||
+    ((val) =>
+      val.length === 1
+        ? val[0].toString()
+        : `${val[0]} - ${val[val.length - 1]}`);
 
   return (
     <div className="space-y-2">

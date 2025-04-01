@@ -1,4 +1,4 @@
-import { Skeleton as SkeletonBase } from ".";
+import { Skeleton as SkeletonBase } from "@/components/inits/skeleton";
 import React from "react";
 import { cn } from "@/lib/utils";
 

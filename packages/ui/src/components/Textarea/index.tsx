@@ -1,10 +1,9 @@
-import {
-  Textarea as TextareaBase
-} from "../textarea";
+import { Textarea as TextareaBase } from "@/components/inits/textarea";
 import React from "react";
 import { cn } from "@/lib/utils";
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: boolean;
   hint?: string;
   label?: string;
@@ -48,8 +47,8 @@ export function Textarea({
   return (
     <div className="space-y-1.5">
       {label && (
-        <label 
-          htmlFor={props.id} 
+        <label
+          htmlFor={props.id}
           className={cn(
             "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
             error && "text-destructive"
@@ -71,19 +70,23 @@ export function Textarea({
       />
       <div className="flex justify-between">
         {hint && (
-          <p className={cn(
-            "text-xs",
-            error ? "text-destructive" : "text-muted-foreground"
-          )}>
+          <p
+            className={cn(
+              "text-xs",
+              error ? "text-destructive" : "text-muted-foreground"
+            )}
+          >
             {hint}
           </p>
         )}
         {maxLength && (
-          <p className={cn(
-            "ml-auto text-xs text-muted-foreground",
-            textLength > (maxLength * 0.9) && "text-amber-500",
-            textLength >= maxLength && "text-destructive"
-          )}>
+          <p
+            className={cn(
+              "ml-auto text-xs text-muted-foreground",
+              textLength > maxLength * 0.9 && "text-amber-500",
+              textLength >= maxLength && "text-destructive"
+            )}
+          >
             {renderCounter(textLength, maxLength)}
           </p>
         )}

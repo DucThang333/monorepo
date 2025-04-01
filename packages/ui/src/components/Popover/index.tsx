@@ -2,7 +2,7 @@ import {
   Popover as PopoverBase,
   PopoverContent,
   PopoverTrigger,
-} from "../popover";
+} from "@/components/inits/popover";
 import React from "react";
 import { cn } from "@/lib/utils";
 

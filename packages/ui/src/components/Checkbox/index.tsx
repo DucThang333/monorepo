@@ -1,6 +1,4 @@
-import {
-  Checkbox as CheckboxBase
-} from "@/components/checkbox";
+import { Checkbox as CheckboxBase } from "@/components/inits/checkbox";
 import React from "react";
 import { cn } from "@/lib/utils";
 
