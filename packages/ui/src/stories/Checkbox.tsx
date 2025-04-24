@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox } from "@/components/checkbox";
+import { Checkbox } from "@/components/Checkbox";
 
 /** Primary UI component for user interaction */
 export const CheckboxExample = () => {

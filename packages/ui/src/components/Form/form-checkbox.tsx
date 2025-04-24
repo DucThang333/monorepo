@@ -4,8 +4,8 @@ import {
   FieldErrors,
   FieldValues,
 } from "react-hook-form";
-import { Checkbox } from "../checkbox";
-import { Label } from "../label";
+import { Checkbox } from "../inits/checkbox";
+import { Label } from "../inits/label";
 import { cn } from "../../lib/utils";
 
 export interface FormCheckboxProps {

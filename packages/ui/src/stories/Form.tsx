@@ -8,7 +8,7 @@ import {
   FormSubmitButton,
   FormTextarea,
   FormSelect,
-} from "@/components/form";
+} from "@/components/Form";
 import { z } from "@package/validation/libs/zod";
 import { zodResolver } from "@package/validation/libs/resolver";
 import { Control, FieldValues } from "react-hook-form";

@@ -6,8 +6,8 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/card";
-import { Button } from "@/components/button";
+} from "@/components/Card";
+import { Button } from "@/components/Button";
 
 /** Primary UI component for user interaction */
 export const CardExample = () => {

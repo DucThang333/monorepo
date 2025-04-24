@@ -4,7 +4,7 @@ import {
 } from "@/components/inits/radio-group";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Label } from "../label";
+import { Label } from "../inits/label";
 
 export interface RadioOption {
   value: string;

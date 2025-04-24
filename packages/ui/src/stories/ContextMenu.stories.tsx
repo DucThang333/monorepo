@@ -12,7 +12,7 @@ import {
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
   ContextMenuRadioItem,
-} from "../components/contextMenu";
+} from "@/components/ContextMenu";
 
 const meta = {
   title: "ContextMenu",

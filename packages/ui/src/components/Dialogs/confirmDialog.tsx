@@ -1,6 +1,6 @@
 import { DialogContent } from "@radix-ui/react-dialog";
-import { Button } from "../button";
-import { Dialog, DialogHeader, DialogTrigger } from "@/components/inits/dialog";
+import { Button } from "../inits/button";
+import { Dialog, DialogHeader, DialogTrigger } from "../inits/dialog";
 import React from "react";
 import { useTranslation } from "@package/i18next";
 

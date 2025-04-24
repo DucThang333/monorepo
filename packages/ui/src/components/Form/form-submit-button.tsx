@@ -1,6 +1,6 @@
 import React from "react";
 import { UseFormReturn, FieldValues } from "react-hook-form";
-import { Button, ButtonProps } from "../button";
+import { Button, ButtonProps } from "../inits/button";
 import { cn } from "../../lib/utils";
 
 export interface FormSubmitButtonProps extends Omit<ButtonProps, 'form'> {

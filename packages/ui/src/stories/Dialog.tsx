@@ -1,32 +1,17 @@
 import React from "react";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-} from "@/components/dialog";
-import { Button } from "@/components/button";
+import { Dialog } from "@/components/Dialog";
+import { Button } from "@/components/Button";
 
 /** Primary UI component for user interaction */
 export const DialogExample = () => {
   return (
     <div className="max-w-xl mx-auto p-6 bg-[#f8fafc] rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-[#1e293b]">Dialog Component</h2>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline">Open Dialog</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Edit Profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription>
-          </DialogHeader>
+      <Dialog
+        trigger={<Button variant="outline">Open Dialog</Button>}
+        title="Edit Profile"
+        description="Make changes to your profile here. Click save when you're done."
+        content={
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="name" className="text-right text-sm font-medium">
@@ -49,13 +34,14 @@ export const DialogExample = () => {
               />
             </div>
           </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="submit">Save changes</Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        }
+        footer={
+          <Button type="submit">Save changes</Button>
+        }
+        className="sm:max-w-[425px]"
+        showCloseButton={true}
+        onOpenChange={(open) => console.log("Dialog open state:", open)}
+      />
     </div>
   );
 };

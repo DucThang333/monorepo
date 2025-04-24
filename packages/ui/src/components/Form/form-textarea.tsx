@@ -1,8 +1,8 @@
 import React from 'react';
 import { ControllerRenderProps, FieldErrors, FieldValues } from 'react-hook-form';
-import { Textarea } from '../textarea';
-import { Label } from '../label';
-import { cn } from '../../lib/utils';
+import { Textarea } from '@/components/inits/textarea';
+import { Label } from '@/components/inits/label';
+import { cn } from '@/lib/utils';
 
 export interface FormTextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

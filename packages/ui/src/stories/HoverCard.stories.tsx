@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { HoverCard } from "../components/hoverCard";
-import { Button } from "@/components/button";
-import { Avatar } from "../components/avatar";
+import { HoverCard } from "@/components/HoverCard";
+import { Button } from "@/components/Button";
+import { Avatar  } from "@/components/Avatar";
 
 const meta = {
   title: "HoverCard",
@@ -60,11 +60,7 @@ export const UserProfile: Story = {
     trigger: <Button variant="ghost">@johndoe</Button>,
     content: (
       <div className="flex space-x-4 p-4">
-        <Avatar className="h-12 w-12">
-          <div className="bg-blue-500 h-full w-full flex items-center justify-center text-white">
-            JD
-          </div>
-        </Avatar>
+        <Avatar className="h-12 w-12"/>
         <div className="space-y-1">
           <h4 className="text-sm font-semibold">John Doe</h4>
           <p className="text-xs">Software Developer at Acme Corp</p>

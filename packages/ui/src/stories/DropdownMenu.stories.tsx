@@ -12,8 +12,8 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-} from "../components/dropdownMenu";
-import { Button } from "../components/button";
+} from "@/components/DropdownMenu";
+import { Button } from "@/components/Button";
 
 const meta = {
   title: "DropdownMenu",

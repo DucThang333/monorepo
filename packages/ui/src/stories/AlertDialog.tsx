@@ -10,7 +10,7 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "@/components/inits/alert-dialog";
-import { Button } from "@/components/button";
+import { Button } from "@/components/Button";
 
 /** Primary UI component for user interaction */
 export const AlertDialogExample = () => {
