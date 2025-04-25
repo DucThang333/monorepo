@@ -43,6 +43,13 @@ export function CircleProgress({
     lg: 8,
   };
 
+  // Text size based on circle size
+  const textSize = {
+    sm: "text-sm",
+    md: "text-base",
+    lg: "text-lg",
+  };
+
   const colorClasses = {
     default: "text-gray-500",
     primary: "text-primary",
@@ -53,19 +60,25 @@ export function CircleProgress({
   };
 
   return (
-    <div className={cn("relative flex items-center justify-center", 
-      sizeValues[size], colorClasses[color], className)}>
+    <div className={cn(
+      "relative inline-flex items-center justify-center", 
+      colorClasses[color], 
+      className
+    )}>
       <CircleProgressBase
         size={sizeValues[size]}
         percentage={percentage}
         strokeWidth={strokeWidth[size]}
         {...props}
       />
-      {/* Remove the text from CircleProgressBase if we're showing it here */}
       {showValue && (
-        <span className="absolute font-medium">
+        <div className={cn(
+          "absolute inset-0 flex items-center justify-center",
+          textSize[size],
+          "font-medium transition-opacity duration-200",
+        )}>
           {percentage}%
-        </span>
+        </div>
       )}
     </div>
   );

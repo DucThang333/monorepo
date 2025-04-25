@@ -3,7 +3,7 @@ import { Popover } from "@/components/Popover";
 import { Button } from "@/components/Button";
 
 const meta = {
-  title: "Popover",
+  title: "UI/Popover",
   component: Popover,
   parameters: {
     layout: "centered",

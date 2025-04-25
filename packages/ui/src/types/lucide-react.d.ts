@@ -20,6 +20,11 @@ declare module "lucide-react" {
   export const X: LucideIcon;
   export const ChevronUp: LucideIcon;
   export const Loader2: LucideIcon;
+  export const Info: LucideIcon;
+  export const HelpCircle: LucideIcon;
+  export const Settings: LucideIcon;
+  export const Bell: LucideIcon;
+  export const User: LucideIcon;
   // Add other icons as needed
 }
 
@@ -81,3 +86,35 @@ declare module "lucide-react/dist/esm/icons/loader-2" {
   const Loader2: LucideIcon;
   export { Loader2 };
 }
+
+declare module "lucide-react/dist/esm/icons/info" {
+  import { LucideIcon } from "lucide-react";
+  const Info: LucideIcon;
+  export { Info };
+}
+
+declare module "lucide-react/dist/esm/icons/help-circle" {
+  import { LucideIcon } from "lucide-react";
+  const HelpCircle: LucideIcon;
+  export { HelpCircle };
+}
+
+declare module "lucide-react/dist/esm/icons/settings" {
+  import { LucideIcon } from "lucide-react";
+  const Settings: LucideIcon;
+  export { Settings };
+}
+
+declare module "lucide-react/dist/esm/icons/bell" {
+  import { LucideIcon } from "lucide-react";
+  const Bell: LucideIcon;
+  export { Bell };
+}
+
+declare module "lucide-react/dist/esm/icons/user" {
+  import { LucideIcon } from "lucide-react";
+  const User: LucideIcon;
+  export { User };
+}
+
+// Add other icons as needed  

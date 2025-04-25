@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { TableDemo } from "./Table";
 
 const meta = {
-  title: "Table",
+  title: "UI/Table",
   component: TableDemo,
   parameters: {
     layout: "centered",

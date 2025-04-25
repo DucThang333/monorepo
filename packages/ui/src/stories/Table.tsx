@@ -172,6 +172,7 @@ export function TableDemo({ pageSize = 10, enablePagination = true }: TableDemoP
             accessorKey: 'firstName',
             header: 'First Name',
             cell: info => info.getValue(),
+            enableColumnFilter: true
           },
           {
             accessorFn: row => row.lastName,
@@ -232,6 +233,9 @@ export function TableDemo({ pageSize = 10, enablePagination = true }: TableDemoP
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    defaultColumn: {
+      enableColumnFilter: false
+    },
     state: {
       pagination: {
         pageIndex: 0,
@@ -239,6 +243,9 @@ export function TableDemo({ pageSize = 10, enablePagination = true }: TableDemoP
       },
     },
   });
+
+  console.log("table", table.getHeaderGroups()?.[1]?.headers[0]?.column?.getCanFilter())
+
 
   return (
     <div className="p-4 border rounded-lg shadow-sm bg-white">

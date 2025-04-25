@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { HoverCard } from "@/components/HoverCard";
 import { Button } from "@/components/Button";
-import { Avatar  } from "@/components/Avatar";
+import { Avatar } from "@/components/Avatar";
 
 const meta = {
-  title: "HoverCard",
+  title: "UI/HoverCard",
   component: HoverCard,
   parameters: {
     layout: "centered",

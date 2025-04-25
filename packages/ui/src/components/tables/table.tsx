@@ -43,7 +43,7 @@ export function Table<T>({
               >
                 {/* Render header content if not a placeholder */}
                 {!header.isPlaceholder && (
-                  <div className="flex flex-col space-y-1">
+                  <div className="flex flex-col space-y-1 p-2">
                     <div className="flex items-center">
                       {/* Use custom renderer or default */}
                       {flexHeaderRender 
@@ -131,7 +131,7 @@ function flexRenderHeaderDefault(
         // Need to cast context as any to avoid TypeScript errors with the union type
         return header(context as any)
     }
-    return header;
+    return <p className="text-gray-500 text-md">{header}</p>;
 }
 
 function flexRenderCellDefault(
