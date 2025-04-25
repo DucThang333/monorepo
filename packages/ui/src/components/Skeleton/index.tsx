@@ -36,10 +36,10 @@ export function Skeleton({
 
   switch (variant) {
     case "card":
-      variantClass = "h-48 w-full rounded-lg";
+      variantClass = "min-h-48 min-w-60 w-full rounded-lg";
       break;
     case "text":
-      variantClass = "h-4 w-full";
+      variantClass = "min-h-4 min-w-60 w-full";
       break;
     case "avatar":
       variantClass = "h-12 w-12 rounded-full";
@@ -48,7 +48,7 @@ export function Skeleton({
       variantClass = "h-10 w-24 rounded-md";
       break;
     case "input":
-      variantClass = "h-10 w-full rounded-md";
+      variantClass = "min-h-10 min-w-60 w-full rounded-md";
       break;
   }
 

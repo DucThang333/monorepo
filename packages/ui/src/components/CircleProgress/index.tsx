@@ -26,10 +26,21 @@ export function CircleProgress({
   className,
   ...props
 }: CircleProgressProps) {
-  const sizeClasses = {
-    sm: "h-16 w-16",
-    md: "h-24 w-24",
-    lg: "h-32 w-32",
+  // Calculate percentage
+  const percentage = Math.min(Math.round((value / max) * 100), 100);
+  
+  // Define size values in pixels
+  const sizeValues = {
+    sm: 64,  // 16*4 = 64px
+    md: 96,  // 24*4 = 96px
+    lg: 128, // 32*4 = 128px
+  };
+  
+  // Define stroke width based on size
+  const strokeWidth = {
+    sm: 4,
+    md: 6,
+    lg: 8,
   };
 
   const colorClasses = {
@@ -42,16 +53,18 @@ export function CircleProgress({
   };
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div className={cn("relative flex items-center justify-center", 
+      sizeValues[size], colorClasses[color], className)}>
       <CircleProgressBase
-        value={value}
-        max={max}
-        className={cn(sizeClasses[size], colorClasses[color], className)}
+        size={sizeValues[size]}
+        percentage={percentage}
+        strokeWidth={strokeWidth[size]}
         {...props}
       />
+      {/* Remove the text from CircleProgressBase if we're showing it here */}
       {showValue && (
         <span className="absolute font-medium">
-          {Math.round((value / max) * 100)}%
+          {percentage}%
         </span>
       )}
     </div>

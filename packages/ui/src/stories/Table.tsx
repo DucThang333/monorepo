@@ -1,6 +1,6 @@
 import React from "react";
-import { Table as UITable } from "../components/tables/table";
-import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { Table as UITable } from "@/components/tables/table";
+import { flexRender, createColumnHelper, getCoreRowModel, getSortedRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable, ColumnDef, Row } from "@tanstack/react-table";
 
 // Create a mock DefinedUseQueryResult to simulate the query prop
 interface MockQueryResult<T> {
@@ -9,6 +9,20 @@ interface MockQueryResult<T> {
   isError: boolean;
   error: Error | null;
 }
+
+// Define CellProps type
+type CellProps = {
+  getValue: () => any;
+  row: Row<any>;
+  column: { id: string };
+};
+
+// Status color mapping
+const statusColors = {
+  active: 'bg-green-500',
+  inactive: 'bg-red-500',
+  pending: 'bg-yellow-500'
+};
 
 export interface TableDemoProps {
   pageSize?: number;
@@ -27,6 +41,29 @@ interface Person {
 }
 
 export function TableDemo({ pageSize = 10, enablePagination = true }: TableDemoProps) {
+  const StatusCell = (props: CellProps) => {
+    const status = props.getValue();
+    return (
+      <div className="flex items-center">
+        <span className={`h-2 w-2 rounded-full ${statusColors[status as keyof typeof statusColors]}`}></span>
+        <span className="ml-2 capitalize">{status}</span>
+      </div>
+    );
+  };
+
+  const ActionCell = (info: CellProps) => {
+    return (
+      <div className="flex space-x-2">
+        {info.row.original.canEdit && (
+          <button className="text-blue-600 hover:text-blue-800">Edit</button>
+        )}
+        {info.row.original.canDelete && (
+          <button className="text-red-600 hover:text-red-800">Delete</button>
+        )}
+      </div>
+    );
+  };
+  
   // Sample data
   const data: Person[] = React.useMemo(
     () => [
@@ -161,17 +198,7 @@ export function TableDemo({ pageSize = 10, enablePagination = true }: TableDemoP
           {
             accessorKey: 'status',
             header: 'Status',
-            cell: info => (
-              <span
-                className={`px-2 py-1 rounded-full text-xs ${
-                  info.getValue() === 'active' 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
-                }`}
-              >
-                {info.getValue() as string}
-              </span>
-            ),
+            cell: StatusCell,
           },
           {
             accessorKey: 'progress',
@@ -185,26 +212,38 @@ export function TableDemo({ pageSize = 10, enablePagination = true }: TableDemoP
               </div>
             ),
           },
+          {
+            id: 'actions',
+            header: 'Actions',
+            cell: ActionCell,
+          },
         ],
       },
     ],
     []
   );
 
-  // Mock query result
-  const mockQuery: MockQueryResult<Person> = {
+
+  // Create table instance directly
+  const table = useReactTable({
+    columns,
     data,
-    isLoading: false,
-    isError: false,
-    error: null,
-  };
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    state: {
+      pagination: {
+        pageIndex: 0,
+        pageSize: 10,
+      },
+    },
+  });
 
   return (
     <div className="p-4 border rounded-lg shadow-sm bg-white">
       <UITable
-        columns={columns}
-        query={mockQuery as any}
-        flexRender={flexRender}
+        table={table}
         enablePagination={enablePagination}
       />
     </div>

@@ -35,10 +35,3 @@ export const WithoutPagination: Story = {
     enablePagination: false,
   },
 };
-
-export const SmallPageSize: Story = {
-  args: {
-    pageSize: 5,
-    enablePagination: true,
-  },
-};

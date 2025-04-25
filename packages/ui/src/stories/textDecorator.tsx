@@ -20,7 +20,10 @@ export const TextDecorator = (props: TextDecoratorProps) => {
     textSizes,
     is_italic,
   } = props;
-  console.log("textSizes: ", textSizes);
+  useEffect(() => {
+    style.setProperty("--text-color", textColor ?? "#000000");
+  }, [textColor]);
+
   return (
     <div
       className={cn(

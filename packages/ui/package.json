@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "watch": "npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch",
+    "reload:css": "npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css",
     "storybook": "storybook dev -p 6006",
     "tailwind:watch": "npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch",
     "storybook:watch": "concurrently \"npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch\" \"storybook dev -p 6006\""

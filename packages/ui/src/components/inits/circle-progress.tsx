@@ -49,4 +49,4 @@ const CircleProgress = (props: Props) => {
   );
 };
 
-export default CircleProgress;
+export {CircleProgress};

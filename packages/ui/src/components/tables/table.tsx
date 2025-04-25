@@ -1,116 +1,146 @@
-import { CellContext, ColumnDef, ColumnDefTemplate, ColumnFiltersState, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, HeaderContext, useReactTable, type Table } from "@tanstack/react-table"
+import { CellContext, ColumnDefTemplate, HeaderContext, type Table as TableType } from "@tanstack/react-table"
 import { Pagination } from "./pagination"
 import { Filter } from "./filter"
-import { DefinedUseQueryResult} from "@package/query"
+import {
+  Table as UITable,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/inits/table"
 
 
 type TableParams<T> = {
-    columns: ColumnDef<T>[],
-    flexRender:(header:ColumnDefTemplate<HeaderContext<any, unknown>> | undefined,
+    table: TableType<T>,
+    flexHeaderRender?:(header:ColumnDefTemplate<HeaderContext<any, unknown>> | undefined,
         context: HeaderContext<any, unknown>)=>JSX.Element,
-    enablePagination?:boolean,
-    query:DefinedUseQueryResult<T[], any>,
-    columnFilters?:ColumnFiltersState
+    flexCellRender?:(cell:ColumnDefTemplate<CellContext<any, unknown>> | undefined,
+        context: CellContext<any, unknown>)=>JSX.Element,
+    enablePagination?:boolean
 }
-export function     Table<T>({
-    columns,
-    query,
-    flexRender,
-    columnFilters,
+export function Table<T>({
+    table,
+    flexHeaderRender,
+    flexCellRender,
     enablePagination
-}:TableParams<T>){
-    const table = useReactTable({
-        columns,
-        data:query.data,
-        debugTable: true,
-        getCoreRowModel: getCoreRowModel(),
-        getSortedRowModel: getSortedRowModel(),
-        getFilteredRowModel: getFilteredRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        onPaginationChange: ()=>{},
-        //no need to pass pageCount or rowCount with client-side pagination as it is calculated automatically
-        state: {
-          pagination:{
-            pageIndex:1,
-            pageSize:20
-          },
-          columnFilters:columnFilters
-        },
-        // autoResetPageIndex: false, // turn off page index reset when sorting or filtering
-      })
-    return <div className="p-2 block max-w-full overflow-x-scroll overflow-y-hidden">
-    <div className="h-2" />
-    <table className="w-full ">
-      <thead>
+}:TableParams<T>) {
+    return (
+      <div className="p-2 block max-w-full overflow-x-scroll overflow-y-hidden">
+        <div className="h-2" />
+        <UITable>
+          <TableHeader>
         {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header => {
-              return (
-                <th
-                  key={header.id}
-                  colSpan={header.colSpan}
-                  style={{ position: 'relative', width: header.getSize() }}
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : (flexRender ? 
-                        flexRender(     
+          <TableRow key={headerGroup.id}>
+            {headerGroup.headers.map(header => (
+              <TableHead
+                key={header.id}
+                colSpan={header.colSpan}
+                style={{ 
+                  position: 'relative', 
+                  width: header.getSize() 
+                }}
+              >
+                {/* Render header content if not a placeholder */}
+                {!header.isPlaceholder && (
+                  <div className="flex flex-col space-y-1">
+                    <div className="flex items-center">
+                      {/* Use custom renderer or default */}
+                      {flexHeaderRender 
+                        ? flexHeaderRender(
                             header.column.columnDef.header,
-                            header.getContext())
-                        :flexRenderDefault(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      ))}
-                      {{
-                        asc: ' 🔼',
-                        desc: ' 🔽',
-                      }[header.column.getIsSorted() as string] ?? null}
-                      {header.column.getCanFilter() ? (
-                        <div>
-                          <Filter column={header.column} table={table} />
-                        </div>
-                      ) : null}
-                  {header.column.getCanResize() && (
-                    <div
-                      onMouseDown={header.getResizeHandler()}
-                      onTouchStart={header.getResizeHandler()}
-                      className={`resizer ${
-                        header.column.getIsResizing() ? 'isResizing' : ''
-                      }`}
-                    ></div>
-                  )}
-                </th>
-              )
-            })}
-          </tr>
+                            header.getContext()
+                          )
+                        : flexRenderHeaderDefault(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )
+                      }
+                      
+                      {/* Sort indicators */}
+                      {header.column.getCanSort() && (
+                        <span className="ml-1">
+                          {{
+                            asc: ' 🔼',
+                            desc: ' 🔽',
+                          }[header.column.getIsSorted() as string] ?? null}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {/* Filter component if applicable */}
+                    {header.column.getCanFilter() && (
+                      <div className="mt-1">
+                        <Filter column={header.column} table={table} />
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Resizer handle */}
+                {header.column.getCanResize() && (
+                  <div
+                    onMouseDown={header.getResizeHandler()}
+                    onTouchStart={header.getResizeHandler()}
+                    className={`resizer ${
+                      header.column.getIsResizing() ? 'isResizing' : ''
+                    }`}
+                  />
+                )}
+              </TableHead>
+            ))}
+          </TableRow>
         ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map(row => {
-          return (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell => {
-                return (
-                  <td key={cell.id} style={{ width: cell.column.getSize() }}>
-                    {flexRenderDefault(
+      </TableHeader>
+      <TableBody>
+        {table.getRowModel().rows.map(row => (
+          <TableRow key={row.id}>
+            {row.getVisibleCells().map(cell => (
+              <TableCell 
+                key={cell.id} 
+                style={{ width: cell.column.getSize() }}
+              >
+                {/* Use custom cell renderer or default */}
+                {flexCellRender 
+                  ? flexCellRender(
                       cell.column.columnDef.cell,
                       cell.getContext()
-                    )}
-                  </td>
-                )
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-    {enablePagination && <Pagination table={table}/>}
-    <div className="h-4" />
-  </div>
+                    )
+                  : flexRenderCellDefault(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    )
+                }
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+          </TableBody>
+        </UITable>
+        {enablePagination && <Pagination table={table}/>}
+        <div className="h-4" />
+      </div>
+    )
 }
 
-function flexRenderDefault(
+function flexRenderHeaderDefault(
         header:ColumnDefTemplate<HeaderContext<any, unknown>> | ColumnDefTemplate<CellContext<any, unknown>> | undefined,
         context: HeaderContext<any, unknown> | CellContext<any, unknown>){
-    return <div>content</div>
+    // Type guard to check if we have a valid function before calling it
+    if(typeof header === 'function') {
+        // Need to cast context as any to avoid TypeScript errors with the union type
+        return header(context as any)
+    }
+    return header;
+}
+
+function flexRenderCellDefault(
+        cell:ColumnDefTemplate<CellContext<any, unknown>> | undefined,
+        context: CellContext<any, unknown>):JSX.Element{
+            // Type guard to check if we have a valid function before calling it
+      if(typeof cell === 'function') {
+          // Need to cast context as any to avoid TypeScript errors with the union type
+          return cell(context as any)
+      }
+      return <></>;
 }

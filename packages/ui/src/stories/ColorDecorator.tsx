@@ -18,6 +18,10 @@ type ColorDecoratorProps = {
   destructiveDark?: string;
   destructiveForeground?: string;
   background?: string;
+  muted?: string;
+  mutedLight?: string;
+  mutedDark?: string;
+  mutedForeground?: string;
 };
 
 export const ColorDecorator = (props: ColorDecoratorProps) => {
@@ -40,6 +44,10 @@ export const ColorDecorator = (props: ColorDecoratorProps) => {
     destructiveDark,
     destructiveForeground,
     background,
+    muted,
+    mutedLight,
+    mutedDark,
+    mutedForeground,
   } = props;
   useEffect(() => {
     style.setProperty(
@@ -145,6 +153,30 @@ export const ColorDecorator = (props: ColorDecoratorProps) => {
       background || style.getPropertyValue("--color-background")
     );
   }, [background]);
+  useEffect(() => {
+    style.setProperty(
+      "--color-muted",
+      muted || style.getPropertyValue("--color-muted")
+    );
+  }, [muted]);
+  useEffect(() => {
+    style.setProperty(
+      "--color-muted-light",
+      mutedLight || style.getPropertyValue("--color-muted-light")
+    );
+  }, [mutedLight]);
+  useEffect(() => {
+    style.setProperty(
+      "--color-muted-dark",
+      mutedDark || style.getPropertyValue("--color-muted-dark")
+    );
+  }, [mutedDark]);
+  useEffect(() => {
+    style.setProperty(
+      "--color-muted-foreground",
+      mutedForeground || style.getPropertyValue("--color-muted-foreground")
+    );
+  }, [mutedForeground]);  
   return (
     <div className="grid gap-4 grid-cols-3">
       <div className="text-center text-sm font-semibold">
@@ -232,6 +264,28 @@ export const ColorDecorator = (props: ColorDecoratorProps) => {
         <div className="min-w-60 min-h-8 bg-destructive-foreground">
           <div className="text-black text-sm leading-8 text-center">
             destructive foreground
+          </div>
+        </div>
+      </div>
+      <div className="text-center text-sm font-semibold">
+        <div className="min-w-60 min-h-8 bg-muted-light">
+          <div className="text-muted-foreground text-sm leading-8 text-center">
+            muted light
+          </div>
+        </div>
+        <div className="min-w-60 min-h-8 bg-muted">
+          <div className="text-muted-foreground text-sm leading-8 text-center">
+            muted
+          </div>
+        </div>
+        <div className="min-w-60 min-h-8 bg-muted-dark">
+          <div className="text-muted-foreground text-sm leading-8 text-center">
+            muted dark
+          </div>
+        </div>
+        <div className="min-w-60 min-h-8 bg-muted-foreground">
+          <div className="text-white text-sm leading-8 text-center">
+            muted foreground
           </div>
         </div>
       </div>
