@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Calendar } from "@/components/Calendar";
 import { Button } from "@/components/Button";
-import { addDays, format } from "date-fns";
+import dayjs from "@package/date";
 
 const meta = {
   title: "UI/Calendar",
@@ -42,8 +42,8 @@ export const Range: Story = {
   args: {
     mode: "range",
     selected: {
-      from: new Date(),
-      to: addDays(new Date(), 7),
+      from: dayjs().toDate(),
+      to: dayjs().add(7, "day").toDate(),
     },
   },
 };
@@ -51,14 +51,14 @@ export const Range: Story = {
 export const Multiple: Story = {
   args: {
     mode: "multiple",
-    selected: [new Date(), addDays(new Date(), 2), addDays(new Date(), 5)],
+    selected: [dayjs().toDate(), dayjs().add(2, "day").toDate(), dayjs().add(5, "day").toDate()],
   },
 };
 
 export const WithDefaultSelected: Story = {
   args: {
     mode: "single",
-    selected: new Date(),
+    selected: dayjs().toDate(),
   },
 };
 
@@ -84,7 +84,7 @@ export const SingleSelectInteractive = () => {
         />
       </div>
       <p className="text-center text-muted-foreground">
-        Selected date: {date ? format(date, "PPP") : "None"}
+        Selected date: {date ? dayjs(date).format("PPP") : "None"}
       </p>
       <div className="flex justify-center space-x-2">
         <Button
@@ -111,8 +111,8 @@ export const RangeSelectInteractive = () => {
     from: Date | undefined;
     to?: Date | undefined;
   } | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 7),
+    from: dayjs().toDate(),
+    to: dayjs().add(7, "day").toDate(),
   });
 
   return (
@@ -129,10 +129,10 @@ export const RangeSelectInteractive = () => {
         {dateRange?.from ? (
           dateRange.to ? (
             <>
-              {format(dateRange.from, "PPP")} - {format(dateRange.to, "PPP")}
+              {dayjs(dateRange.from).format("PPP")} - {dayjs(dateRange.to).format("PPP")}
             </>
           ) : (
-            format(dateRange.from, "PPP")
+            dayjs(dateRange.from).format("PPP")
           )
         ) : (
           "No date selected"
@@ -144,8 +144,8 @@ export const RangeSelectInteractive = () => {
           variant="outline"
           onClick={() =>
             setDateRange({
-              from: new Date(),
-              to: addDays(new Date(), 7),
+              from: dayjs().toDate(),
+              to: dayjs().add(7, "day").toDate(),
             })
           }
         >
@@ -165,13 +165,13 @@ export const RangeSelectInteractive = () => {
 
 export const MultipleSelectInteractive = () => {
   const [dates, setDates] = useState<Date[] | undefined>([
-    new Date(),
-    addDays(new Date(), 2),
-    addDays(new Date(), 5),
+    dayjs().toDate(),
+    dayjs().add(2, "day").toDate(),
+    dayjs().add(5, "day").toDate(),
   ]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-[1800px]">
       <div className="flex justify-center">
         <Calendar
           mode="multiple"
@@ -188,7 +188,7 @@ export const MultipleSelectInteractive = () => {
           size="sm"
           variant="outline"
           onClick={() =>
-            setDates([new Date(), addDays(new Date(), 2), addDays(new Date(), 5)])
+            setDates([dayjs().toDate(), dayjs().add(2, "day").toDate(), dayjs().add(5, "day").toDate()])
           }
         >
           Select 3 days
@@ -212,46 +212,50 @@ export const AllCalendarModes = () => {
     from: Date | undefined;
     to?: Date | undefined;
   } | undefined>({
-    from: new Date(),
-    to: addDays(new Date(), 7),
+    from: dayjs().toDate(),
+    to: dayjs().add(7, "day").toDate(),
   });
   const [multipleDates, setMultipleDates] = useState<Date[] | undefined>([
-    new Date(),
-    addDays(new Date(), 2),
-    addDays(new Date(), 5),
+    dayjs().toDate(),
+    dayjs().add(2, "day").toDate(),
+    dayjs().add(5, "day").toDate(),
   ]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
       <div className="space-y-2">
         <h3 className="text-lg font-medium text-center">Single Date</h3>
+        <div className="flex justify-center">
         <Calendar
           mode="single"
           selected={singleDate}
           onSelect={setSingleDate}
           className="rounded-md border mx-auto"
         />
+        </div>
         <p className="text-center text-sm text-muted-foreground">
-          {singleDate ? format(singleDate, "PPP") : "No date selected"}
+          {singleDate ? dayjs(singleDate).format("PPP") : "No date selected"}
         </p>
       </div>
       
       <div className="space-y-2">
         <h3 className="text-lg font-medium text-center">Date Range</h3>
-        <Calendar
-          mode="range"
-          selected={dateRange}
-          onSelect={setDateRange}
-          className="rounded-md border mx-auto"
-        />
+        <div className="flex justify-center"> 
+          <Calendar
+            mode="range"
+            selected={dateRange}
+            onSelect={setDateRange}
+            className="rounded-md border mx-auto"
+          />
+        </div>
         <p className="text-center text-sm text-muted-foreground">
           {dateRange?.from ? (
             dateRange.to ? (
               <>
-                {format(dateRange.from, "PPP")} to {format(dateRange.to, "PPP")}
+                {dayjs(dateRange.from).format("PPP")} to {dayjs(dateRange.to).format("PPP")}
               </>
             ) : (
-              format(dateRange.from, "PPP")
+              dayjs(dateRange.from).format("PPP")
             )
           ) : (
             "No range selected"
@@ -261,12 +265,14 @@ export const AllCalendarModes = () => {
       
       <div className="space-y-2">
         <h3 className="text-lg font-medium text-center">Multiple Dates</h3>
+        <div className="flex justify-center">
         <Calendar
           mode="multiple"
           selected={multipleDates}
           onSelect={setMultipleDates}
           className="rounded-md border mx-auto"
         />
+        </div>
         <p className="text-center text-sm text-muted-foreground">
           {multipleDates?.length 
             ? `${multipleDates.length} dates selected` 

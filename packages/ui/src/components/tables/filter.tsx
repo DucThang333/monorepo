@@ -1,4 +1,5 @@
 import { Column, Table } from "@tanstack/react-table"
+import { Input } from "@/components/inits/input"
 
 export function Filter({
     column,
@@ -15,7 +16,7 @@ export function Filter({
   
     return typeof firstValue === 'number' ? (
       <div className="flex space-x-2" onClick={e => e.stopPropagation()}>
-        <input
+        <Input
           type="number"
           value={(columnFilterValue as [number, number])?.[0] ?? ''}
           onChange={e =>
@@ -25,9 +26,9 @@ export function Filter({
             ])
           }
           placeholder={`Min`}
-          className="w-24 border shadow rounded"
+          className="w-24 h-7 px-2 py-1 focus-visible:ring-0 focus-visible:ring-offset-0"
         />
-        <input
+        <Input
           type="number"
           value={(columnFilterValue as [number, number])?.[1] ?? ''}
           onChange={e =>
@@ -37,12 +38,12 @@ export function Filter({
             ])
           }
           placeholder={`Max`}
-          className="w-24 border shadow rounded"
+          className="w-24 h-7 px-2 py-1 focus-visible:ring-0 focus-visible:ring-offset-0"
         />
       </div>
     ) : (
-      <input
-        className="w-36 border shadow rounded"
+      <Input
+        className="w-36 h-7 px-2 py-1 focus-visible:ring-0 focus-visible:ring-offset-0"
         onChange={e => column.setFilterValue(e.target.value)}
         onClick={e => e.stopPropagation()}
         placeholder={`Search...`}

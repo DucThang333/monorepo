@@ -1,0 +1,14 @@
+{
+    "name": "@package/lodash",
+    "version": "0.0.0",
+    "license": "ISC",
+    "exports": {
+        ".": "./index.ts"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.17"
+    }
+}

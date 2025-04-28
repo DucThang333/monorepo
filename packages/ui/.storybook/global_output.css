@@ -1,5 +1,41 @@
 /*! tailwindcss v4.1.4 | MIT License | https://tailwindcss.com */
 @layer properties;
+@font-face {
+  font-family: 'anton';
+  src: url('/fonts/Anton-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Caveat-brush';
+  src: url('/fonts/CaveatBrush-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'e-b-garamond';
+  src: url('/fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'lobster';
+  src: url('/fonts/Lobster-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'poppins';
+  src: url('/fonts/Poppins.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'nunito';
+  src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'oswald';
+  src: url('/fonts/Oswald-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Jet-brains-mono';
+  src: url('/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+}
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -21,7 +57,9 @@
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-neutral-600: oklch(43.9% 0 0);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -394,14 +432,14 @@
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
+  .mt-auto {
+    margin-top: auto;
+  }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
-  }
-  .mb-3 {
-    margin-bottom: calc(var(--spacing) * 3);
   }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
@@ -441,6 +479,9 @@
   }
   .aspect-square {
     aspect-ratio: 1 / 1;
+  }
+  .\!h-\[200px\] {
+    height: 200px !important;
   }
   .h-0 {
     height: calc(var(--spacing) * 0);
@@ -511,11 +552,17 @@
   .h-\[var\(--radix-select-trigger-height\)\] {
     height: var(--radix-select-trigger-height);
   }
+  .h-\[var\(--thumb-size\)\] {
+    height: var(--thumb-size);
+  }
   .h-full {
     height: 100%;
   }
   .h-px {
     height: 1px;
+  }
+  .h-screen {
+    height: 100vh;
   }
   .max-h-96 {
     max-height: calc(var(--spacing) * 96);
@@ -607,8 +654,35 @@
   .w-\[200\%\] {
     width: 200%;
   }
+  .w-\[200px\] {
+    width: 200px;
+  }
+  .w-\[250px\] {
+    width: 250px;
+  }
+  .w-\[300px\] {
+    width: 300px;
+  }
+  .w-\[350px\] {
+    width: 350px;
+  }
   .w-\[400px\] {
     width: 400px;
+  }
+  .w-\[500px\] {
+    width: 500px;
+  }
+  .w-\[800px\] {
+    width: 800px;
+  }
+  .w-\[1800px\] {
+    width: 1800px;
+  }
+  .w-\[var\(--thumb-size\)\] {
+    width: var(--thumb-size);
+  }
+  .w-fit {
+    width: fit-content;
   }
   .w-full {
     width: 100%;
@@ -715,6 +789,9 @@
   .rotate-45 {
     rotate: 45deg;
   }
+  .rotate-180 {
+    rotate: 180deg;
+  }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
@@ -729,6 +806,9 @@
   }
   .cursor-default {
     cursor: default;
+  }
+  .cursor-not-allowed {
+    cursor: not-allowed;
   }
   .cursor-pointer {
     cursor: pointer;
@@ -790,9 +870,6 @@
   .justify-end {
     justify-content: flex-end;
   }
-  .gap-1 {
-    gap: calc(var(--spacing) * 1);
-  }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
@@ -807,13 +884,6 @@
   }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
-  }
-  .space-y-0 {
-    :where(& > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 0) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 0) * calc(1 - var(--tw-space-y-reverse)));
-    }
   }
   .space-y-1 {
     :where(& > :not(:last-child)) {
@@ -864,13 +934,6 @@
       margin-block-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
-  .space-y-10 {
-    :where(& > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 10) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 10) * calc(1 - var(--tw-space-y-reverse)));
-    }
-  }
   .space-x-1 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -890,6 +953,13 @@
       --tw-space-x-reverse: 0;
       margin-inline-start: calc(calc(var(--spacing) * 4) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
+  .space-x-6 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing) * 6) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   .overflow-auto {
@@ -965,12 +1035,6 @@
     --tw-border-style: none;
     border-style: none;
   }
-  .border-\[\#e2e8f0\] {
-    border-color: #e2e8f0;
-  }
-  .border-\[\#f1f5f9\] {
-    border-color: #f1f5f9;
-  }
   .border-border {
     border-color: var(--color-border);
   }
@@ -979,6 +1043,9 @@
   }
   .border-destructive {
     border-color: var(--color-destructive);
+  }
+  .border-gray-200 {
+    border-color: var(--color-gray-200);
   }
   .border-gray-300 {
     border-color: var(--color-gray-300);
@@ -1179,9 +1246,6 @@
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
-  .p-5 {
-    padding: calc(var(--spacing) * 5);
-  }
   .p-6 {
     padding: calc(var(--spacing) * 6);
   }
@@ -1232,6 +1296,9 @@
   }
   .pr-2 {
     padding-right: calc(var(--spacing) * 2);
+  }
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
@@ -1382,9 +1449,6 @@
   }
   .text-\[\#1e293b\] {
     color: #1e293b;
-  }
-  .text-\[\#475569\] {
-    color: #475569;
   }
   .text-accent-foreground {
     color: var(--color-accent-foreground);
@@ -1611,10 +1675,10 @@
       z-index: 20;
     }
   }
-  .hover\:bg-\[\#f8fafc\] {
+  .hover\:cursor-pointer {
     &:hover {
       @media (hover: hover) {
-        background-color: #f8fafc;
+        cursor: pointer;
       }
     }
   }
@@ -1632,6 +1696,20 @@
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-destructive) 80%, transparent);
         }
+      }
+    }
+  }
+  .hover\:bg-gray-50 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-50);
+      }
+    }
+  }
+  .hover\:bg-muted {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-muted);
       }
     }
   }
@@ -1689,13 +1767,6 @@
       }
     }
   }
-  .hover\:text-\[\#0f172a\] {
-    &:hover {
-      @media (hover: hover) {
-        color: #0f172a;
-      }
-    }
-  }
   .hover\:text-accent-foreground {
     &:hover {
       @media (hover: hover) {
@@ -1707,6 +1778,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-blue-800);
+      }
+    }
+  }
+  .hover\:text-neutral-600 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-neutral-600);
       }
     }
   }
@@ -1792,6 +1870,12 @@
     &:focus {
       --tw-outline-style: none;
       outline-style: none;
+    }
+  }
+  .focus-visible\:ring-0 {
+    &:focus-visible {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
   .focus-visible\:ring-2 {
@@ -1940,10 +2024,15 @@
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
-  .data-\[state\=checked\]\:translate-x-5 {
+  .data-\[state\=checked\]\:translate-x-4 {
     &[data-state="checked"] {
-      --tw-translate-x: calc(var(--spacing) * 5);
+      --tw-translate-x: calc(var(--spacing) * 4);
       translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+  .data-\[state\=checked\]\:bg-destructive {
+    &[data-state="checked"] {
+      background-color: var(--color-destructive);
     }
   }
   .data-\[state\=checked\]\:bg-primary {
@@ -2169,18 +2258,6 @@
       width: calc(var(--spacing) * 5);
     }
   }
-  .\[\&_tr\]\:border-b {
-    & tr {
-      border-bottom-style: var(--tw-border-style);
-      border-bottom-width: 1px;
-    }
-  }
-  .\[\&_tr\:last-child\]\:border-0 {
-    & tr:last-child {
-      border-style: var(--tw-border-style);
-      border-width: 0px;
-    }
-  }
   .\[\&\:has\(\[aria-selected\]\)\]\:bg-accent {
     &:has([aria-selected]) {
       background-color: var(--color-accent);
@@ -2227,14 +2304,6 @@
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
-    }
-  }
-  .\[\&\>tr\]\:last\:border-b-0 {
-    &>tr {
-      &:last-child {
-        border-bottom-style: var(--tw-border-style);
-        border-bottom-width: 0px;
-      }
     }
   }
   .\[\&\[data-state\=open\]\>svg\]\:rotate-180 {
@@ -2314,44 +2383,11 @@
   --icon-muted: #6E7F96FF;
   --icon-active: #F1F5FBFF;
 }
-@font-face {
-  font-family: 'anton';
-  src: url('/fonts/Anton-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Caveat-brush';
-  src: url('/fonts/CaveatBrush-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'e-b-garamond';
-  src: url('/fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'lobster';
-  src: url('/fonts/Lobster-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'poppins';
-  src: url('/fonts/Poppins.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'nunito';
-  src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'oswald';
-  src: url('/fonts/Oswald-VariableFont_wght.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'montserrat';
-  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Jet-brains-mono';
-  src: url('/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
-}
 body {
   font-family: var(--font-family), sans-serif,"mono","montserrat";
+}
+.border-input {
+  border-color: var(--color-border-input);
 }
 @property --tw-translate-x {
   syntax: "*";

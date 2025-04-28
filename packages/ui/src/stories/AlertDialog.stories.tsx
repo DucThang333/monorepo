@@ -1,24 +1,96 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { AlertDialogExample } from "./AlertDialog";
+import React from "react";
+import type { Meta } from "@storybook/react";
+import { AlertDialog } from "@/components/AlertDialog";
+import { Button } from "@/components/Button";
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta = {
+export default {
   title: "UI/AlertDialog",
-  component: AlertDialogExample,
+  component: AlertDialog,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-} satisfies Meta<typeof AlertDialogExample>;
+  argTypes: {
+    title: { control: 'text' },
+    description: { control: 'text' },
+    cancelText: { control: 'text' },
+    actionText: { control: 'text' },
+    isActionLoading: { control: 'boolean' },
+    actionVariant: {
+      control: { type: 'select' },
+      options: ['default', 'destructive', 'outline', 'secondary', 'ghost'],
+    },
+  },
+} as Meta<typeof AlertDialog>;
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+// Showcase all alertdialog variants
+export const Showcase = () => {
+  return (
+    <div className="space-y-8 p-4 bg-background rounded-lg border border-border">
+      <h2 className="text-xl font-semibold">AlertDialog Examples</h2>
+      
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <h3 className="text-md font-medium">Default</h3>
+          <AlertDialog 
+            trigger={<Button>Open Alert</Button>}
+            title="Are you absolutely sure?"
+            description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+            cancelText="Cancel"
+            actionText="Continue"
+            onAction={() => console.log('Action clicked')}
+          />
+        </div>
+        
+        <div className="space-y-2">
+          <h3 className="text-md font-medium">Destructive</h3>
+          <AlertDialog 
+            trigger={<Button variant="destructive">Delete Item</Button>}
+            title="Delete this item?"
+            description="This will permanently remove this item from your account."
+            cancelText="Cancel"
+            actionText="Delete"
+            actionVariant="destructive"
+            onAction={() => console.log('Delete clicked')}
+          />
+        </div>
+      </div>
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = {
-  args: {},
+      <div className="space-y-2">
+        <h3 className="text-md font-medium">Loading State</h3>
+        <AlertDialog 
+          trigger={<Button>Save Changes</Button>}
+          title="Save changes?"
+          description="Your changes will be saved and can't be reverted."
+          cancelText="Cancel"
+          actionText="Save"
+          isActionLoading={true}
+          onAction={() => new Promise(resolve => setTimeout(resolve, 2000))}
+        />
+      </div>
+    </div>
+  );
+};
+
+// Configurable story
+export const Configurable = ({ 
+  title = "Are you sure?",
+  description = "This is a configurable alert dialog. Try changing the props in the controls panel.",
+  cancelText = "Cancel",
+  actionText = "Continue",
+  actionVariant = "default",
+  isActionLoading = false,
+}) => {
+  return (
+    <AlertDialog 
+      trigger={<Button>Open Configurable Alert</Button>}
+      title={title}
+      description={description}
+      cancelText={cancelText}
+      actionText={actionText}
+      actionVariant={actionVariant as "default" | "destructive" | "outline" | "secondary" | "ghost"}
+      isActionLoading={isActionLoading}
+      onAction={() => console.log('Configurable action clicked')}
+    />
+  );
 };

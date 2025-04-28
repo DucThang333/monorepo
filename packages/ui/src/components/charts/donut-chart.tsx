@@ -1,6 +1,6 @@
 "use client";
 
-import merge from "lodash.merge";
+import {merge} from "@package/lodash";
 import dynamic from "next/dynamic";
 import { useTheme } from "next-themes";
 import { ApexOptions } from "apexcharts";

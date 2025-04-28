@@ -12,13 +12,17 @@
     "./component/*": "./src/components/*/index.ts",
     "./lib/*": "./src/components/*.ts",
     "./chart/*": "./src/components/charts/*.tsx",
-    "./icon/*": "./src/components/icons/index.tsx"
+    "./icon/*": "./src/components/icons/index.tsx",
+    "./tanstack-react-form": "./src/tanstack-react-form",
+    "./tanstack-react-table": "./src/tanstack-react-table"
   },
   "dependencies": {
     "@package/i18next": "workspace:*",
     "@package/query": "workspace:*",
-    "@package/validation": "workspace:*",
     "@package/tailwind-config": "workspace:*",
+    "@package/validation": "workspace:*",
+    "@package/lodash": "workspace:*",
+    "@package/date": "workspace:*",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -52,7 +56,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
-    "lodash.merge": "^4.6.2",
     "lucide-react": "^0.293.0",
     "next-themes": "^0.2.1",
     "numeral": "^2.0.6",
@@ -66,6 +69,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "storybook-color-picker": "^4.0.0",
     "swiper": "^11.0.5",
+    "tailwind-merge": "^3.2.0",
     "tailwindcss": "^4.0.17"
   },
   "devDependencies": {
@@ -76,8 +80,7 @@
     "@storybook/blocks": "8.5.6",
     "@storybook/nextjs": "8.5.6",
     "@storybook/react": "8.5.6",
-    "@storybook/test": "8.5.6",
-    "@types/lodash.merge": "^4.6.9",
+    "@storybook/test": "8.5.6",    
     "@types/node": "^20",
     "@types/numeral": "^2.0.5",
     "@types/react": "^18",

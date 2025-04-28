@@ -25,6 +25,15 @@ declare module "lucide-react" {
   export const Settings: LucideIcon;
   export const Bell: LucideIcon;
   export const User: LucideIcon;
+  export const Home: LucideIcon;
+  export const Mail: LucideIcon;
+  export const CalendarDays: LucideIcon;
+  export const ShieldCheck: LucideIcon;
+  export const Plus: LucideIcon;
+  export const CreditCard: LucideIcon;
+  export const Download: LucideIcon;
+  export const Trash: LucideIcon;
+  export const Calendar: LucideIcon;
   // Add other icons as needed
 }
 
@@ -117,4 +126,57 @@ declare module "lucide-react/dist/esm/icons/user" {
   export { User };
 }
 
+declare module "lucide-react/dist/esm/icons/home" {
+  import { LucideIcon } from "lucide-react";
+  const Home: LucideIcon;
+  export { Home };
+}
+
+declare module "lucide-react/dist/esm/icons/mail" {
+  import { LucideIcon } from "lucide-react";
+  const Mail: LucideIcon;
+  export { Mail };
+}
+
+declare module "lucide-react/dist/esm/icons/calendar-days" {
+  import { LucideIcon } from "lucide-react";
+  const CalendarDays: LucideIcon;
+  export { CalendarDays };
+}
+
+declare module "lucide-react/dist/esm/icons/shield-check" {
+  import { LucideIcon } from "lucide-react";
+  const ShieldCheck: LucideIcon;
+  export { ShieldCheck };
+}
+
+declare module "lucide-react/dist/esm/icons/plus" {
+  import { LucideIcon } from "lucide-react";
+  const Plus: LucideIcon;
+  export { Plus };
+} 
+
+declare module "lucide-react/dist/esm/icons/credit-card" {
+  import { LucideIcon } from "lucide-react";
+  const CreditCard: LucideIcon;
+  export { CreditCard };
+}
+
+declare module "lucide-react/dist/esm/icons/download" {
+  import { LucideIcon } from "lucide-react";
+  const Download: LucideIcon;
+  export { Download };
+}
+
+declare module "lucide-react/dist/esm/icons/trash" {
+  import { LucideIcon } from "lucide-react";
+  const Trash: LucideIcon;
+  export { Trash };
+}
+
+declare module "lucide-react/dist/esm/icons/calendar" {
+  import { LucideIcon } from "lucide-react";
+  const Calendar: LucideIcon;
+  export { Calendar };
+}
 // Add other icons as needed  

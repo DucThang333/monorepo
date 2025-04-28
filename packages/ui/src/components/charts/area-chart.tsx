@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import merge from "lodash.merge";
+import {merge} from "@package/lodash";
 import { ApexOptions } from "apexcharts";
 import { baseChartOptions } from "@/lib/base-chart-options";
 

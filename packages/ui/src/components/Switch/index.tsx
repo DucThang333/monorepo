@@ -41,9 +41,9 @@ export function Switch({
   };
 
   const thumbSizeClasses = {
-    sm: "h-3 w-3",
-    md: "h-4 w-4",
-    lg: "h-5 w-5",
+    sm: "14",
+    md: "18",
+    lg: "22",
   };
 
   return (
@@ -59,15 +59,14 @@ export function Switch({
         id={id}
         className={cn(
           sizeClasses[size],
-          error && "border-destructive",
+          "border border-primary ",
+          error && "border-destructive data-[state=checked]:bg-destructive",
           className
         )}
         {...props}
-        style={
-          {
-            "--thumb-size": thumbSizeClasses[size].split(" ")[1],
-          } as React.CSSProperties
-        }
+        style={{
+          "--thumb-size": thumbSizeClasses[size] + "px",
+        } as React.CSSProperties}
       />
       {(label || description || error) && (
         <div className="space-y-1 leading-none">
