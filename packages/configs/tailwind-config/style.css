@@ -49,7 +49,7 @@
 /* import tailwind and custom css */
 @import "tailwindcss";
 
-@theme{
+@theme {
     /* color */
     --color-primary: var(--color-primary);
     --color-primary-light: var(--color-primary-light);
@@ -147,9 +147,9 @@
     --hover: #D5DEE9FF;
     --input: #E3E8EFFF;
     --ring: #0D1116FF;
-  
+
     --radius: 0.5rem;
-    
+
     --icon: #6B7C93FF;
     --icon-muted: #98A5B6FF;
     --icon-active: #1C2B3AFF;
@@ -159,34 +159,34 @@
 .dark {
     --background: #0D1116FF;
     --foreground: #F1F5FBFF;
-  
+
     --card: #0D1116FF;
     --card-hover: #212C3CFF;
     --card-foreground: #F1F5FBFF;
-  
+
     --popover: #0D1116FF;
     --popover-foreground: #F1F5FBFF;
-  
+
     --primary: #F1F5FBFF;
     --primary-foreground: #1C2B3AFF;
-  
+
     --secondary: #6BAAFFFF;
     --secondary-foreground: #0D1116FF;
-  
+
     --muted: #C7D5A8FF;
     --muted-foreground: #3C4A2FFF;
-  
+
     --accent: #C4A976FF;
     --accent-foreground: #0D1116FF;
-  
+
     --destructive: #FF3A3AFF;
     --destructive-foreground: #0D1116FF;
-  
+
     --border: #212C3CFF;
     --hover: #2B384BFF;
     --input: #212C3CFF;
     --ring: #D6E0F0FF;
-    
+
     --icon: #A0AEC0FF;
     --icon-muted: #6E7F96FF;
     --icon-active: #F1F5FBFF;
@@ -194,9 +194,87 @@
 
 
 body {
-    font-family: var(--font-family), sans-serif,"mono","montserrat";
+    font-family: var(--font-family), sans-serif, "mono", "montserrat";
 }
 
 .border-input {
     border-color: var(--color-border-input);
+}
+
+/* Resizable component styling */
+.resizable {
+    position: relative;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+    /* Optional: Add a subtle border when resizing */
+    outline: 1px solid transparent;
+}
+
+.resizable:focus-within {
+    outline: 2px solid var(--ring);
+    outline-offset: 1px;
+}
+
+/* Horizontal resizer */
+.resizable.flex-row > .resizer {
+    cursor: col-resize;
+    width: 4px;
+    height: 100%;
+    background-color: var(--border);
+    transition: background-color 0.2s;
+    margin: 0 -2px;
+    right: 0;
+}
+
+/* Vertical resizer */
+.resizable.flex-col > .resizer {
+    cursor: row-resize;
+    height: 4px;
+    width: 100%;
+    background-color: var(--border);
+    transition: background-color 0.2s;
+    margin: -2px 0;
+    bottom: 0;
+}
+
+.resizer:hover,
+.resizer:active {
+    background-color: var(--primary);
+}
+
+/* Improve drag experience */
+.resizable[data-dragging="true"] > .resizer {
+    background-color: var(--primary);
+}
+
+.resizable[data-dragging="true"] {
+    outline: 2px solid var(--ring);
+    outline-offset: 1px;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95em;
+    color: var(--muted-foreground, #6b7280);
+    /* Optional: Add spacing or custom font */
+}
+
+.breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent, #C4A976FF);
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 0.25em;
+    color: var(--muted-foreground, #b0b0b0);
 }
