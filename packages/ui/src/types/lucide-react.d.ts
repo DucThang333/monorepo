@@ -34,6 +34,10 @@ declare module "lucide-react" {
   export const Download: LucideIcon;
   export const Trash: LucideIcon;
   export const Calendar: LucideIcon;
+  export const Lock: LucideIcon;
+  export const Info: LucideIcon;
+  export const AlertCircle: LucideIcon;
+  
   // Add other icons as needed
 }
 
@@ -179,4 +183,23 @@ declare module "lucide-react/dist/esm/icons/calendar" {
   const Calendar: LucideIcon;
   export { Calendar };
 }
+
+declare module "lucide-react/dist/esm/icons/lock" {
+  import { LucideIcon } from "lucide-react";
+  const Lock: LucideIcon;
+  export { Lock };
+}
+
+declare module "lucide-react/dist/esm/icons/info" {
+  import { LucideIcon } from "lucide-react";
+  const Info: LucideIcon;
+  export { Info };
+}
+
+declare module "lucide-react/dist/esm/icons/alert-circle" {
+  import { LucideIcon } from "lucide-react";
+  const AlertCircle: LucideIcon;
+  export { AlertCircle };
+}
+
 // Add other icons as needed  
