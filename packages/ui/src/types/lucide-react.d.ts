@@ -35,8 +35,11 @@ declare module "lucide-react" {
   export const Trash: LucideIcon;
   export const Calendar: LucideIcon;
   export const Lock: LucideIcon;
-  export const Info: LucideIcon;
   export const AlertCircle: LucideIcon;
+  export const PanelLeft: LucideIcon;
+  export const PanelLeftClose: LucideIcon;
+  export const PanelLeftOpen: LucideIcon;
+  export const Menu: LucideIcon;
   
   // Add other icons as needed
 }
@@ -142,12 +145,6 @@ declare module "lucide-react/dist/esm/icons/mail" {
   export { Mail };
 }
 
-declare module "lucide-react/dist/esm/icons/calendar-days" {
-  import { LucideIcon } from "lucide-react";
-  const CalendarDays: LucideIcon;
-  export { CalendarDays };
-}
-
 declare module "lucide-react/dist/esm/icons/shield-check" {
   import { LucideIcon } from "lucide-react";
   const ShieldCheck: LucideIcon;
@@ -190,16 +187,34 @@ declare module "lucide-react/dist/esm/icons/lock" {
   export { Lock };
 }
 
-declare module "lucide-react/dist/esm/icons/info" {
-  import { LucideIcon } from "lucide-react";
-  const Info: LucideIcon;
-  export { Info };
-}
-
 declare module "lucide-react/dist/esm/icons/alert-circle" {
   import { LucideIcon } from "lucide-react";
   const AlertCircle: LucideIcon;
   export { AlertCircle };
+}
+
+declare module "lucide-react/dist/esm/icons/panel-left" {
+  import { LucideIcon } from "lucide-react";
+  const PanelLeft: LucideIcon;
+  export { PanelLeft };
+}
+
+declare module "lucide-react/dist/esm/icons/panel-left-close" {
+  import { LucideIcon } from "lucide-react";
+  const PanelLeftClose: LucideIcon;
+  export { PanelLeftClose };
+}
+
+declare module "lucide-react/dist/esm/icons/panel-left-open" {
+  import { LucideIcon } from "lucide-react";
+  const PanelLeftOpen: LucideIcon;
+  export { PanelLeftOpen };
+}
+
+declare module "lucide-react/dist/esm/icons/menu" {
+  import { LucideIcon } from "lucide-react";
+  const Menu: LucideIcon;
+  export { Menu };
 }
 
 // Add other icons as needed  

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import type { Meta } from "@storybook/react";
 import { Table } from "@/components/tables/table";
 import {
@@ -9,6 +9,7 @@ import {
   getPaginationRowModel,
   ColumnDef,
 } from "@/tanstack-react-table";
+import { ColumnResizeDirection } from "@tanstack/react-table";
 
 // Sample data type
 interface Person {
@@ -245,4 +246,124 @@ export const LoadingState = () => {
 // Without pagination
 export const WithoutPagination = () => {
   return <Showcase enablePagination={false} />;
+};
+
+// Generate mock data function
+const generateMoreData = (start: number, count: number): Person[] => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: (start + i).toString(),
+    firstName: `FirstName${start + i}`,
+    lastName: `LastName${start + i}`,
+    age: Math.floor(Math.random() * 50) + 20,
+    visits: Math.floor(Math.random() * 15),
+    status: ['active', 'inactive', 'pending'][Math.floor(Math.random() * 3)],
+    progress: Math.floor(Math.random() * 100),
+  }));
+};
+
+// Infinity scroll story
+export const InfinityScroll = () => {
+  const [data, setData] = useState<Person[]>(() => generateMoreData(0, 100));
+  const [fetchState, setFetchState] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const columns = React.useMemo<ColumnDef<Person>[]>(
+    () => [
+      {
+        accessorKey: 'id',
+        header: 'ID',
+        size: 60,
+      },
+      {
+        accessorKey: 'firstName',
+        header: 'First Name',
+        size: 120,
+      },
+      {
+        accessorKey: 'lastName',
+        header: 'Last Name',
+        size: 120,
+      },
+      {
+        accessorKey: 'age',
+        header: 'Age',
+        size: 80,
+      },
+      {
+        accessorKey: 'visits',
+        header: 'Visits',
+        size: 80,
+      },
+      {
+        accessorKey: 'status',
+        header: 'Status',
+        size: 120,
+        cell: (info) => {
+          const status = info.getValue() as string;
+          return (
+            <div className="flex items-center">
+              <span className={`h-2 w-2 rounded-full ${statusColors[status as keyof typeof statusColors]}`}></span>
+              <span className="ml-2 capitalize">{status}</span>
+            </div>
+          );
+        }
+      },
+      {
+        accessorKey: 'progress',
+        header: 'Progress',
+        size: 120,
+        cell: (info) => {
+          const progress = info.getValue() as number;
+          return (
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div
+                className="bg-primary h-2.5 rounded-full"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+          );
+        }
+      },
+    ],
+    []
+  );
+
+  const fetchMoreData = useCallback(() => {
+    if (fetchState === "loading") return;
+    
+    setFetchState("loading");
+    // Simulate API call
+    setTimeout(() => {
+      const newData = generateMoreData(data.length, 100);
+      setData(prev => [...prev, ...newData]);
+      setFetchState("success");
+    }, 1000);
+  }, [data.length, fetchState]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
+
+  return (
+    <div className="flex flex-col h-screen p-4">
+      <Table 
+        table={table}
+        enablePagination={false}
+        // fetchingMore={fetchMoreData}
+        isHasLoadMore={data.length <= 200}
+        stateFetchingMore={"error"}
+      />
+    </div>
+  );
+};
+
+InfinityScroll.parameters = {
+  docs: {
+    description: {
+      story: 'This story demonstrates the infinity scroll functionality. The table will load more data when scrolled to the bottom.',
+    },
+  },
 };

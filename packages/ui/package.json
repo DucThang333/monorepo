@@ -23,6 +23,7 @@
     "@fullcalendar/list": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17",
+    "@package/utils": "workspace:*",
     "@package/date": "workspace:*",
     "@package/i18next": "workspace:*",
     "@package/lodash": "workspace:*",

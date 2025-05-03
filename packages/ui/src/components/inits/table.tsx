@@ -16,6 +16,21 @@ const Table = React.forwardRef<
 ))
 Table.displayName = "Table"
 
+const TableScrollCustom = React.forwardRef<
+  HTMLTableElement,
+  React.HTMLAttributes<HTMLTableElement> & {
+    onScroll?: (event: React.UIEvent<HTMLTableElement>) => void
+  }
+>(({ className, onScroll, ...props }, ref) => (
+  <div className="relative w-full overflow-auto" ref={ref} onScroll={onScroll}>
+    <table
+      className={cn("w-full caption-bottom text-sm", className)}
+      {...props}
+    />
+  </div>
+))
+TableScrollCustom.displayName = "TableScrollCustom"
+
 const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
@@ -111,4 +126,5 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  TableScrollCustom
 }

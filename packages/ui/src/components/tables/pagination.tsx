@@ -2,28 +2,38 @@ import { Table } from "@tanstack/react-table"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/inits/input"
 import LeftArrow from "@/components/icons/left-arrow"
-import {debounce} from "@package/lodash"
+import loash from "@package/lodash"
 import { useEffect, useMemo, useState } from "react"
+import { useTranslation } from "@package/i18next"
+import { capitalizeFirstLetter } from "@package/utils"
+import { Loading } from "../Loading"
+
+const { debounce } = loash;
 
 type PaginationParams = {
     table: Table<any>
+    isLoading: boolean
+    enablePagination: boolean
 }
 
 export function Pagination({
-    table
+    table,
+    isLoading,
+    enablePagination
 }: PaginationParams) {
-    const [directPage, setDirectPage] = useState<Number|undefined>(table.getState().pagination.pageIndex + 1)
+    const { t } = useTranslation()
+    const [directPage, setDirectPage] = useState<Number | undefined>(table.getState().pagination.pageIndex + 1)
     const changeDirectPage = useMemo(() => debounce((e: React.ChangeEvent<HTMLInputElement>) => {
         const page = e.target.value ? Number(e.target.value) - 1 : 0
         table.setPageIndex(page)
-    },300), [table])
+    }, 300), [table])
     useEffect(() => {
         setDirectPage(table.getState().pagination.pageIndex + 1)
     }, [table.getState().pagination.pageIndex])
     return (
         <div className="mt-4 space-y-4">
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                {enablePagination && <div className="flex items-center gap-2">
                     <button
                         className={cn(
                             "flex h-8 items-center justify-center ",
@@ -33,12 +43,11 @@ export function Pagination({
                         disabled={!table.getCanPreviousPage()}
                         aria-label="Go to previous page"
                     >
-                        <LeftArrow />Previous
+                        <LeftArrow /> {capitalizeFirstLetter(t("tables.previous"))}
                     </button>
                     <div className="flex items-center">
                         <span className="text-sm font-medium">
-                            Page {table.getState().pagination.pageIndex + 1} of{' '}
-                            {table.getPageCount().toLocaleString()}
+                            {capitalizeFirstLetter(t("tables.page_of", { page: table.getState().pagination.pageIndex + 1, total: table.getPageCount().toLocaleString() }))}
                         </span>
                     </div>
                     <button
@@ -49,24 +58,33 @@ export function Pagination({
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                         aria-label="Go to next page">
-                        Next<LeftArrow className="rotate-180" />
+                        {capitalizeFirstLetter(t("tables.next"))} <LeftArrow className="rotate-180" />
                     </button>
-                </div>
+                </div>}
+                {isLoading ?
+                    <div className="flex items-center gap-2">
+                        <Loading size="sm" variant="primary" />
+                    </div>
+                : (
+                    <div className="text-sm text-muted-foreground">
+                        {capitalizeFirstLetter(t("tables.showing_rows", { count: table.getRowModel().rows.length }))}
+                    </div>
+                )}
 
-                <div className="flex items-center space-x-6">
+                {enablePagination && <div className="flex items-center space-x-6">
                     <div className="flex items-center space-x-2">
-                        <span className="text-sm text-muted-foreground">Go to page:</span>
+                        <span className="text-sm text-muted-foreground">{capitalizeFirstLetter(t("tables.go_to_page"))}:</span>
                         <Input
                             type="number"
                             min="1"
                             max={table.getPageCount()}
                             value={String(directPage)}
-                            onChange={(e)=>{
-                                if(!e.target.value) {
+                            onChange={(e) => {
+                                if (!e.target.value) {
                                     setDirectPage(undefined)
                                     return
                                 }
-                                if(Number(e.target.value) < 1 || Number(e.target.value) > table.getPageCount()) {
+                                if (Number(e.target.value) < 1 || Number(e.target.value) > table.getPageCount()) {
                                     return
                                 }
                                 setDirectPage(Number(e.target.value))
@@ -78,7 +96,7 @@ export function Pagination({
 
                     <div className="flex items-center space-x-2">
                         <label className="text-sm text-muted-foreground">
-                            Rows per page
+                            {capitalizeFirstLetter(t("tables.rows_per_page"))}
                         </label>
                         <select
                             value={table.getState().pagination.pageSize}
@@ -94,7 +112,7 @@ export function Pagination({
                             ))}
                         </select>
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import { CellContext, ColumnDefTemplate, ColumnResizeDirection, ColumnResizeMode, HeaderContext, type Table as TableType } from "@tanstack/react-table"
+import { CellContext, ColumnDefTemplate, ColumnResizeDirection, HeaderContext, type Table as TableType } from "@tanstack/react-table"
 import { Pagination } from "./pagination"
 import { Filter } from "./filter"
 import {
@@ -8,13 +8,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableScrollCustom,
 } from "@/components/inits/table"
+import { capitalizeFirstLetter } from "@package/utils"
 
 // Import table styles
 import './table.css'
 import { cn } from "@/lib/utils"
 import { Loading } from "../Loading"
-
+import { useCallback, useEffect, useRef } from "react"
+import { useTranslation } from "@package/i18next"
 
 type TableParams<T> = {
   table: TableType<T>,
@@ -25,6 +28,10 @@ type TableParams<T> = {
   enablePagination?: boolean
   columnResizeDirection?: ColumnResizeDirection
   isLoading?: boolean
+  fetchingMore?: ()=>void
+  isHasLoadMore?: boolean
+  stateFetchingMore?: "idle" | "loading" | "success" | "error"
+  className?: string
 }
 export function Table<T>({
   table,
@@ -33,12 +40,39 @@ export function Table<T>({
   enablePagination,
   columnResizeDirection = "ltr",
   isLoading = false,
+  fetchingMore,
+  isHasLoadMore = false,
+  stateFetchingMore = "idle",
+  className = ""
 }: TableParams<T>) {
-  console.log("isLoading", isLoading)
+  const ref = useRef<HTMLTableElement>(null)
+  const { t } = useTranslation()
+  const handleScroll = useCallback(() => {
+    if(!ref.current || !fetchingMore || !isHasLoadMore || stateFetchingMore === "loading") return  
+    if(ref.current.scrollTop + ref.current.clientHeight >= ref.current.scrollHeight - 100){
+      console.log("fetching more data...")
+      fetchingMore()
+    }
+  }, [stateFetchingMore, fetchingMore, isHasLoadMore])
+
+  useEffect(() => {
+    if(!ref.current || !fetchingMore) return  
+    console.log("fetching more data...")
+    const fillUntilScroll = async () => {
+      if(!ref.current?.scrollHeight || !ref.current?.clientHeight) return
+      while (ref.current.scrollHeight < ref.current.clientHeight && isHasLoadMore) {
+        console.log("fetching more data...")
+        await fetchingMore(); // fetch more data
+      }
+    };
+  
+    fillUntilScroll();
+  }, [ref.current, fetchingMore, isHasLoadMore]);
+
 
   return (
-    <div className="flex-1 p-2 flex flex-col max-w-full overflow-x-scroll overflow-y-hidden border border-gray-200">
-      <UITable>
+    <div className={cn("flex-1 p-2 flex flex-col max-w-full overflow-x-scroll overflow-y-hidden border border-gray-200", className)}>
+      <TableScrollCustom ref={ref} onScroll={handleScroll} >
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
@@ -151,15 +185,31 @@ export function Table<T>({
               </TableRow>
             ))
           )}
+          {isHasLoadMore && stateFetchingMore === "loading" && (
+            <TableRow className="!h-[100px]">
+              <TableCell colSpan={100} className="text-center">
+                <Loading label={capitalizeFirstLetter(t("tables.loading_more"))} size="lg" variant="primary" />
+              </TableCell>
+            </TableRow>
+          )}
+          {isHasLoadMore && stateFetchingMore === "error" && (
+            <TableRow className="!h-[100px]">
+              <TableCell colSpan={100} className="text-center">
+                <p>{capitalizeFirstLetter(t("tables.error_load_more"))}</p>
+              </TableCell>
+            </TableRow>
+          )}
+          {!isHasLoadMore && stateFetchingMore === "success" && (
+            <TableRow className="!h-[100px]">
+              <TableCell colSpan={100} className="text-center">
+                <p>{capitalizeFirstLetter(t("tables.no_more_data"))}</p>
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
-      </UITable>
+      </TableScrollCustom>
       <div className="mt-auto pb-3">
-      {enablePagination && <Pagination table={table} />}
-      {!isLoading && (
-        <div className="text-sm text-muted-foreground">
-          Showing {table.getRowModel().rows.length.toLocaleString()}/{table.getState().pagination.pageSize.toLocaleString()} per page
-        </div>
-      )}
+        <Pagination enablePagination={enablePagination ?? false} table={table} isLoading={isLoading} />
       </div>
     </div>
   )
