@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 export type FullCalendarBaseProps = Omit<React.ComponentProps<typeof FullCalendarComponent>, 'plugins'> & {
   className?: string;

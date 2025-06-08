@@ -1,5 +1,5 @@
 import { Column, Table } from "@tanstack/react-table"
-import { Input } from "@/components/inits/input"
+import { Input } from "../inits/input"
 
 export function Filter({
     column,

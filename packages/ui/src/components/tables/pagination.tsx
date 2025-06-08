@@ -1,7 +1,7 @@
 import { Table } from "@tanstack/react-table"
-import { cn } from "@/lib/utils"
-import { Input } from "@/components/inits/input"
-import LeftArrow from "@/components/icons/left-arrow"
+import { cn } from "../../lib/utils"
+import { Input } from "../inits/input"
+import {ArrowLeft} from "../icons"
 import loash from "@package/lodash"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "@package/i18next"
@@ -43,7 +43,7 @@ export function Pagination({
                         disabled={!table.getCanPreviousPage()}
                         aria-label="Go to previous page"
                     >
-                        <LeftArrow /> {capitalizeFirstLetter(t("tables.previous"))}
+                        <ArrowLeft /> {capitalizeFirstLetter(t("tables.previous"))}
                     </button>
                     <div className="flex items-center">
                         <span className="text-sm font-medium">

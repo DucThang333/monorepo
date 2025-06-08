@@ -1,6 +1,6 @@
-import { Progress as ProgressBase } from "@/components/inits/progress";
+import { Progress as ProgressBase } from "../inits/progress";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface ProgressProps {
   value?: number;

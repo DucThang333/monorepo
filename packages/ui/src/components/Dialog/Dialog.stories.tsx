@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta } from "@storybook/react";
 import { Dialog } from "@/components/Dialog";
 import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
+import { Input } from "@/components/input";
 
 export default {
   title: "UI/Dialog",

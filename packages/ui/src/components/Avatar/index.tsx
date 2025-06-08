@@ -2,9 +2,9 @@ import {
   Avatar as AvatarBase,
   AvatarFallback,
   AvatarImage,
-} from "@/components/inits/avatar";
+} from "../inits/avatar";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface AvatarProps {
   src?: string;

@@ -9,6 +9,18 @@
             "contact": "contact",
             "settings": "settings"
         },
+        "sidebar": {
+            "toggle_sidebar": "toggle sidebar",
+            "toggle_language": "change language",
+            "toggle_theme": "toggle theme",
+            "dashboard": "dashboard",
+            "profile": "profile",
+            "analytics": "analytics",
+            "reports": "reports",
+            "settings": "settings",
+            "help": "help",
+            "logout": "logout"
+        },
         "auth": {
             "login": "login",
             "register": "register",

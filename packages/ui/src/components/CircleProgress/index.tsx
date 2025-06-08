@@ -1,6 +1,6 @@
-import { CircleProgress as CircleProgressBase } from "@/components/inits/circle-progress";
+import { CircleProgress as CircleProgressBase } from "../inits/circle-progress";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface CircleProgressProps {
   value?: number;

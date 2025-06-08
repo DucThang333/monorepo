@@ -7,9 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/inits/dialog";
-import { Button } from "@/components/inits/button";
-import { cn } from "@/lib/utils";
+} from "../inits/dialog";
+import { Button } from "../inits/button";
+import { cn } from "../../lib/utils";
 import { X } from "lucide-react";
 
 export type DialogProps = React.ComponentPropsWithoutRef<

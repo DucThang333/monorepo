@@ -1,6 +1,6 @@
-import { Skeleton as SkeletonBase } from "@/components/inits/skeleton";
+import { Skeleton as SkeletonBase } from "../inits/skeleton";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface SkeletonProps {
   className?: string;

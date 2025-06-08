@@ -1,6 +1,6 @@
-import { Calendar as CalendarBase } from "@/components/inits/calendar";
+import { Calendar as CalendarBase } from "../inits/calendar";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { DayPickerSingleProps, DayPickerRangeProps, DayPickerMultipleProps } from "react-day-picker";
 
 

@@ -1,4 +1,4 @@
-import { AspectRatio as AspectRatioBase } from "@/components/inits/aspect-ratio";
+import { AspectRatio as AspectRatioBase } from "../inits/aspect-ratio";
 import React from "react";
 
 export interface AspectRatioProps {

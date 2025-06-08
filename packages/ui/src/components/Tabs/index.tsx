@@ -4,8 +4,8 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/inits/tabs";
-import { cn } from "@/lib/utils";
+} from "../inits/tabs";
+import { cn } from "../../lib/utils";
 
 export type TabItem = {
   value: string;

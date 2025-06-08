@@ -2,9 +2,9 @@ import {
   HoverCard as HoverCardBase,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/inits/hover-card";
+} from "../inits/hover-card";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface HoverCardProps {
   trigger: React.ReactNode;

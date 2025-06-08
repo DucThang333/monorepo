@@ -1,9 +1,9 @@
 "use client";
 
-import {merge} from "@package/lodash";
+import lodash from "@package/lodash";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
-import { baseChartOptions } from "@/lib/base-chart-options";
+import { baseChartOptions } from "../../lib/base-chart-options";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -24,7 +24,7 @@ const ActionlessAreaChart = (props: Props) => {
     chartCategories,
   } = props;
 
-  const areaChartOptions = merge(baseChartOptions(), {
+  const areaChartOptions = lodash.merge(baseChartOptions(), {
     stroke: { show: true, width: strokeWidth },
     colors: colors,
     grid: {

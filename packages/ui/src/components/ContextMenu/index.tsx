@@ -14,9 +14,9 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
-} from "@/components/inits/context-menu";
+} from "../inits/context-menu";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface ContextMenuProps {
   children: React.ReactNode;

@@ -4,14 +4,11 @@ import {
   FieldErrors,
   FieldValues,
 } from "react-hook-form";
-import { Select } from "@/components/inits/select";
-import { Label } from "@/components/inits/label";
-import { cn } from "@/lib/utils";
+import { Select } from "../inits/select";
+import { Label } from "../inits/label";
+import { cn } from "../../lib/utils";
+import { SelectOption } from "../Select";
 
-export interface SelectOption {
-  label: string;
-  value: string;
-}
 
 export interface FormSelectProps {
   field: ControllerRenderProps<any, any>;

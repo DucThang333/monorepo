@@ -15,9 +15,9 @@ import {
   MenubarSub,
   MenubarSubContent,
   MenubarSubTrigger,
-} from "@/components/inits/menubar";
+} from "../inits/menubar";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface MenubarProps {
   className?: string;

@@ -9,10 +9,10 @@
     "storybook:watch": "concurrently \"npx @tailwindcss/cli -i ./.storybook/global.css -o ./.storybook/global_output.css --watch\" \"storybook dev -p 6006\""
   },
   "exports": {
-    "./component/*": "./src/components/*/index.ts",
+    "./component": "./src/components/index.ts",
     "./lib/*": "./src/components/*.ts",
     "./chart/*": "./src/components/charts/*.tsx",
-    "./icon/*": "./src/components/icons/index.tsx",
+    "./icon": "./src/components/icons/index.ts",
     "./tanstack-react-form": "./src/tanstack-react-form",
     "./tanstack-react-table": "./src/tanstack-react-table"
   },
@@ -28,8 +28,9 @@
     "@package/i18next": "workspace:*",
     "@package/lodash": "workspace:*",
     "@package/query": "workspace:*",
-    "@package/tailwind-config": "workspace:*",
+    "@package/tailwind": "workspace:*",
     "@package/validation": "workspace:*",
+    "@package/hooks": "workspace:*",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",

@@ -9,6 +9,18 @@
             "contact": "liên hệ",
             "settings": "cài đặt"
         },
+        "sidebar": {
+            "toggle_sidebar": "ẩn/hiện thanh bên",
+            "toggle_language": "thay đổi ngôn ngữ",
+            "toggle_theme": "thay đổi chủ đề",
+            "dashboard": "bảng điều khiển",
+            "profile": "hồ sơ",
+            "analytics": "phân tích",
+            "reports": "báo cáo",
+            "settings": "cài đặt",
+            "help": "trợ giúp",
+            "logout": "đăng xuất"
+        },
         "auth": {
             "login": "đăng nhập",
             "register": "đăng ký",

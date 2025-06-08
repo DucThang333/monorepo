@@ -7,8 +7,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/inits/select";
-import { cn } from "@/lib/utils";
+} from "../inits/select";
+import { cn } from "../../lib/utils";
 
 export type SelectOption = {
   value: string;

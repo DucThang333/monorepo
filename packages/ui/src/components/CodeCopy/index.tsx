@@ -1,5 +1,6 @@
+"use client";
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { Copy, Check } from "lucide-react";
 
 export interface CodeCopyProps {

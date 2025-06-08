@@ -1,6 +1,6 @@
-import { Label as LabelBase } from "@/components/inits/label";
+import { Label as LabelBase } from "../inits/label";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface LabelProps
   extends React.LabelHTMLAttributes<HTMLLabelElement> {

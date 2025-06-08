@@ -1,6 +1,6 @@
-import { Separator as SeparatorBase } from "@/components/inits/separator";
+import { Separator as SeparatorBase } from "../inits/separator";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface SeparatorProps {
   orientation?: "horizontal" | "vertical";

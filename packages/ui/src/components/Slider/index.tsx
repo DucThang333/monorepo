@@ -1,6 +1,6 @@
-import { Slider as SliderBase } from "@/components/inits/slider";
+import { Slider as SliderBase } from "../inits/slider";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface SliderProps {
   defaultValue?: number[];

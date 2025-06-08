@@ -9,8 +9,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/inits/alert-dialog";
-import { cn } from "@/lib/utils";
+} from "../inits/alert-dialog";
+import { cn } from "../../lib/utils";
 import { Loader2 } from "lucide-react";
 
 export type AlertDialogProps = React.ComponentPropsWithoutRef<

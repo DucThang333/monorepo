@@ -1,6 +1,6 @@
-import { Switch as SwitchBase } from "@/components/inits/switch";
+import { Switch as SwitchBase } from "../inits/switch";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface SwitchProps {
   checked?: boolean;

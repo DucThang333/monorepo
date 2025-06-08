@@ -2,9 +2,9 @@ import {
   Collapsible as CollapsibleBase,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/inits/collapsible";
+} from "../inits/collapsible";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { ChevronDown } from "lucide-react";
 
 export interface CollapsibleProps {

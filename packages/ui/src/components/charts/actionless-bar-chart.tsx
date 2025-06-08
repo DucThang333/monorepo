@@ -1,9 +1,9 @@
 "use client";
 
-import {merge} from "@package/lodash";
+import lodash from "@package/lodash";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
-import { baseChartOptions } from "@/lib/base-chart-options";
+import { baseChartOptions } from "../../lib/base-chart-options";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -17,7 +17,7 @@ interface Props {
 const ActionlessBarChart = (props: Props) => {
   const { height = 120, colors, chartSeries, chartCategories } = props;
 
-  const barChartOptions = merge(baseChartOptions(), {
+  const barChartOptions = lodash.merge(baseChartOptions(), {
     chart: { offsetY: 30 },
     stroke: { show: false },
     xaxis: { categories: chartCategories },

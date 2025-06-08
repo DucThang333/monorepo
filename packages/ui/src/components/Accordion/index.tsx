@@ -1,11 +1,12 @@
+"use client";
 import {
   Accordion as AccordionDefault,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/inits/accordion";
+} from "../inits/accordion";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export type AccordionProps = {
   items: {

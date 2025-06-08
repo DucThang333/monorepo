@@ -1,0 +1,9 @@
+{
+    "name": "@package/tiptap",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+        "@tiptap/pm": "^2.12.0",
+        "@tiptap/react": "^2.12.0"
+    }
+}

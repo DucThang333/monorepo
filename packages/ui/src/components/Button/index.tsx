@@ -1,10 +1,10 @@
 import {
   Button as ButtonDefault,
   ButtonProps as ButtonPropsDefault,
-} from "@/components/inits/button";
+} from "../inits/button";
 import React from "react";
 import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 export type ButtonProps = ButtonPropsDefault & {
   disabled?: boolean;
   onClick?: () => void;

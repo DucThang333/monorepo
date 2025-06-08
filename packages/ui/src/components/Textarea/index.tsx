@@ -1,6 +1,6 @@
-import { Textarea as TextareaBase } from "@/components/inits/textarea";
+import { Textarea as TextareaBase } from "../inits/textarea";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

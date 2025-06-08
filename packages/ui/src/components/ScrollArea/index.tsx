@@ -1,9 +1,9 @@
 import {
   ScrollArea as ScrollAreaBase,
   ScrollBar,
-} from "@/components/inits/scroll-area";
+} from "../inits/scroll-area";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface ScrollAreaProps {
   children: React.ReactNode;

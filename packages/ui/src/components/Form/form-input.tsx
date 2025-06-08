@@ -1,8 +1,8 @@
 import React from 'react';
 import { ControllerRenderProps, FieldErrors, FieldValues } from 'react-hook-form';
-import { Input } from '@/components/inits/input';
-import { Label } from '@/components/inits/label';
-import { cn } from '@/lib/utils';
+import { Input } from '../inits/input';
+import { Label } from '../inits/label';
+import { cn } from '../../lib/utils';
 
 export interface FormInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

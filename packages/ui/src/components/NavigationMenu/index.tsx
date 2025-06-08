@@ -7,9 +7,9 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
   NavigationMenuIndicator,
-} from "@/components/inits/navigation-menu";
+} from "../inits/navigation-menu";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface NavigationMenuProps {
   className?: string;

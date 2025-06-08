@@ -1,6 +1,6 @@
-import { Checkbox as CheckboxBase } from "@/components/inits/checkbox";
+import { Checkbox as CheckboxBase } from "../inits/checkbox";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface CheckboxProps {
   checked?: boolean;

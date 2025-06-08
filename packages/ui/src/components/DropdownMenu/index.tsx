@@ -14,9 +14,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
-} from "@/components/inits/dropdown-menu";
+} from "../inits/dropdown-menu";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface DropdownMenuProps {
   children: React.ReactNode;

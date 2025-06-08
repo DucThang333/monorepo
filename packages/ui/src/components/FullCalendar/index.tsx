@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { FullCalendarBase } from "@/components/inits/fullcalendar";
-import { cn } from "@/lib/utils";
+import { FullCalendarBase } from "../inits/fullcalendar";
+import { cn } from "../../lib/utils";
 import { EventSourceInput, DateSelectArg, EventClickArg } from '@fullcalendar/core';
-import "./style.css"
+// import "./style.css"
 export interface FullCalendarProps {
   /**
    * Additional class names to apply
