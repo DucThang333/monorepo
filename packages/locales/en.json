@@ -1,0 +1,14 @@
+{
+    "tables": {
+        "loading_more": "loading more data...",
+        "no_more_data": "no more data",
+        "showing_rows": "showing {{count}} rows",
+        "page_of": "page {{page}} / {{total}}",
+        "previous": "previous",
+        "next": "next",
+        "go_to_page": "go to page",
+        "rows_per_page": "rows per page",
+        "error_load_more": "error loading more data",
+        "description": "this table demonstrates infinity scroll with translated UI elements."
+    }
+}

@@ -1,19 +1,15 @@
-import type { StorybookConfig } from "@storybook/nextjs";
+import type { StorybookConfig } from '@storybook/react-webpack5';
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  addons: [
-    "@storybook/addon-onboarding",
-    "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
-    "@storybook/addon-interactions",
-    "storybook-color-picker",
+  "stories": [
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
-  framework: {
-    name: "@storybook/nextjs",
-    options: {},
-  },
-
-  staticDirs: ["../public"],
+  "addons": [
+    "@storybook/addon-webpack5-compiler-swc"
+  ],
+  "framework": {
+    "name": "@storybook/react-webpack5",
+    "options": {}
+  }
 };
 export default config;

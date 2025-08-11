@@ -3,11 +3,6 @@
   "version": "0.0.0",
   "private": false,
   "exports": {
-    "./style": "./style.css",
-    "./tailwind.config": "./tailwind.config.js"
-  },
-  "dependencies": {
-    "@tailwindcss/postcss": "^4.1.8",
-    "tailwindcss": "^4.0.17"
+    "./style": "./style.css"
   }
 }

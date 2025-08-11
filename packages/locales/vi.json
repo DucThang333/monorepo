@@ -1,0 +1,13 @@
+{
+    "tables": {
+        "loading_more": "đang tải thêm dữ liệu...",
+        "no_more_data": "không còn dữ liệu",
+        "showing_rows": "hiển thị {{count}} dòng",
+        "page_of": "trang {{page}} / {{total}}",
+        "previous": "trang trước",
+        "next": "trang tiếp",
+        "go_to_page": "đi đến trang",
+        "rows_per_page": "số dòng trên trang",
+        "error_load_more": "đã có lỗi xảy ra khi tải thêm dữ liệu"
+    }
+}

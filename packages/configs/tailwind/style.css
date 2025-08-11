@@ -85,7 +85,7 @@
     --color-text: var(--color-text);
     --color-text-light: var(--color-text-light);
     --color-text-dark: var(--color-text-dark);
-    --color-text-primary-foreground: var(--color-text-primary-foreground);
+    --color-text-primary-foreground: var(--coslor-text-primary-foreground);
 
     /* text font family */
     --font-anton: 'anton', sans-serif;

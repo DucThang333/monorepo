@@ -40,3 +40,5 @@ coverage/
 
 package-lock.json
 .cursor/
+*storybook.log
+storybook-static
