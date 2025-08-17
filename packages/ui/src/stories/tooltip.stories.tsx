@@ -1,18 +1,30 @@
-import { Input } from "@/components/ui/input";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from '@storybook/react-webpack5';
+import { Button } from '@/components/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/tooltip';
+
+export function TooltipStory() {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline">Hover</Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Add to library</p>
+      </TooltipContent>
+    </Tooltip>
+  );
+}
 
 const meta = {
-    title: "Component/Input",
-    component: Input,
-    parameters: {
-        // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-        layout: 'centered',
-    },
-} satisfies Meta<typeof Input>
+  title: 'Component/Tooltip',
+  component: TooltipStory,
+  parameters: {
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
+    layout: 'centered',
+  },
+} satisfies Meta<typeof TooltipStory>;
 
-export default meta
+export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-
-}
+export const Default: Story = {};

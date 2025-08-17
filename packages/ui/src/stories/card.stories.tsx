@@ -1,6 +1,6 @@
-import { Input } from "@/components/ui/input";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
-import { Button } from "@/components/ui/button"
+import { Input } from '@/components/input';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
+import { Button } from '@/components/button';
 import {
   Card,
   CardAction,
@@ -9,17 +9,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+} from '@/components/card';
+import { Label } from '@/components/label';
 
 export function CardStory() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
+        <CardDescription>Enter your email below to login to your account</CardDescription>
         <CardAction>
           <Button variant="link">Sign Up</Button>
         </CardAction>
@@ -46,35 +44,43 @@ export function CardStory() {
                   Forgot your password?
                 </a>
               </div>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                required
+              />
             </div>
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full"
+        >
           Login
         </Button>
-        <Button variant="outline" className="w-full">
+        <Button
+          variant="outline"
+          className="w-full"
+        >
           Login with Google
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
 const meta = {
-    title: "Component/Card",
-    component: CardStory,
-    parameters: {
-        // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-        layout: 'centered',
-    },
-} satisfies Meta<typeof CardStory>
+  title: 'Component/Card',
+  component: CardStory,
+  parameters: {
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
+    layout: 'centered',
+  },
+} satisfies Meta<typeof CardStory>;
 
-export default meta
+export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-
-}
+export const Default: Story = {};

@@ -2,10 +2,7 @@ import type { NonEmptyArray } from '../types';
 
 export type IsoDateString = string;
 export const isIsoDateString = (dateStr: unknown): dateStr is IsoDateString => {
-  if (
-    typeof dateStr !== 'string' ||
-    !/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(dateStr)
-  ) {
+  if (typeof dateStr !== 'string' || !/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(dateStr)) {
     return false;
   }
   try {
@@ -46,14 +43,11 @@ export const isParsableNumeric = (v: unknown): v is number | string => {
   if (!isNonEmptyString(v)) {
     return false;
   }
-  return !Number.isNaN(
-    Number.parseInt(v, 10) || Number.isNaN(Number.parseFloat(v))
-  );
+  return !Number.isNaN(Number.parseInt(v, 10) || Number.isNaN(Number.parseFloat(v)));
 };
 
 export const isParsableSafeInteger = (v: unknown): v is number | string => {
-  const value =
-    typeof v === 'string' && /^-?\d+$/.test(v) ? Number.parseInt(v, 10) : v;
+  const value = typeof v === 'string' && /^-?\d+$/.test(v) ? Number.parseInt(v, 10) : v;
   return isSafeInteger(value);
 };
 

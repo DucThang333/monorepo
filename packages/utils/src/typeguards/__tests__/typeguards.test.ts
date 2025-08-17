@@ -78,8 +78,23 @@ describe('Typeguards tests', () => {
   describe('isPlainObject', () => {
     it.each([
       [{}, true],
-      [{ name: 'seb' }, true],
-      [{ name: 'deep', children: [{ test: 1 }] }, true],
+      [
+        {
+          name: 'seb',
+        },
+        true,
+      ],
+      [
+        {
+          name: 'deep',
+          children: [
+            {
+              test: 1,
+            },
+          ],
+        },
+        true,
+      ],
       [new Date(), false],
       [false, false],
       [undefined, false],

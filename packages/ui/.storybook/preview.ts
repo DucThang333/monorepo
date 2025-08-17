@@ -1,9 +1,9 @@
-import type { Preview } from '@storybook/react-webpack5'
-import "../src/styles/globals.css"
+import type { Preview } from '@storybook/react-webpack5';
+import '../src/styles/globals.css';
 import { withThemeByClassName } from '@storybook/addon-themes';
- 
+
 /* snipped for brevity */
- 
+
 export const decorators = [
   withThemeByClassName({
     themes: {
@@ -14,13 +14,12 @@ export const decorators = [
   }),
 ];
 
-
 const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
   },

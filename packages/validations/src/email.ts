@@ -1,15 +1,20 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-const emailSchema = z.string().email({ message: "Invalid email address" });
+const emailSchema = z.string().email({ message: 'Invalid email address' });
 
 const validateEmail = (email: string) => {
   const result = emailSchema.safeParse(email);
 
   if (!result.success) {
-    return { success: false, errors: result.error.errors };
+    return {
+      success: false,
+      errors: result.error.errors,
+    };
   }
 
-  return { success: true };
+  return {
+    success: true,
+  };
 };
 
 export { validateEmail };

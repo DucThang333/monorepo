@@ -1,9 +1,9 @@
 {
-    "name": "@package/locales",
-    "version": "0.0.1",
-    "private": true,
-    "exports": {
-        "./en": "./en.json",
-        "./vi": "./vi.json"
-    }
+  "name": "@package/locales",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./en": "./en.json",
+    "./vi": "./vi.json"
+  }
 }

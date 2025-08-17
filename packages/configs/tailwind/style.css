@@ -1,299 +1,295 @@
 /* import font face */
 @font-face {
-    font-family: 'anton';
-    src: url('/fonts/Anton-Regular.ttf') format('truetype');
-}
-
-
-@font-face {
-    font-family: 'Caveat-brush';
-    src: url('/fonts/CaveatBrush-Regular.ttf') format('truetype');
+  font-family: 'anton';
+  src: url('/fonts/Anton-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'e-b-garamond';
-    src: url('/fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
+  font-family: 'Caveat-brush';
+  src: url('/fonts/CaveatBrush-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'lobster';
-    src: url('/fonts/Lobster-Regular.ttf') format('truetype');
+  font-family: 'e-b-garamond';
+  src: url('/fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'poppins';
-    src: url('/fonts/Poppins.ttf') format('truetype');
-}
-
-
-@font-face {
-    font-family: 'nunito';
-    src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+  font-family: 'lobster';
+  src: url('/fonts/Lobster-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'oswald';
-    src: url('/fonts/Oswald-VariableFont_wght.ttf') format('truetype');
+  font-family: 'poppins';
+  src: url('/fonts/Poppins.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'montserrat';
-    src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-family: 'nunito';
+  src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Jet-brains-mono';
-    src: url('/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+  font-family: 'oswald';
+  src: url('/fonts/Oswald-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Jet-brains-mono';
+  src: url('/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
 }
 
 /* import tailwind and custom css */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-    /* color */
-    --color-primary: var(--color-primary);
-    --color-primary-light: var(--color-primary-light);
-    --color-primary-dark: var(--color-primary-dark);
-    --color-primary-foreground: var(--color-primary-foreground);
-    --color-secondary: var(--color-secondary);
-    --color-secondary-light: var(--color-secondary-light);
-    --color-secondary-dark: var(--color-secondary-dark);
-    --color-secondary-foreground: var(--color-secondary-foreground);
-    --color-accent: var(--color-accent);
-    --color-accent-light: var(--color-accent-light);
-    --color-accent-dark: var(--color-accent-dark);
-    --color-accent-foreground: var(--color-accent-foreground);
-    --color-destructive: var(--color-destructive);
-    --color-destructive-light: var(--color-destructive-light);
-    --color-destructive-dark: var(--color-destructive-dark);
-    --color-destructive-foreground: var(--color-destructive-foreground);
-    --color-muted: var(--color-muted);
-    --color-muted-light: var(--color-muted-light);
-    --color-muted-dark: var(--color-muted-dark);
-    --color-muted-foreground: var(--color-muted-foreground);
-    --color-background: var(--color-background);
+  /* color */
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-light: var(--color-secondary-light);
+  --color-secondary-dark: var(--color-secondary-dark);
+  --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-accent: var(--color-accent);
+  --color-accent-light: var(--color-accent-light);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-accent-foreground: var(--color-accent-foreground);
+  --color-destructive: var(--color-destructive);
+  --color-destructive-light: var(--color-destructive-light);
+  --color-destructive-dark: var(--color-destructive-dark);
+  --color-destructive-foreground: var(--color-destructive-foreground);
+  --color-muted: var(--color-muted);
+  --color-muted-light: var(--color-muted-light);
+  --color-muted-dark: var(--color-muted-dark);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-background: var(--color-background);
 
-    /* color border */
-    --color-border: var(--color-border);
-    --color-border-light: var(--color-border-light);
-    --color-border-dark: var(--color-border-dark);
-    --color-border-accent: var(--color-border-accent);
-    --color-border-accent-light: var(--color-border-accent-light);
-    --color-border-accent-dark: var(--color-border-accent-dark);
+  /* color border */
+  --color-border: var(--color-border);
+  --color-border-light: var(--color-border-light);
+  --color-border-dark: var(--color-border-dark);
+  --color-border-accent: var(--color-border-accent);
+  --color-border-accent-light: var(--color-border-accent-light);
+  --color-border-accent-dark: var(--color-border-accent-dark);
 
-    /* text color */
-    --color-text: var(--color-text);
-    --color-text-light: var(--color-text-light);
-    --color-text-dark: var(--color-text-dark);
-    --color-text-primary-foreground: var(--coslor-text-primary-foreground);
+  /* text color */
+  --color-text: var(--color-text);
+  --color-text-light: var(--color-text-light);
+  --color-text-dark: var(--color-text-dark);
+  --color-text-primary-foreground: var(--coslor-text-primary-foreground);
 
-    /* text font family */
-    --font-anton: 'anton', sans-serif;
-    --font-caveat-brush: 'Caveat-brush', sans-serif;
-    --font-e-b-garamond: 'e-b-garamond', sans-serif;
-    --font-lobster: 'lobster', sans-serif;
-    --font-poppins: 'poppins', sans-serif;
-    --font-nunito: 'nunito', sans-serif;
-    --font-oswald: 'oswald', sans-serif;
-    --font-montserrat: 'montserrat', sans-serif;
-    --font-jet-brains-mono: 'Jet-brains-mono', sans-serif;
+  /* text font family */
+  --font-anton: 'anton', sans-serif;
+  --font-caveat-brush: 'Caveat-brush', sans-serif;
+  --font-e-b-garamond: 'e-b-garamond', sans-serif;
+  --font-lobster: 'lobster', sans-serif;
+  --font-poppins: 'poppins', sans-serif;
+  --font-nunito: 'nunito', sans-serif;
+  --font-oswald: 'oswald', sans-serif;
+  --font-montserrat: 'montserrat', sans-serif;
+  --font-jet-brains-mono: 'Jet-brains-mono', sans-serif;
 
-    /* sidebar */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* sidebar */
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
 }
 
 :root {
-    /* text */
-    --font-family: "nunito";
-    /* color */
-    --color-primary: #1C2B3AFF;
-    --color-primary-light: #324966FF;
-    --color-primary-dark: #0E1520FF;
-    --color-primary-foreground: #F1F5FBFF;
-    --color-secondary: #448CCBFF;
-    --color-secondary-light: #6BAAFFFF;
-    --color-secondary-dark: #00366CFF;
-    --color-secondary-foreground: #1C2B3AFF;
-    --color-accent: #E1CCA6FF;
-    --color-accent-light: #F5EBCFFF;
-    --color-accent-dark: #C4A976FF;
-    --color-accent-foreground: #F1F5FBFF;
-    --color-destructive: #E60606FF;
-    --color-destructive-light: #FF3A3AFF;
-    --color-destructive-dark: #9F0000FF;
-    --color-destructive-foreground: #f1ebebFF;
-    --color-background: #FFFFFFFF;
-    --color-foreground: #0D1116FF;
-    --color-muted: #E5EBD7FF;
-    --color-muted-light: #F2F7E6FF;
-    --color-muted-dark: #C7D5A8FF;
-    --color-muted-foreground: #6B7C93FF;
-    --color-popover: #FFFFFFFF;
-    --color-popover-foreground: #0D1116FF;
+  /* text */
+  --font-family: 'nunito';
+  /* color */
+  --color-primary: #1c2b3aff;
+  --color-primary-light: #324966ff;
+  --color-primary-dark: #0e1520ff;
+  --color-primary-foreground: #f1f5fbff;
+  --color-secondary: #448ccbff;
+  --color-secondary-light: #6baaffff;
+  --color-secondary-dark: #00366cff;
+  --color-secondary-foreground: #1c2b3aff;
+  --color-accent: #e1cca6ff;
+  --color-accent-light: #f5ebcfff;
+  --color-accent-dark: #c4a976ff;
+  --color-accent-foreground: #f1f5fbff;
+  --color-destructive: #e60606ff;
+  --color-destructive-light: #ff3a3aff;
+  --color-destructive-dark: #9f0000ff;
+  --color-destructive-foreground: #f1ebebff;
+  --color-background: #ffffffff;
+  --color-foreground: #0d1116ff;
+  --color-muted: #e5ebd7ff;
+  --color-muted-light: #f2f7e6ff;
+  --color-muted-dark: #c7d5a8ff;
+  --color-muted-foreground: #6b7c93ff;
+  --color-popover: #ffffffff;
+  --color-popover-foreground: #0d1116ff;
 
-    /* color border */
-    --color-border: #D1D5DBFF;
-    --color-border-light: #E5E7EBFF;
-    --color-border-dark: #9CA3AFFF;
-    --color-border-input: #9CA3AFFF;
+  /* color border */
+  --color-border: #d1d5dbff;
+  --color-border-light: #e5e7ebff;
+  --color-border-dark: #9ca3afff;
+  --color-border-input: #9ca3afff;
 
-    /* color text */
-    --color-text: #111827FF;
-    --color-text-light: #6B7280FF;
-    --color-text-dark: #374151FF;
+  /* color text */
+  --color-text: #111827ff;
+  --color-text-light: #6b7280ff;
+  --color-text-dark: #374151ff;
 
-    --card: #FFFFFFFF;
-    --card-hover: #F1F5FBFF;
-    --card-foreground: #0D1116FF;
+  --card: #ffffffff;
+  --card-hover: #f1f5fbff;
+  --card-foreground: #0d1116ff;
 
-    --border: #E3E8EFFF;
-    --hover: #D5DEE9FF;
-    --input: #E3E8EFFF;
-    --ring: #0D1116FF;
+  --border: #e3e8efff;
+  --hover: #d5dee9ff;
+  --input: #e3e8efff;
+  --ring: #0d1116ff;
 
-    --radius: 0.5rem;
+  --radius: 0.5rem;
 
-    --icon: #6B7C93FF;
-    --icon-muted: #98A5B6FF;
-    --icon-active: #1C2B3AFF;
+  --icon: #6b7c93ff;
+  --icon-muted: #98a5b6ff;
+  --icon-active: #1c2b3aff;
 }
-
 
 .dark {
-    --background: #0D1116FF;
-    --foreground: #F1F5FBFF;
+  --background: #0d1116ff;
+  --foreground: #f1f5fbff;
 
-    --card: #0D1116FF;
-    --card-hover: #212C3CFF;
-    --card-foreground: #F1F5FBFF;
-    --destructive-foreground: #0D1116FF;
+  --card: #0d1116ff;
+  --card-hover: #212c3cff;
+  --card-foreground: #f1f5fbff;
+  --destructive-foreground: #0d1116ff;
 
-    --border: #212C3CFF;
-    --hover: #2B384BFF;
-    --input: #212C3CFF;
-    --ring: #D6E0F0FF;
+  --border: #212c3cff;
+  --hover: #2b384bff;
+  --input: #212c3cff;
+  --ring: #d6e0f0ff;
 
-    --icon: #A0AEC0FF;
-    --icon-muted: #6E7F96FF;
-    --icon-active: #F1F5FBFF;
+  --icon: #a0aec0ff;
+  --icon-muted: #6e7f96ff;
+  --icon-active: #f1f5fbff;
 
-    /* sidebar */
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* sidebar */
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
 }
 
-
 body {
-    font-family: var(--font-family), sans-serif, "mono", "montserrat";
+  font-family: var(--font-family), sans-serif, 'mono', 'montserrat';
 }
 
 .border-input {
-    border-color: var(--color-border-input);
+  border-color: var(--color-border-input);
 }
 
 /* Resizable component styling */
 .resizable {
-    position: relative;
-    min-width: 40px;
-    min-height: 40px;
-    border-radius: var(--radius);
-    transition: all 0.2s ease;
-    /* Optional: Add a subtle border when resizing */
-    outline: 1px solid transparent;
+  position: relative;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  /* Optional: Add a subtle border when resizing */
+  outline: 1px solid transparent;
 }
 
 .resizable:focus-within {
-    outline: 2px solid var(--ring);
-    outline-offset: 1px;
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
 }
 
 /* Horizontal resizer */
-.resizable.flex-row>.resizer {
-    cursor: col-resize;
-    width: 4px;
-    height: 100%;
-    background-color: var(--border);
-    transition: background-color 0.2s;
-    margin: 0 -2px;
-    right: 0;
+.resizable.flex-row > .resizer {
+  cursor: col-resize;
+  width: 4px;
+  height: 100%;
+  background-color: var(--border);
+  transition: background-color 0.2s;
+  margin: 0 -2px;
+  right: 0;
 }
 
 /* Vertical resizer */
-.resizable.flex-col>.resizer {
-    cursor: row-resize;
-    height: 4px;
-    width: 100%;
-    background-color: var(--border);
-    transition: background-color 0.2s;
-    margin: -2px 0;
-    bottom: 0;
+.resizable.flex-col > .resizer {
+  cursor: row-resize;
+  height: 4px;
+  width: 100%;
+  background-color: var(--border);
+  transition: background-color 0.2s;
+  margin: -2px 0;
+  bottom: 0;
 }
 
 .resizer:hover,
 .resizer:active {
-    background-color: var(--primary);
+  background-color: var(--primary);
 }
 
 /* Improve drag experience */
-.resizable[data-dragging="true"]>.resizer {
-    background-color: var(--primary);
+.resizable[data-dragging='true'] > .resizer {
+  background-color: var(--primary);
 }
 
-.resizable[data-dragging="true"] {
-    outline: 2px solid var(--ring);
-    outline-offset: 1px;
+.resizable[data-dragging='true'] {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
 }
 
 .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.95em;
-    color: var(--muted-foreground, #6b7280);
-    /* Optional: Add spacing or custom font */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95em;
+  color: var(--muted-foreground, #6b7280);
+  /* Optional: Add spacing or custom font */
 }
 
 .breadcrumb a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
 .breadcrumb a:hover {
-    color: var(--accent, #C4A976FF);
-    text-decoration: underline;
+  color: var(--accent, #c4a976ff);
+  text-decoration: underline;
 }
 
 .breadcrumb-separator {
-    margin: 0 0.25em;
-    color: var(--muted-foreground, #b0b0b0);
+  margin: 0 0.25em;
+  color: var(--muted-foreground, #b0b0b0);
 }
 
 .fc .fc-button-primary:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .fc .fc-button:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .fc .fc-button-primary:not(:disabled).fc-button-active:focus,
 .fc .fc-button-primary:not(:disabled):active:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }

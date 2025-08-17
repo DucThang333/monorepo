@@ -20,9 +20,7 @@ export function assertIncludes<T extends string[]>(
   insensitive = false
 ): asserts v is T[number] {
   const val = insensitive ? v?.toUpperCase() : v;
-  const allowed = insensitive
-    ? stringArray.map((v) => v.toUpperCase())
-    : stringArray;
+  const allowed = insensitive ? stringArray.map((v) => v.toUpperCase()) : stringArray;
   if (!val || !allowed.includes(val)) {
     const msg = [
       `Value '${v ?? typeof v}' is not in allowed values`,
@@ -38,10 +36,7 @@ export function assertIsPresent<T>(
   msgOrErrorFactory?: MsgOrErrorFactory
 ): asserts v is NonNullable<T> {
   if (v === null || v === undefined) {
-    throw createAssertException(
-      msgOrErrorFactory,
-      'Value is null or undefined.'
-    );
+    throw createAssertException(msgOrErrorFactory, 'Value is null or undefined.');
   }
 }
 
@@ -50,24 +45,13 @@ export function assertSafeInteger(
   msgOrErrorFactory?: MsgOrErrorFactory
 ): asserts v is number {
   if (typeof v !== 'number' || !Number.isSafeInteger(v)) {
-    throw createAssertException(
-      msgOrErrorFactory,
-      'Value is not a safe integer'
-    );
+    throw createAssertException(msgOrErrorFactory, 'Value is not a safe integer');
   }
 }
 
-function createAssertException(
-  msgOrErrorFactory?: string | (() => Error),
-  fallbackMsg?: string
-) {
-  if (
-    typeof msgOrErrorFactory === 'string' ||
-    msgOrErrorFactory === undefined
-  ) {
-    return new Error(
-      msgOrErrorFactory ?? fallbackMsg ?? 'Assertion did not pass.'
-    );
+function createAssertException(msgOrErrorFactory?: string | (() => Error), fallbackMsg?: string) {
+  if (typeof msgOrErrorFactory === 'string' || msgOrErrorFactory === undefined) {
+    return new Error(msgOrErrorFactory ?? fallbackMsg ?? 'Assertion did not pass.');
   }
   return msgOrErrorFactory();
 }

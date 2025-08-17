@@ -1,5 +1,4 @@
-import { Input } from "@/components/ui/input";
-import { Meta, StoryObj } from "@storybook/react-webpack5";
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -8,13 +7,13 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from '@/components/breadcrumb';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/dropdown-menu';
 
 export function BreadcrumbStory() {
   return (
@@ -51,21 +50,19 @@ export function BreadcrumbStory() {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }
 
 const meta = {
-    title: "Component/Breadcrumb",
-    component: BreadcrumbStory,
-    parameters: {
-        // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-        layout: 'centered',
-    },
-} satisfies Meta<typeof BreadcrumbStory>
+  title: 'Component/Breadcrumb',
+  component: BreadcrumbStory,
+  parameters: {
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
+    layout: 'centered',
+  },
+} satisfies Meta<typeof BreadcrumbStory>;
 
-export default meta
+export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-
-}
+export const Default: Story = {};

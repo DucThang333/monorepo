@@ -1,17 +1,17 @@
 {
-    "name": "@package/hooks",
-    "version": "0.0.0",
-    "license": "ISC",
-    "main": "./src/use-mobile.ts",
-    "types": "./src/use-mobile.ts",
-    "exports": {
-        "./use-mobile": "./src/use-mobile.ts"
-    },
-    "dependencies": {
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1"
-    },
-    "devDependencies": {
-        "typescript": "^5.5.4"
-    }
+  "name": "@package/hooks",
+  "version": "0.0.0",
+  "license": "ISC",
+  "main": "./src/use-mobile.ts",
+  "types": "./src/use-mobile.ts",
+  "exports": {
+    "./use-mobile": "./src/use-mobile.ts"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
 }
