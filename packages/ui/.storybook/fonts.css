@@ -1,0 +1,45 @@
+/* import font face */
+@font-face {
+    font-family: 'anton';
+    src: url('../../fonts/Anton-Regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Caveat-brush';
+    src: url('../../fonts/CaveatBrush-Regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'e-b-garamond';
+    src: url('../../fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'lobster';
+    src: url('../../fonts/Lobster-Regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'poppins';
+    src: url('../../fonts/Poppins.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'nunito';
+    src: url('../../fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'oswald';
+    src: url('../../fonts/Oswald-VariableFont_wght.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'montserrat';
+    src: url('../../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Jet-brains-mono';
+    src: url('../../fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+  }

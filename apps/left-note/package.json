@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@package/tailwind": "workspace:*",
     "@package/ui": "workspace:*",
-    "next": "15.4.6"
+    "lucide-react": "^0.536.0",
+    "next": "15.4.6",
+    "next-transpile-modules": "^10.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -21,7 +24,6 @@
     "@types/webpack": "^5.28.5",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
-    "tailwindcss": "^4",
     "typescript": "^5"
   }
 }

@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react-webpack5';
 import '../src/styles/globals.css';
+import './fonts.css';
 import { withThemeByClassName } from '@storybook/addon-themes';
 
 /* snipped for brevity */
