@@ -1,0 +1,124 @@
+.tiptap {
+  min-height: 200px;
+}
+
+.tiptap:focus {
+  outline: none;
+}
+
+.tiptap h1 {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.tiptap h2 {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+}
+
+.tiptap h3 {
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+}
+.tiptap h4 {
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+}
+
+.tiptap h5 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.tiptap h6 {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+
+.tiptap p {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+
+.tiptap h1 {
+  font-size: var(--font-text-tiptap-h1);
+}
+
+.tiptap h2 {
+  font-size: var(--font-text-tiptap-h2);
+}
+
+.tiptap h3 {
+  font-size: var(--font-text-tiptap-h3);
+}
+
+.tiptap h4 {
+  font-size: var(--font-text-tiptap-h4);
+}
+.tiptap h5 {
+  font-size: var(--font-text-tiptap-h5);
+}
+.tiptap h6 {
+  font-size: var(--font-text-tiptap-h6);
+}
+.tiptap p {
+  font-size: var(--font-text-tiptap-p);
+}
+
+.tiptap ul[data-type='taskList'] {
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+
+  li {
+    align-items: center;
+    display: flex;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    > label {
+      flex: 0 0 auto;
+      margin-right: 0.5rem;
+      user-select: none;
+    }
+
+    > div {
+      flex: 1 1 auto;
+    }
+  }
+
+  input[type='checkbox'] {
+    cursor: pointer;
+  }
+
+  ul[data-type='taskList'] {
+    margin: 0;
+  }
+}
+
+@media (width >= 40rem) {
+  .tiptap {
+    font-size: var(--font-size-tiptap-sm);
+  }
+}
+@media (width >= 48rem) {
+  .tiptap {
+    font-size: var(--font-size-tiptap-md);
+  }
+}
+
+@media (width >= 64rem) {
+  .tiptap {
+    font-size: var(--font-size-tiptap-lg);
+  }
+}
+
+@media (width >= 80rem) {
+  .tiptap {
+    font-size: var(--font-size-tiptap-xl);
+  }
+}
+
+@media (width >= 96rem) {
+  .tiptap {
+    font-size: var(--font-size-tiptap-2xl);
+  }
+}

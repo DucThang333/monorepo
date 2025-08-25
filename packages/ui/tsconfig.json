@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "lib": ["ES2015", "DOM"],
+    "lib": ["ES2015", "DOM", "ES2017"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "module": "es2020",
+    "moduleResolution": "bundler"
   },
   "include": ["**/*"],
   "exclude": ["node_modules", "dist"]

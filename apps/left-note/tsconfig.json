@@ -19,7 +19,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*","../../packages/ui/*"],
+      "@/*": ["./src/*", "../../packages/ui/*", "../../packages/tiptap/rsc/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -4,12 +4,24 @@
   "private": true,
   "exports": {
     "./component/shadcn/*": "./components/shadcn/*.tsx",
+    "./component/editor/plugins/*": "./components/editor/plugins/*.tsx",
     "./component/*": "./components/*.tsx",
     "./lib/*": "./lib/*",
     "./hook/*": "./hooks/*",
     "./style": "./src/styles/globals-ouput.css"
   },
   "dependencies": {
+    "@package/tiptap":"workspace:*",
+    "@excalidraw/excalidraw": "^0.18.0",
+    "@lexical/code": "^0.34.0",
+    "@lexical/link": "^0.34.0",
+    "@lexical/list": "^0.34.0",
+    "@lexical/markdown": "^0.34.0",
+    "@lexical/react": "^0.34.0",
+    "@lexical/rich-text": "^0.34.0",
+    "@lexical/selection": "^0.34.0",
+    "@lexical/table": "^0.34.0",
+    "@lexical/utils": "^0.34.0",
     "@package/tailwind": "workspace:*",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -45,8 +57,11 @@
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
+    "lexical": "^0.34.0",
+    "lodash-es": "^4.17.21",
     "lucide-react": "^0.536.0",
     "next-themes": "^0.4.6",
+    "react-colorful": "^5.6.1",
     "react-day-picker": "^9.8.1",
     "react-resizable-panels": "^3.0.4",
     "recharts": "2.15.4",
@@ -70,6 +85,8 @@
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build:tailwind": "npx @tailwindcss/cli -i ./src/styles/globals.css -o ./src/styles/globals-ouput.css",
+    "watch:tailwind": "npx @tailwindcss/cli -i ./src/styles/globals.css -o ./src/styles/globals-ouput.css --watch"
   }
 }

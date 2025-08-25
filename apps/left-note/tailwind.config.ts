@@ -1,4 +1,3 @@
-import { join } from "path"
 import type {Config} from "tailwindcss"
 
 
@@ -7,6 +6,7 @@ const config:Config = {
         "./src/**/*.{js,ts,jsx,tsx}",
         "../../packages/**/*.{js,ts,jsx,tsx}",
       ],
+      darkMode:"class",
     theme:{
         extend:{}
     },

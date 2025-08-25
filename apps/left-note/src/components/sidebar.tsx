@@ -10,6 +10,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/dropdown-menu';
 import { Input } from '@/components/input';
+import { Separator } from '@/components/separator';
+import { Switch } from '@/components/switch';
 import {
   Sidebar as SidebarComp,
   SidebarContent,
@@ -24,12 +26,20 @@ import {
 } from '@package/ui/component/sidebar';
 import {
   Bell,
+  LaptopMinimal,
   LayoutDashboardIcon,
   LogOut,
+  Moon,
   PanelLeftOpen,
   PanelRightOpen,
+  PencilLine,
+  Settings,
+  Sun,
   User,
 } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
 
 type MenuItemsType = {
@@ -50,6 +60,11 @@ const menuItems: MenuType = {
       label: 'Dashboard',
       icon: <LayoutDashboardIcon />,
     },
+    {
+      label: 'Note',
+      icon: <PencilLine />,
+      url: 'note',
+    },
   ],
   footer: [],
 };
@@ -61,6 +76,9 @@ function Sidebar() {
     avatar: '',
   };
   const { isMobile, setOpen, open } = useSidebar();
+  const { setTheme, theme, themes } = useTheme();
+  const path = usePathname();
+  console.log(path);
   return (
     <SidebarComp
       collapsible="icon"
@@ -91,19 +109,27 @@ function Sidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+      <Separator />
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            {menuItems.main.map((item) => {
-              return (
-                <SidebarMenuItem key={item.label}>
-                  <SidebarMenuButton>
-                    {item.icon}
-                    {item.label}
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
-            })}
+            <SidebarMenu>
+              {menuItems.main.map((item) => {
+                return (
+                  <SidebarMenuItem key={item.label}>
+                    <Link href={item.url ?? '#'}>
+                      <SidebarMenuButton
+                        isActive={path === '/' + item.url}
+                        className="rounded-[0.2rem]"
+                      >
+                        {item.icon}
+                        {item.label}
+                      </SidebarMenuButton>
+                    </Link>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
@@ -121,7 +147,9 @@ function Sidebar() {
                       src={user.avatar}
                       alt={user.name}
                     />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    <AvatarFallback className="rounded-lg">
+                      {user.name.substring(0, 1)}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
@@ -142,7 +170,9 @@ function Sidebar() {
                         src={user.avatar}
                         alt={user.name}
                       />
-                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                      <AvatarFallback className="rounded-lg">
+                        {user.name.substring(0, 1)}
+                      </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-medium">{user.name}</span>
@@ -152,11 +182,36 @@ function Sidebar() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <User /> Account
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <Bell /> Notifications
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onSelect={(e) => {
+                      const indexNextMode = themes.findIndex((t) => t === theme) + 1;
+                      setTheme(themes[indexNextMode > themes.length - 1 ? 0 : indexNextMode]);
+                      e.preventDefault();
+                    }}
+                  >
+                    {theme === 'light' ? (
+                      <>
+                        <Sun /> Light Mode
+                      </>
+                    ) : theme === 'system' ? (
+                      <>
+                        <LaptopMinimal />
+                        System Mode
+                      </>
+                    ) : (
+                      <>
+                        <Moon /> Dark Mode
+                      </>
+                    )}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    <Settings /> Setting
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />

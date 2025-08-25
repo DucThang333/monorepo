@@ -1,0 +1,20 @@
+export const FONT_SIZE = "--font-size-tiptap"
+export const FONT_TEXT = "--font-text-tiptap"
+
+export enum ResponisveKey {
+    MOBILE="-sm",
+    IPAD_MINI="-md",
+    TABLET="-lg",
+    LAPTOP="-xl",
+    DESKTOP="-2xl",
+}
+
+export enum TypographyKey{
+    H1="-h1",
+    H2="-h2",
+    H3="-h3",
+    H4="-h4",
+    H5="-h5",
+    H6="-h6",
+    P="-p",
+}

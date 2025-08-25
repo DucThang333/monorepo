@@ -4,11 +4,13 @@ export const metadata: Metadata = {
   description: 'The App Helper User Take notes.',
   icons: '/icons/favorite.png',
 };
+import '@/styles/globals.css';
 
 import '@package/ui/style';
-import '@/styles/globals.css';
+import '@package/tiptap/style';
 import { SidebarProvider } from '@package/ui/component/sidebar';
 import { Sidebar } from '@/components/sidebar';
+import { Providers } from '@/providers/theme-provider';
 
 export default function RootLayout({
   children,
@@ -16,14 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body>
-        <SidebarProvider>
-          <div className="flex">
-            <Sidebar />
-            {children}
-          </div>
-        </SidebarProvider>
+        <Providers>
+          <SidebarProvider>
+            <div className="flex w-full">
+              <Sidebar />
+              {children}
+            </div>
+          </SidebarProvider>
+        </Providers>
       </body>
     </html>
   );

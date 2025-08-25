@@ -17,7 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/shadcn/pop
 
 export type ComboboxItemType = {
   value: string;
-  label: string;
+  label: React.ReactNode;
 };
 
 export type ComboboxProps = {
@@ -26,9 +26,9 @@ export type ComboboxProps = {
   model?: string;
   isSearching?: boolean;
   classPopoverContent?: string;
-  classPopoverTrigger: string;
+  classPopoverTrigger?: string;
   value?: string;
-  setValue: (value: string) => void;
+  onChange?: (value: string) => void;
 };
 
 export function Combobox(props: ComboboxProps) {
@@ -40,7 +40,7 @@ export function Combobox(props: ComboboxProps) {
     classPopoverContent,
     classPopoverTrigger,
     value,
-    setValue,
+    onChange,
   } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -78,7 +78,7 @@ export function Combobox(props: ComboboxProps) {
                   key={item.value}
                   value={item.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? '' : currentValue);
+                    if (onchange) onChange(currentValue === value ? '' : currentValue);
                     setOpen(false);
                   }}
                 >
