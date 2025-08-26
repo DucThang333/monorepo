@@ -78,7 +78,6 @@ function Sidebar() {
   const { isMobile, setOpen, open } = useSidebar();
   const { setTheme, theme, themes } = useTheme();
   const path = usePathname();
-  console.log(path);
   return (
     <SidebarComp
       collapsible="icon"

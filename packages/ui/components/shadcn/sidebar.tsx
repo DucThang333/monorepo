@@ -24,6 +24,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/shadcn/tooltip';
+import shortcutManage from '@package/keyboard-shortcut';
+import {
+  KEYBOARD_SHORTCUT,
+  SHORTCUT_FEATURE,
+  SHORTCUT_MODEL,
+  SHORTCUT_SCOPE,
+} from '@package/keyboard-shortcut/constant';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -94,17 +101,15 @@ function SidebarProvider({
   }, [isMobile, setOpen, setOpenMobile]);
 
   // Adds a keyboard shortcut to toggle the sidebar.
-  React.useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        toggleSidebar();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleSidebar]);
+  shortcutManage.register({
+    scope: SHORTCUT_SCOPE.APP,
+    model: SHORTCUT_MODEL.BOLD,
+    feature: SHORTCUT_FEATURE.TOGGLE,
+    keyboardShortcut: [KEYBOARD_SHORTCUT.CTRL, KEYBOARD_SHORTCUT.B],
+    handler: () => {
+      toggleSidebar();
+    },
+  });
 
   // We add a state so that we can do data-state="expanded" or "collapsed".
   // This makes it easier to style the sidebar with Tailwind classes.

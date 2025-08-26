@@ -1,0 +1,7 @@
+{
+    "name": "@package/keyboard-shortcut",
+    "exports":{
+       ".":"./src/index.ts", 
+       "./constant":"./src/constants/shortcut.ts" 
+    }
+}

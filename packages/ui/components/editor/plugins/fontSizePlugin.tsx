@@ -58,7 +58,6 @@ export function FontSizePlugin(props: FontSizePluginProps) {
 
 function getFontSizeText(editor: Editor) {
   const { editorKey } = useContext(EditorContext);
-  console.log('🚀 ~ getFontSizeText ~ editorKey:', editorKey);
   const element = document.getElementById(editorKey);
   if (!element) return;
   if (editor.isActive('heading', { level: 1 }))

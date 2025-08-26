@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@package/tailwind": "workspace:*",
+    "@package/keyboard-shortcut":"workspace:*",
     "@package/ui": "workspace:*",
     "@package/tiptap": "workspace:*",
     "lucide-react": "^0.536.0",
