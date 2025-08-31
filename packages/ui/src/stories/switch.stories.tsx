@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Label } from '@/components/label';
-import { Switch } from '@/components/switch';
+import { Label } from '@package/ui/components/label';
+import { Switch } from '@package/ui/components/switch';
 
 export function SwitchStory() {
   return (

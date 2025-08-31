@@ -1,5 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/input-otp';
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from '@package/ui/components/input-otp';
 
 export function InputOTPStory() {
   return (

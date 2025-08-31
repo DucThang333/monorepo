@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Bold, Italic, Underline } from 'lucide-react';
 
-import { ToggleGroup, ToggleGroupItem } from '@/components/toggle-group';
+import { ToggleGroup, ToggleGroupItem } from '@package/ui/components/toggle-group';
 
 export function ToggleGroupStory() {
   return (

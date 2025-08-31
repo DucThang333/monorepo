@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/accordion';
+} from '@package/ui/components/accordion';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 
 function AccordionStory() {

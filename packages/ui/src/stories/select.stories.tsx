@@ -9,7 +9,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/select';
+} from '@package/ui/components/select';
 
 export function SelectStory() {
   return (

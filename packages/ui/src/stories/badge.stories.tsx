@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { BadgeCheckIcon } from 'lucide-react';
-import { Badge } from '@/components/shadcn/badge';
+import { Badge } from '@package/ui/components/shadcn/badge';
 function BadgeStory() {
   return (
     <div className="flex flex-col items-center gap-2">

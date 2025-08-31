@@ -12,32 +12,47 @@ type RegisteredShortcut = {
   model: SHORTCUT_MODEL;
   feature: SHORTCUT_FEATURE;
   handler: () => void;
-  keyboardShortcut: KEYBOARD_SHORTCUT[];
+  keyboardShortcuts: KEYBOARD_SHORTCUT[][];
 };
 export default class ShortcutManager {
   private shortcuts: RegisteredShortcut[] = [];
   private listener?: (event: KeyboardEvent) => void;
 
-  register({ scope, model, feature, handler, keyboardShortcut }: RegisteredShortcut) {
-    this.shortcuts.push({
+  register({ scope, model, feature, handler, keyboardShortcuts }: RegisteredShortcut) {
+    const indexShortcut = this.shortcuts.findIndex(
+      (sc) => sc.scope === scope && sc.feature === feature && sc.model === model
+    );
+    if (indexShortcut == -1) {
+      this.shortcuts.push({
+        feature,
+        model,
+        scope,
+        handler,
+        keyboardShortcuts,
+      });
+      return;
+    }
+
+    this.shortcuts[indexShortcut] = {
+      scope,
       feature,
       model,
-      scope,
+      keyboardShortcuts,
       handler,
-      keyboardShortcut,
-    });
+    };
   }
 
   listen() {
     this.listener = (event: KeyboardEvent) => {
-      for (const { scope, keyboardShortcut, handler } of this.shortcuts) {
-        if (isShortcutPressed(event, keyboardShortcut)) {
-          event.preventDefault();
-          if (this.getKeypressContext(event) === scope) handler();
-        }
+      for (const { scope, keyboardShortcuts, handler } of this.shortcuts) {
+        keyboardShortcuts.forEach((keyboardShortcut) => {
+          if (isShortcutPressed(event, keyboardShortcut)) {
+            event.preventDefault();
+            if (this.getKeypressContext(event) === scope) handler();
+          }
+        });
       }
     };
-
     window.addEventListener('keydown', this.listener);
   }
 
@@ -48,7 +63,7 @@ export default class ShortcutManager {
     }
   }
 
-  getKeypressContext(event: KeyboardEvent): SHORTCUT_SCOPE | undefined {
+  private getKeypressContext(event: KeyboardEvent): SHORTCUT_SCOPE | undefined {
     const target = event.target as HTMLElement | null;
     if (!target) return undefined;
     if (target.closest('.tiptap')) return SHORTCUT_SCOPE.EDITOR; // any div or component marked as editor

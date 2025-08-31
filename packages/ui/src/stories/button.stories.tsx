@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@/components/button';
+import { Button, ButtonProps } from '@package/ui/components/button';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { GitBranch } from 'lucide-react';
 

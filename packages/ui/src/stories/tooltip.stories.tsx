@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Button } from '@/components/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/tooltip';
+import { Button } from '@package/ui/components/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@package/ui/components/tooltip';
 
 export function TooltipStory() {
   return (

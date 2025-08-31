@@ -1,0 +1,19 @@
+// tsconfig.base.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@left-note/*": ["apps/left-note/src/*"],
+      "@package/ui/*": ["packages/ui/src/*"],
+      "@package/date/*": ["packages/date/*"],
+      "@package/hook/*": ["packages/hook/*"],
+      "@package/locales/*": ["packages/locales/*"],
+      "@package/lodash/*": ["packages/lodash/*"],
+      "@package/query/*": ["packages/query/*"],
+      "@package/scripts/*": ["packages/scripts/*"],
+      "@package/keyboard-shortcut/*": ["packages/shortcut/*"],
+      "@package/stores/*": ["packages/stores/*"],
+      "@package/tiptap/*": ["packages/tiptap/src/*"]
+    }
+  }
+}

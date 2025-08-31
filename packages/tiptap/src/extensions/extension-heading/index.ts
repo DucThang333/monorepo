@@ -1,5 +1,5 @@
-import { Heading } from './heading.ts'
+import { Heading } from './heading';
 
-export * from './heading.ts'
+export * from './heading';
 
-export default Heading
+export default Heading;

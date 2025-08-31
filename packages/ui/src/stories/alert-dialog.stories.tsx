@@ -8,9 +8,9 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-} from '@/components/alert-dialog';
+} from '@package/ui/components/alert-dialog';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Button } from '@/components/shadcn/button';
+import { Button } from '@package/ui/components/shadcn/button';
 
 function AlertDialogStory() {
   return (

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
-import { Calendar } from '@/components/calendar';
+import { Calendar } from '@package/ui/components/calendar';
 export function CalendarStory() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   return (

@@ -1,6 +1,6 @@
-import { Input } from '@/components/input';
+import { Input } from '@package/ui/components/input';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Button } from '@/components/button';
+import { Button } from '@package/ui/components/button';
 import {
   Card,
   CardAction,
@@ -9,8 +9,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/card';
-import { Label } from '@/components/label';
+} from '@package/ui/components/card';
+import { Label } from '@package/ui/components/label';
 
 export function CardStory() {
   return (

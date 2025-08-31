@@ -3,22 +3,29 @@ import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from '@package/ui/component/resizable';
+} from '@package/ui/components/resizable';
 import { Tiptap } from '@package/tiptap/tiptap';
-import { fullExtension } from '@/constants/tiptapKey';
+import { fullExtension } from '@left-note/constants/tiptapKey';
+import { Profiler } from 'react';
 export default function NotePage() {
+  console.log('Loading Note Page');
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel className="min-w-40">Left Side</ResizablePanel>
       <ResizableHandle />
       <ResizablePanel className="min-w-1/2">
-        Main content
         <div className=".menu" />
-        <Tiptap
-          extensionKey={fullExtension}
-          enableHeaderMenu
-          tiptapKey="note-page"
-        />
+        <Profiler
+          id="Tiptap"
+          onRender={() => {}}
+        >
+          <Tiptap
+            extensionKey={fullExtension}
+            enableHeaderMenu
+            tiptapKey="note-page"
+            className="mt-16"
+          />
+        </Profiler>
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel className="min-w-40">Right Side</ResizablePanel>

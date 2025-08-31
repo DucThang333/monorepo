@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Skeleton } from '@/components/skeleton';
+import { Skeleton } from '@package/ui/components/skeleton';
 
 export function SkeletonStory() {
   return (

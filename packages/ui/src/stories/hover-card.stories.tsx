@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
-import { Button } from '@/components/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/hover-card';
+import { Avatar, AvatarFallback, AvatarImage } from '@package/ui/components/avatar';
+import { Button } from '@package/ui/components/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@package/ui/components/hover-card';
 
 export function HoverCardStory() {
   return (

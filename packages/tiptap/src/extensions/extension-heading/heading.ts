@@ -1,9 +1,9 @@
-import { mergeAttributes, Node, textblockTypeInputRule } from '@tiptap/react'
+import { mergeAttributes, Node, textblockTypeInputRule } from '@tiptap/react';
 
 /**
  * The heading level options.
  */
-export type Level = 1 | 2 | 3 | 4 | 5 | 6
+export type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface HeadingOptions {
   /**
@@ -11,14 +11,14 @@ export interface HeadingOptions {
    * @default [1, 2, 3, 4, 5, 6]
    * @example [1, 2, 3]
    */
-  levels: Level[]
+  levels: Level[];
 
   /**
    * The HTML attributes for a heading node.
    * @default {}
    * @example { class: 'foo' }
    */
-  HTMLAttributes: Record<string, any>
+  HTMLAttributes: Record<string, any>;
 }
 
 declare module '@tiptap/react' {
@@ -29,14 +29,14 @@ declare module '@tiptap/react' {
        * @param attributes The heading attributes
        * @example editor.commands.setHeading({ level: 1 })
        */
-      setHeading: (attributes: { level: Level }) => ReturnType
+      setHeading: (attributes: { level: Level }) => ReturnType;
       /**
        * Toggle a heading node
        * @param attributes The heading attributes
        * @example editor.commands.toggleHeading({ level: 1 })
        */
-      toggleHeading: (attributes: { level: Level }) => ReturnType
-    }
+      toggleHeading: (attributes: { level: Level }) => ReturnType;
+    };
   }
 }
 
@@ -51,7 +51,7 @@ export const Heading = Node.create<HeadingOptions>({
     return {
       levels: [1, 2, 3, 4, 5, 6],
       HTMLAttributes: {},
-    }
+    };
   },
 
   content: 'inline*',
@@ -66,44 +66,44 @@ export const Heading = Node.create<HeadingOptions>({
         default: 1,
         rendered: false,
       },
-    }
+    };
   },
 
   parseHTML() {
     return this.options.levels.map((level: Level) => ({
       tag: `h${level}`,
-      attrs: { level }
-    }))
+      attrs: { level },
+    }));
   },
 
   renderHTML({ node, HTMLAttributes }) {
-    const hasLevel = this.options.levels.includes(node.attrs.level)
-    const level = hasLevel ? node.attrs.level : this.options.levels[0]
+    const hasLevel = this.options.levels.includes(node.attrs.level);
+    const level = hasLevel ? node.attrs.level : this.options.levels[0];
 
-    return [`h${level}`, mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0]
+    return [`h${level}`, mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), 0];
   },
 
   addCommands() {
     return {
       setHeading:
-        attributes =>
+        (attributes) =>
         ({ chain }) => {
           if (!this.options.levels.includes(attributes.level)) {
-            return false
+            return false;
           }
 
-          return chain().setNode(this.name, attributes).setMark("bold").run()
+          return chain().setNode(this.name, attributes).setMark('bold').run();
         },
       toggleHeading:
-        attributes =>
+        (attributes) =>
         ({ commands }) => {
           if (!this.options.levels.includes(attributes.level)) {
-            return false
+            return false;
           }
 
-          return commands.toggleNode(this.name, 'paragraph', attributes)
+          return commands.toggleNode(this.name, 'paragraph', attributes);
         },
-    }
+    };
   },
 
   addKeyboardShortcuts() {
@@ -114,19 +114,19 @@ export const Heading = Node.create<HeadingOptions>({
           [`Mod-Alt-${level}`]: () => this.editor.commands.toggleHeading({ level }),
         },
       }),
-      {},
-    )
+      {}
+    );
   },
 
   addInputRules() {
-    return this.options.levels.map(level => {
+    return this.options.levels.map((level) => {
       return textblockTypeInputRule({
         find: new RegExp(`^(#{${Math.min(...this.options.levels)},${level}})\\s$`),
         type: this.type,
         getAttributes: {
           level,
         },
-      })
-    })
-  }
-})
+      });
+    });
+  },
+});

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { AspectRatio } from '@/components/shadcn/aspect-ratio';
+import { AspectRatio } from '@package/ui/components/shadcn/aspect-ratio';
 function AspectRatioStory() {
   return (
     <AspectRatio

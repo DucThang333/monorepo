@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Bold } from 'lucide-react';
 
-import { Toggle } from '@/components/toggle';
+import { Toggle } from '@package/ui/components/toggle';
 
 export function ToggleStory() {
   return (

@@ -13,7 +13,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '@/components/context-menu';
+} from '@package/ui/components/context-menu';
 
 function ContextMenuStory() {
   return (

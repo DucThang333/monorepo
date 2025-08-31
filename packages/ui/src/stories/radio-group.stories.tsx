@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Label } from '@/components/label';
-import { RadioGroup, RadioGroupItem } from '@/components/radio-group';
+import { Label } from '@package/ui/components/label';
+import { RadioGroup, RadioGroupItem } from '@package/ui/components/radio-group';
 
 export function RadioGroupStory() {
   return (

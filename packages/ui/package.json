@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./component/shadcn/*": "./components/shadcn/*.tsx",
-    "./component/editor/plugins/*": "./components/editor/plugins/*.tsx",
-    "./component/*": "./components/*.tsx",
+    "./components/shadcn/*": "./components/shadcn/*.tsx",
+    "./components/editor/plugins/*": "./components/editor/plugins/*.tsx",
+    "./components/editor/constants/*": "./components/editor/constants/*.ts",
+    "./components/*": "./components/*.tsx",
     "./lib/*": "./lib/*",
     "./hook/*": "./hooks/*",
-    "./style": "./src/styles/globals-ouput.css"
+    "./style": "./src/styles/globals.css"
   },
   "dependencies": {
     "@package/tiptap":"workspace:*",

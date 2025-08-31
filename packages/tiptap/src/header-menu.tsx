@@ -1,15 +1,15 @@
 import { Editor, useEditorState } from '@tiptap/react';
-import { ExtensionKey } from '@package/ui/component/editor/constants/extensionKey';
-import { HistoryPlugin } from '@package/ui/component/editor/plugins/historyPlugin';
-import { CollabsibleFormatTextPlugin } from '@package/ui/component/editor/plugins/collabsibleFormatTextPlugin';
-import { CollabsibleFontFamilyPlugin } from '@package/ui/component/editor/plugins/collabsibleFontFamilyPlugin';
-import { ListPlugin } from '@package/ui/component/editor/plugins/listPlugin';
-import { BoldPlugin } from '@package/ui/component/editor/plugins/boldPlugin';
-import { ItalicPlugin } from '@package/ui/component/editor/plugins/italicPlugin';
-import { StrikePlugin } from '@package/ui/component/editor/plugins/strikePlugin';
-import { UnderlinePlugin } from '@package/ui/component/editor/plugins/underlinePlugin';
-import { FontSizePlugin } from '@package/ui/component/editor/plugins/fontSizePlugin';
-import { SettingPlugin } from '@package/ui/component/editor/plugins/setttingPlugin';
+import { ExtensionKey } from '@package/ui/components/editor/constants/extensionKey';
+import { HistoryPlugin } from '@package/ui/components/editor/plugins/historyPlugin';
+import { CollabsibleFormatTextPlugin } from '@package/ui/components/editor/plugins/collabsibleFormatTextPlugin';
+import { CollabsibleFontFamilyPlugin } from '@package/ui/components/editor/plugins/collabsibleFontFamilyPlugin';
+import { ListPlugin } from '@package/ui/components/editor/plugins/listPlugin';
+import { BoldPlugin } from '@package/ui/components/editor/plugins/boldPlugin';
+import { ItalicPlugin } from '@package/ui/components/editor/plugins/italicPlugin';
+import { StrikePlugin } from '@package/ui/components/editor/plugins/strikePlugin';
+import { UnderlinePlugin } from '@package/ui/components/editor/plugins/underlinePlugin';
+import { FontSizePlugin } from '@package/ui/components/editor/plugins/fontSizePlugin';
+import { SettingPlugin } from '@package/ui/components/editor/plugins/setttingPlugin';
 
 type HeaderMenuProps = {
   editor: Editor;
@@ -18,7 +18,7 @@ type HeaderMenuProps = {
 
 export function HeaderMenu(props: HeaderMenuProps) {
   const { extensionKey, editor } = props;
-
+  console.log('rerender header menu component');
   return (
     <div className="flex justify-between">
       <div className="flex gap-2 overflow-auto">

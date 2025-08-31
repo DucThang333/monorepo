@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { AppWindowIcon, CodeIcon } from 'lucide-react';
 
-import { Button } from '@/components/button';
+import { Button } from '@package/ui/components/button';
 import {
   Card,
   CardContent,
@@ -9,10 +9,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/card';
-import { Input } from '@/components/input';
-import { Label } from '@/components/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/tabs';
+} from '@package/ui/components/card';
+import { Input } from '@package/ui/components/input';
+import { Label } from '@package/ui/components/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@package/ui/components/tabs';
 
 export function TabsStory() {
   return (

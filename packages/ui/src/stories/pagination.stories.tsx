@@ -1,6 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Pagination } from '@/components/pagination';
-import { getCoreRowModel, getPaginationRowModel, useReactTable } from '@/components/table';
+import { Pagination } from '@package/ui/components/pagination';
+import {
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from '@package/ui/components/table';
 
 export function PaginationStory() {
   const table = useReactTable({

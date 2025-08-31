@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
 import { ChevronsUpDown } from 'lucide-react';
-import { Button } from '@/components/button';
+import { Button } from '@package/ui/components/button';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/shadcn/collapsible';
+} from '@package/ui/components/shadcn/collapsible';
 
 export function CollapsibleStory() {
   const [isOpen, setIsOpen] = React.useState(false);

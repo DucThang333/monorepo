@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Button } from '@/components/button';
+import { Button } from '@package/ui/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +13,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
+} from '@package/ui/components/dropdown-menu';
 
 export function DropdownMenuStory() {
   return (

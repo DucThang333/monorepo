@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
-import { Card, CardContent } from '@/components/card';
+import { Card, CardContent } from '@package/ui/components/card';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/carousel';
+} from '@package/ui/components/carousel';
 
 export function CarouselStory() {
   return (

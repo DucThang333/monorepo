@@ -5,18 +5,18 @@ import {
   TableCustom,
   getCoreRowModel,
   getPaginationRowModel,
-} from '@/components/table';
+} from '@package/ui/components/table';
 import { useMemo } from 'react';
-import { Checkbox } from '@/components/checkbox';
-import { Badge } from '@/components/badge';
-import { Switch } from '@/components/switch';
+import { Checkbox } from '@package/ui/components/checkbox';
+import { Badge } from '@package/ui/components/badge';
+import { Switch } from '@package/ui/components/switch';
 import { EllipsisVertical } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
+} from '@package/ui/components/dropdown-menu';
 
 enum InvoiceStatus {
   PAID = 'paid',

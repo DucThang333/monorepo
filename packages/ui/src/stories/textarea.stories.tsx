@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Textarea } from '@/components/textarea';
+import { Textarea } from '@package/ui/components/textarea';
 
 export function TextareaStory() {
   return <Textarea placeholder="Type your message here." />;

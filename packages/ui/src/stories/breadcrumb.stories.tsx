@@ -7,13 +7,13 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/breadcrumb';
+} from '@package/ui/components/breadcrumb';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
+} from '@package/ui/components/dropdown-menu';
 
 export function BreadcrumbStory() {
   return (

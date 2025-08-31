@@ -1,4 +1,4 @@
-import { Input } from '@/components/input';
+import { Input } from '@package/ui/components/input';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 
 function InputStory(props: typeof Input) {

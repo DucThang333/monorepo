@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
 
-import { ScrollArea } from '@/components/scroll-area';
-import { Separator } from '@/components/separator';
+import { ScrollArea } from '@package/ui/components/scroll-area';
+import { Separator } from '@package/ui/components/separator';
 
 const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 

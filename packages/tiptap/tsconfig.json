@@ -1,5 +1,6 @@
 // tsconfig.json
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "lib": ["ES2017", "DOM"],
@@ -7,13 +8,6 @@
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "paths": {
-      "@/*": ["./src/*"],
-      "@package/ui/*": ["../ui/*"],
-      "@package/ui/component/editor/plugins/*": ["../ui/components/editor/plugins/*"],
-      "@package/ui/component/editor/constants/*": ["../ui/components/editor/constants/*"],
-      "@package/lodash/*": ["../lodash/*"]
-    }
+    "allowImportingTsExtensions": true
   }
 }

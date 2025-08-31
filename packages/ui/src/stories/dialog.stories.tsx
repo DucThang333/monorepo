@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Button } from '@/components/button';
+import { Button } from '@package/ui/components/button';
 import {
   Dialog,
   DialogClose,
@@ -9,9 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/dialog';
-import { Input } from '@/components/input';
-import { Label } from '@/components/label';
+} from '@package/ui/components/dialog';
+import { Input } from '@package/ui/components/input';
+import { Label } from '@package/ui/components/label';
 
 export function DialogStory() {
   return (

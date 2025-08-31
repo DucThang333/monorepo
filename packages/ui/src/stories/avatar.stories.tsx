@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@package/ui/components/avatar';
 
 function AvatarStory() {
   return (

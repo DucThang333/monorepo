@@ -1,5 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/resizable';
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@package/ui/components/resizable';
 
 export function ResizableStory() {
   return (

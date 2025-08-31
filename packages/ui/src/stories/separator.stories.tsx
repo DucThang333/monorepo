@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Separator } from '@/components/separator';
+import { Separator } from '@package/ui/components/separator';
 
 export function SeparatorStory() {
   return (

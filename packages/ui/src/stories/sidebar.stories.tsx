@@ -41,8 +41,8 @@ import {
   SidebarProvider,
   SidebarFooter,
   useSidebar,
-} from '@/components/sidebar';
-import { Button } from '@/components/button';
+} from '@package/ui/components/sidebar';
+import { Button } from '@package/ui/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,9 +51,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
+} from '@package/ui/components/dropdown-menu';
+import { useIsMobile } from '@package/ui/hooks/use-mobile';
+import { Avatar, AvatarFallback, AvatarImage } from '@package/ui/components/avatar';
 
 // Menu items.
 const items = {

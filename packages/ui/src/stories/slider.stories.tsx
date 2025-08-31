@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { cn } from '@/lib/utils';
-import { Slider } from '@/components/slider';
+import { cn } from '@package/ui/lib/utils';
+import { Slider } from '@package/ui/components/slider';
 
 type SliderProps = React.ComponentProps<typeof Slider>;
 

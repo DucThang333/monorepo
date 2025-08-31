@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
-import { Progress } from '@/components/progress';
+import { Progress } from '@package/ui/components/progress';
 
 export function ProgressStory() {
   const [progress, setProgress] = React.useState(10);

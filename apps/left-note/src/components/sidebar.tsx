@@ -1,5 +1,5 @@
 'use client';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@package/ui/components/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,10 +8,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
-import { Input } from '@/components/input';
-import { Separator } from '@/components/separator';
-import { Switch } from '@/components/switch';
+} from '@package/ui/components/dropdown-menu';
+import { Separator } from '@package/ui/components/separator';
 import {
   Sidebar as SidebarComp,
   SidebarContent,
@@ -23,7 +21,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@package/ui/component/sidebar';
+} from '@package/ui/components/sidebar';
 import {
   Bell,
   LaptopMinimal,
@@ -78,6 +76,7 @@ function Sidebar() {
   const { isMobile, setOpen, open } = useSidebar();
   const { setTheme, theme, themes } = useTheme();
   const path = usePathname();
+  console.log('Loading Component Sidebar');
   return (
     <SidebarComp
       collapsible="icon"

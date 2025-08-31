@@ -8,14 +8,15 @@ import Paragraph from './extensions/extension-paragraph';
 import Text from '@tiptap/extension-text';
 import { cn } from '@package/ui/lib/utils';
 import { HeaderMenu } from './header-menu';
-import { ExtensionKey } from '@package/ui/component/editor/constants/extensionKey';
+import { ExtensionKey } from '@package/ui/components/editor/constants/extensionKey';
 import { BulletList, ListItem, OrderedList, TaskItem, TaskList } from '@tiptap/extension-list';
 import { FontFamily, TextStyle, FontSize } from '@tiptap/extension-text-style';
-import Bold from '@tiptap/extension-bold';
-import Italic from '@tiptap/extension-italic';
+import Bold from './extensions/extension-bold';
+import Italic from './extensions/extension-italic';
 import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
-import { EditorProvider } from '@package/ui/component/editor/provider/editorProvider';
+import { EditorProvider } from '@package/ui/components/editor/provider/editorProvider';
+import { KeyboardShortcutInit } from './shortcut';
 
 type TiptapProps = {
   content?: string;
@@ -86,35 +87,41 @@ function Tiptap(props: TiptapProps) {
           '--font-text-tiptap-p: 0.9em',
       },
     },
+    shouldRerenderOnTransaction: false,
   });
 
   return (
     <EditorProvider editorKey={editorKey}>
       <div className={cn('relative border border-gray-300 rounded-md', className)}>
-        {enableHeaderMenu && (
-          <div className="border-b p-1 border-gray-300">
-            <HeaderMenu
-              editor={editor}
-              extensionKey={extensionKey}
-            />
-          </div>
-        )}
-        {enableBubbleMenu && (
-          <BubbleMenu
-            editor={editor}
-            options={{ placement: 'bottom' }}
-            className="h-0"
-          >
-            bubble menu
-          </BubbleMenu>
-        )}
-        {enableFloatingMenu && (
-          <FloatingMenu
-            editor={editor}
-            className="h-0"
-          >
-            floating menu
-          </FloatingMenu>
+        {editor && (
+          <>
+            {enableHeaderMenu && (
+              <div className="border-b p-1 border-gray-300">
+                <HeaderMenu
+                  editor={editor}
+                  extensionKey={extensionKey}
+                />
+              </div>
+            )}
+            {enableBubbleMenu && (
+              <BubbleMenu
+                editor={editor}
+                options={{ placement: 'bottom' }}
+                className="h-0"
+              >
+                bubble menu
+              </BubbleMenu>
+            )}
+            {enableFloatingMenu && (
+              <FloatingMenu
+                editor={editor}
+                className="h-0"
+              >
+                floating menu
+              </FloatingMenu>
+            )}
+            <KeyboardShortcutInit editor={editor} />
+          </>
         )}
         <EditorContent
           editor={editor}

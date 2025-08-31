@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { toast } from 'sonner';
 
-import { Button } from '@/components/button';
-import { Toaster } from '@/components/sonner';
+import { Button } from '@package/ui/components/button';
+import { Toaster } from '@package/ui/components/sonner';
 
 export function SonnerStory() {
   return (

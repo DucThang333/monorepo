@@ -6,7 +6,7 @@ import {
   ExtensionFormatTextKey,
   ExtensionKey,
   ExtensionTextStyleKey,
-} from '@/components/editor/constants/extensionKey';
+} from '@package/ui/components/editor/constants/extensionKey';
 
 const extensionKey: ExtensionKey = {
   fontFamilies: [

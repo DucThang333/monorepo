@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 export const metadata: Metadata = {
   title: 'NOTE',
   description: 'The App Helper User Take notes.',
   icons: '/icons/favorite.png',
 };
-import '@/styles/globals.css';
-import '@package/ui/style';
-import '@package/tiptap/style';
-import { SidebarProvider } from '@package/ui/component/sidebar';
-import { Sidebar } from '@/components/sidebar';
-import { Providers } from '@/providers/theme-provider';
-import { ShortcutInit } from '@/components/keyboardShortcut';
+import '@left-note/styles/globals.css';
+import { SidebarProvider } from '@package/ui/components/sidebar';
+import { Sidebar } from '@left-note/components/sidebar';
+import { Providers } from '@left-note/providers/theme-provider';
+const KeyboardShortcut = dynamic(() => import('@left-note/components/keyboardShortcut'));
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,7 +25,7 @@ export default function RootLayout({
         <Providers>
           <SidebarProvider>
             <div className="flex w-full">
-              <ShortcutInit />
+              <KeyboardShortcut />
               <Sidebar />
               {children}
             </div>

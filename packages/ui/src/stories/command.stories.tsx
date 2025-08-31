@@ -10,7 +10,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from '@/components/command';
+} from '@package/ui/components/command';
 
 export function CommandStory() {
   return (

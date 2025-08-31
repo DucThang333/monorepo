@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { Button } from '@/components/button';
-import { Input } from '@/components/input';
-import { Label } from '@/components/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
+import { Button } from '@package/ui/components/button';
+import { Input } from '@package/ui/components/input';
+import { Label } from '@package/ui/components/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@package/ui/components/popover';
 
 export function PopoverStory() {
   return (

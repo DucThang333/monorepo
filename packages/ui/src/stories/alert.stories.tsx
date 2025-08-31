@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/shadcn/alert';
+import { Alert, AlertDescription, AlertTitle } from '@package/ui/components/shadcn/alert';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
 import { AlertCircleIcon, CheckCircle2Icon, PopcornIcon } from 'lucide-react';
 

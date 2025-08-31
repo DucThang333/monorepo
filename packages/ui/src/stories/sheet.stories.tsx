@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Button } from '@/components/button';
-import { Input } from '@/components/input';
-import { Label } from '@/components/label';
+import { Button } from '@package/ui/components/button';
+import { Input } from '@package/ui/components/input';
+import { Label } from '@package/ui/components/label';
 import {
   Sheet,
   SheetClose,
@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/sheet';
+} from '@package/ui/components/sheet';
 
 export function SheetStory() {
   return (

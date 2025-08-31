@@ -1,5 +1,5 @@
-import { Paragraph } from './paragraph.ts'
+import { Paragraph } from './paragraph';
 
-export * from './paragraph.ts'
+export * from './paragraph';
 
-export default Paragraph
+export default Paragraph;

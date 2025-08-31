@@ -12,7 +12,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '@/components/navigation-menu';
+} from '@package/ui/components/navigation-menu';
 
 const components: { title: string; href: string; description: string }[] = [
   {

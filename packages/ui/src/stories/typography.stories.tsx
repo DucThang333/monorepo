@@ -6,7 +6,7 @@ import {
   TypographyH3,
   TypographyH4,
   TypographyP,
-} from '@/components/typography';
+} from '@package/ui/components/typography';
 
 type TypegraphyStoryProps = {
   type: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'blockquote' | 'example';

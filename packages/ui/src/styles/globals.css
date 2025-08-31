@@ -1,1 +1,2 @@
-@import "@package/tailwind/style"
+@import '@package/tailwind/style';
+@source "../**/*";

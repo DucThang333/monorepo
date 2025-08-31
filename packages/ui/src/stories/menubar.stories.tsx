@@ -13,7 +13,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from '@/components/menubar';
+} from '@package/ui/components/menubar';
 
 export function MenubarStory() {
   return (

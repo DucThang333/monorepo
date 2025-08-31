@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Checkbox } from '@/components/checkbox';
-import { Label } from '@/components/label';
+import { Checkbox } from '@package/ui/components/checkbox';
+import { Label } from '@package/ui/components/label';
 
 export function CheckboxStory() {
   return (
