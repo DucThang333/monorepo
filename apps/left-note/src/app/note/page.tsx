@@ -8,7 +8,6 @@ import { Tiptap } from '@package/tiptap/tiptap';
 import { fullExtension } from '@left-note/constants/tiptapKey';
 import { Profiler } from 'react';
 export default function NotePage() {
-  console.log('Loading Note Page');
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel className="min-w-40">Left Side</ResizablePanel>

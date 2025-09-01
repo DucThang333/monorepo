@@ -1,12 +1,5 @@
 /** @jsxImportSource @tiptap/core */
 import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/react';
-import shortcutManager from '@package/keyboard-shortcut';
-import {
-  KEYBOARD_SHORTCUT,
-  SHORTCUT_FEATURE,
-  SHORTCUT_MODEL,
-  SHORTCUT_SCOPE,
-} from '@package/keyboard-shortcut/src/constants/shortcut';
 
 export interface BoldOptions {
   /**

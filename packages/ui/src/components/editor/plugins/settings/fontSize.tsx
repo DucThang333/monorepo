@@ -214,7 +214,6 @@ export function SettingFontSize() {
                     />
                     <span>Mobile: max width &gt; 640px and &lt; 768px</span>
                   </div>
-                  19
                   <div className="flex gap-3">
                     <TabletSmartphone
                       size={16}

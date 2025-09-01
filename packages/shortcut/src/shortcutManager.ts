@@ -15,34 +15,87 @@ type RegisteredShortcut = {
   keyboardShortcuts: KEYBOARD_SHORTCUT[][];
 };
 export default class ShortcutManager {
-  private shortcuts: RegisteredShortcut[] = [];
+  shortcuts: RegisteredShortcut[] = [];
+  customKeyboardShortcuts: Omit<RegisteredShortcut, 'handler'>[] = [];
   private listener?: (event: KeyboardEvent) => void;
 
   register({ scope, model, feature, handler, keyboardShortcuts }: RegisteredShortcut) {
+    // check shortcut is exist
     const indexShortcut = this.shortcuts.findIndex(
-      (sc) => sc.scope === scope && sc.feature === feature && sc.model === model
+      (sc) => sc.scope === scope && sc.model === model && sc.feature === feature
     );
-    if (indexShortcut == -1) {
+    // check short was custom keyboard
+    const indexCustomKeyboardShortcut = this.customKeyboardShortcuts.findIndex(
+      (sc) => sc.scope === scope && sc.model === model && sc.feature === feature
+    );
+    // modifired keyboard shortcut = first priority is custom keyboard shortcut second priority is new keyboard shortcut
+    const keyboardShortcutRegistered =
+      indexCustomKeyboardShortcut !== -1
+        ? this.customKeyboardShortcuts[indexCustomKeyboardShortcut].keyboardShortcuts
+        : keyboardShortcuts;
+
+    // not found push new item
+    if (indexShortcut === -1) {
       this.shortcuts.push({
         feature,
+        handler,
+        keyboardShortcuts: keyboardShortcutRegistered,
         model,
         scope,
+      });
+    } else {
+      // found update
+      this.shortcuts[indexShortcut] = {
+        ...this.shortcuts[indexShortcut],
         handler,
+        keyboardShortcuts: keyboardShortcutRegistered,
+      };
+    }
+  }
+
+  resgiterShortcutCustom({
+    scope,
+    model,
+    feature,
+    keyboardShortcuts,
+  }: Omit<RegisteredShortcut, 'handler'>) {
+    const indexKeyboardShortcut = this.customKeyboardShortcuts.findIndex(
+      (sc) => sc.scope === scope && sc.feature === feature && sc.model === model
+    );
+    // not found => push new item
+    if (indexKeyboardShortcut === -1) {
+      this.customKeyboardShortcuts.push({
+        scope,
+        feature,
+        model,
         keyboardShortcuts,
       });
-      return;
+    } else {
+      // found => update
+      this.customKeyboardShortcuts[indexKeyboardShortcut] = {
+        scope,
+        feature,
+        model,
+        keyboardShortcuts,
+      };
     }
-
-    this.shortcuts[indexShortcut] = {
-      scope,
-      feature,
-      model,
-      keyboardShortcuts,
-      handler,
-    };
+    // in case shortcut was exist => update
+    const indexShortcut = this.shortcuts.findIndex(
+      (sc) => sc.scope === scope && sc.model === model && sc.feature === feature
+    );
+    if (indexShortcut !== -1) {
+      this.shortcuts[indexShortcut] = {
+        ...this.shortcuts[indexShortcut],
+        keyboardShortcuts,
+      };
+    }
   }
 
   listen() {
+    // remove if old version
+    if (this.listener) {
+      window.removeEventListener('keydown', this.listener);
+    }
     this.listener = (event: KeyboardEvent) => {
       for (const { scope, keyboardShortcuts, handler } of this.shortcuts) {
         keyboardShortcuts.forEach((keyboardShortcut) => {

@@ -120,7 +120,7 @@ function Tiptap(props: TiptapProps) {
                 floating menu
               </FloatingMenu>
             )}
-            <KeyboardShortcutInit editor={editor} />
+            <KeyboardShortcutInit editor={editor} extensionKey={extensionKey} />
           </>
         )}
         <EditorContent
