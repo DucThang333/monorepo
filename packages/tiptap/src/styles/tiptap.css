@@ -1,5 +1,6 @@
 .tiptap {
   min-height: 200px;
+  --tasklist-checkbox: rebeccapurple;
 }
 
 .tiptap:focus {
@@ -68,30 +69,107 @@
   list-style: none;
   margin-left: 0;
   padding: 0;
+}
+.tiptap ul[data-type='taskList'] input[type='checkbox'] {
+  cursor: pointer;
+}
 
-  li {
-    align-items: center;
-    display: flex;
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
-    > label {
-      flex: 0 0 auto;
-      margin-right: 0.5rem;
-      user-select: none;
-    }
+.tiptap ul[data-type='taskList'] li {
+  /* align-items: center; */
+  display: flex;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
 
-    > div {
-      flex: 1 1 auto;
-    }
-  }
+.tiptap ul[data-type='taskList'] li > label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  user-select: none;
+}
 
-  input[type='checkbox'] {
-    cursor: pointer;
-  }
+.tiptap ul[data-type='taskList'] li > div {
+  flex: 1 1 auto;
+}
 
-  ul[data-type='taskList'] {
-    margin: 0;
-  }
+input[type='checkbox'] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin-top: 0.5em;
+  font: inherit;
+  color: currentColor;
+  width: 0.9em;
+  height: 0.9em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.tiptap ul[data-type='taskList'] input[type='checkbox']::before {
+  content: '';
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.1em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--tasklist-checkbox);
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.tiptap ul[data-type='taskList'] input[type='checkbox']:checked::before {
+  transform: scale(1);
+}
+.tiptap ul {
+  padding-inline-start: 20px;
+}
+
+.tiptap ul li {
+  padding-inline-start: 8px;
+}
+
+.tiptap ul li::marker {
+  content: '●'; /* Level 1 */
+}
+
+.tiptap ul ul li::marker {
+  content: '○'; /* Level 2 */
+}
+
+.tiptap ul ul ul li::marker {
+  content: '■'; /* Level 3 */
+}
+
+.tiptap ul ul ul ul li::marker {
+  content: '+'; /* Level 4 */
+}
+
+.tiptap ul ul ul ul ul li::marker {
+  content: '-'; /* Level 4 */
+}
+
+.tiptap ol {
+  counter-reset: item;
+  list-style: none; /* remove default numbers */
+  padding-inline-start: 20px;
+}
+
+/* Each list item increases counter */
+.tiptap ol > li {
+  counter-increment: item;
+}
+
+/* Show parent counter + current number */
+.tiptap ol > li::marker {
+  content: counters(item, '.') '. ';
+  /* "1. ", "1.1. ", "1.1.1. " */
 }
 
 @media (width >= 40rem) {

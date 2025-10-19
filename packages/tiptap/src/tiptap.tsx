@@ -1,20 +1,20 @@
 'use client';
 // src/Tiptap.tsx
 import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/react';
-import { UndoRedo } from '@tiptap/extensions';
+import { UndoRedo } from './extensions/extensions';
 import Heading from './extensions/extension-heading';
-import Document from '@tiptap/extension-document';
+import Document from './extensions/extension-document';
 import Paragraph from './extensions/extension-paragraph';
-import Text from '@tiptap/extension-text';
+import Text from './extensions/extension-text';
 import { cn } from '@package/ui/lib/utils';
 import { HeaderMenu } from './header-menu';
 import { ExtensionKey } from '@package/ui/components/editor/constants/extensionKey';
-import { BulletList, ListItem, OrderedList, TaskItem, TaskList } from '@tiptap/extension-list';
-import { FontFamily, TextStyle, FontSize } from '@tiptap/extension-text-style';
+import { BulletList, ListItem, OrderedList, TaskItem, TaskList } from './extensions/extension-list';
+import { FontFamily, TextStyle, FontSize } from './extensions/extension-text-style';
 import Bold from './extensions/extension-bold';
 import Italic from './extensions/extension-italic';
-import Strike from '@tiptap/extension-strike';
-import Underline from '@tiptap/extension-underline';
+import Strike from './extensions/extension-strike';
+import Underline from './extensions/extension-underline';
 import { EditorProvider } from '@package/ui/components/editor/provider/editorProvider';
 import { KeyboardShortcutInit } from './shortcut';
 
@@ -120,7 +120,10 @@ function Tiptap(props: TiptapProps) {
                 floating menu
               </FloatingMenu>
             )}
-            <KeyboardShortcutInit editor={editor} extensionKey={extensionKey} />
+            <KeyboardShortcutInit
+              editor={editor}
+              extensionKey={extensionKey}
+            />
           </>
         )}
         <EditorContent

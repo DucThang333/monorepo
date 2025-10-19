@@ -1,4 +1,4 @@
-/** @jsxImportSource @tiptap/core */
+/** @jsxImportSource @tiptap/react */
 import { Mark, markInputRule, markPasteRule, mergeAttributes } from '@tiptap/react';
 
 export interface BoldOptions {
