@@ -112,8 +112,8 @@ export const ColorPickerSelection = memo(({ className, ...props }: ColorPickerSe
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [positionX, setPositionX] = useState(0);
-  const [positionY, setPositionY] = useState(0);
-  const { hue, setSaturation, setLightness } = useColorPicker();
+
+  const { hue, saturation, lightness, setSaturation, setLightness } = useColorPicker();
   const backgroundGradient = useMemo(() => {
     return `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
             linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0)),
@@ -127,8 +127,7 @@ export const ColorPickerSelection = memo(({ className, ...props }: ColorPickerSe
       const rect = containerRef.current.getBoundingClientRect();
       const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
       const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
-      setPositionX(x);
-      setPositionY(y);
+      setPositionX(y);
       setSaturation(x * 100);
       const topLightness = x < 0.01 ? 100 : 50 + 50 * (1 - x);
       const lightness = topLightness * (1 - y);
@@ -147,6 +146,12 @@ export const ColorPickerSelection = memo(({ className, ...props }: ColorPickerSe
       window.removeEventListener('pointerup', handlePointerUp);
     };
   }, [isDragging, handlePointerMove]);
+
+  const revertLightness = useMemo(() => {
+    const topLightness = 50 + 50 * (1 - saturation / 100);
+    return 1 - lightness / topLightness;
+  }, [lightness, saturation]);
+
   return (
     <div
       className={cn('relative size-full cursor-crosshair rounded', className)}
@@ -164,8 +169,8 @@ export const ColorPickerSelection = memo(({ className, ...props }: ColorPickerSe
       <div
         className="-translate-x-1/2 -translate-y-1/2 pointer-events-none absolute h-4 w-4 rounded-full border-2 border-white"
         style={{
-          left: `${positionX * 100}%`,
-          top: `${positionY * 100}%`,
+          left: `${saturation}%`,
+          top: `${positionX * 100}%`,
           boxShadow: '0 0 0 1px rgba(0,0,0,0.5)',
         }}
       />
@@ -279,17 +284,32 @@ export const ColorPickerOutput = ({ className, ...props }: ColorPickerOutputProp
   );
 };
 type PercentageInputProps = ComponentProps<typeof Input>;
-const PercentageInput = ({ className, ...props }: PercentageInputProps) => {
+const PercentageInput = ({
+  className,
+  onChange,
+  value,
+  ...props
+}: PercentageInputProps & { onChange?: (value: string) => void }) => {
   return (
     <div className="relative">
       <Input
-        readOnly
         type="text"
+        onChange={(e) => onChange?.(e.target.value)}
         {...props}
         className={cn(
-          'h-8 w-[3.25rem] rounded-l-none bg-secondary px-2 text-xs shadow-none',
+          'h-8 w-[3.25rem] rounded-l-none bg-secondary px-2 text-xs focus-visible:ring-0',
           className
         )}
+        value={value}
+        onKeyDown={(e) => {
+          e.preventDefault();
+          if (e.key === 'ArrowUp') {
+            onChange(String(Number(value) + 1));
+          }
+          if (e.key === 'ArrowDown') {
+            onChange(String(Number(value) - 1));
+          }
+        }}
       />
       <span className="-translate-y-1/2 absolute top-1/2 right-2 text-muted-foreground text-xs">
         %
@@ -299,7 +319,9 @@ const PercentageInput = ({ className, ...props }: PercentageInputProps) => {
 };
 export type ColorPickerFormatProps = HTMLAttributes<HTMLDivElement>;
 export const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
-  const { hue, saturation, lightness, alpha, mode } = useColorPicker();
+  const { hue, saturation, lightness, alpha, mode, setAlpha, setLightness, setSaturation, setHue } =
+    useColorPicker();
+  console.log('🚀 ~ ColorPickerFormat ~ saturation:', saturation);
   const color = Color.hsl(hue, saturation, lightness, alpha / 100);
   if (mode === 'hex') {
     const hex = color.hex();
@@ -312,12 +334,26 @@ export const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProp
         {...props}
       >
         <Input
-          className="h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none"
-          readOnly
+          className="h-8 rounded-r-none border-r border-border bg-secondary px-2 text-xs focus-visible:ring-0"
           type="text"
           value={hex}
+          onChange={(e) => {
+            console.log('🚀 ~ ColorPickerFormat ~ e:', e.target.value);
+            const color = Color(e.target.value);
+            console.log('🚀 ~ ColorPickerFormat ~ color:', color);
+            const [h, s, l] = color.hsl().array();
+            console.log('🚀 ~ ColorPickerFormat ~ h:', h);
+            console.log('🚀 ~ ColorPickerFormat ~ s:', s);
+            console.log('🚀 ~ ColorPickerFormat ~ l:', l);
+            setHue(h);
+            setSaturation(s);
+            setLightness(l);
+          }}
         />
-        <PercentageInput value={alpha} />
+        <PercentageInput
+          onChange={(value) => setAlpha(Number(value))}
+          value={alpha}
+        />
       </div>
     );
   }
@@ -334,7 +370,7 @@ export const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProp
         {rgb.map((value, index) => (
           <Input
             className={cn(
-              'h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none',
+              'h-8 rounded-r-none bg-secondary px-2 text-xs focus-visible:ring-0',
               index && 'rounded-l-none',
               className
             )}
@@ -344,7 +380,10 @@ export const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProp
             value={value}
           />
         ))}
-        <PercentageInput value={alpha} />
+        <PercentageInput
+          value={alpha}
+          onChange={(_value) => setAlpha(Number(_value))}
+        />
       </div>
     );
   }
@@ -381,7 +420,7 @@ export const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProp
         {hsl.map((value, index) => (
           <Input
             className={cn(
-              'h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none',
+              'h-8 rounded-r-none border-border bg-secondary px-2 text-xs focus-visible:ring-0',
               index && 'rounded-l-none',
               className
             )}
@@ -391,7 +430,10 @@ export const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProp
             value={value}
           />
         ))}
-        <PercentageInput value={alpha} />
+        <PercentageInput
+          value={alpha}
+          onChange={(_value) => setAlpha(Number(_value))}
+        />
       </div>
     );
   }

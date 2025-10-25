@@ -5,11 +5,19 @@ import { ExtensionCommonKey } from '../constants/extensionKey';
 import { Separator } from '../../separator';
 import { useState } from 'react';
 import { BanIcon, BrushIcon } from 'lucide-react';
+import { ColorPicker } from '../../color-picker';
 
 type ColorType = {
   color?: string;
   backgroundColor?: string;
-  type: 'text' | 'highlight' | 'picker' | 'none' | 'all';
+  type:
+    | 'text'
+    | 'highlight'
+    | 'picker-text'
+    | 'picker-highlight'
+    | 'none-text'
+    | 'none-highlight'
+    | 'trigger';
 };
 
 const textColor: Pick<ColorType, 'color'>[] = [
@@ -47,19 +55,16 @@ export function ColorPlugin({
 }) {
   const [recentlyUsed, setRecentlyUsed] = useState<ColorType[]>([]);
 
-  const handleColorChange = ({ color, type }: ColorType) => {
-    if (type === 'text' || type === 'all') {
-      setRecentlyUsed([...recentlyUsed.slice(0, 5), { color, type }]);
+  const handleColorChange = ({ color, backgroundColor, type }: ColorType) => {
+    if (type === 'text' || type === 'picker-text' || type === 'none-text') {
       editor.chain().focus().setColor(color).run();
     }
-    editor.chain().focus().setColor(color).run();
-  };
-
-  const handleBackgroundColorChange = ({ backgroundColor, type }: ColorType) => {
-    if (type === 'highlight') {
-      setRecentlyUsed([...recentlyUsed.slice(0, 5), { backgroundColor, type }]);
+    if (type === 'highlight' || type === 'picker-highlight' || type === 'none-highlight') {
+      editor.chain().focus().setBackgroundColor(backgroundColor).run();
     }
-    editor.chain().focus().setBackgroundColor(backgroundColor).run();
+    if (type === 'text' || type === 'highlight') {
+      setRecentlyUsed([{ color, type }, ...recentlyUsed.slice(0, 5)]);
+    }
   };
 
   const { color, backgroundColor } = useEditorState({
@@ -77,7 +82,7 @@ export function ColorPlugin({
         <ColorItem
           color={color}
           backgroundColor={backgroundColor}
-          type="all"
+          type="trigger"
         />
       </PopoverTrigger>
       <PopoverContent
@@ -105,20 +110,20 @@ export function ColorPlugin({
         <div>
           <p className="text-md font-semibold text-gray-200">Text Color</p>
           <div className="flex gap-4 flex-wrap w-full mt-2">
-            {textColor.map((item, index) => (
+            {textColor.map((item) => (
               <ColorItem
-                key={index}
+                key={item.color}
                 color={item.color}
                 type="text"
                 onClick={handleColorChange}
               />
             ))}
             <ColorItem
-              type="picker"
+              type="picker-text"
               onClick={handleColorChange}
             />
             <ColorItem
-              type="none"
+              type="none-text"
               onClick={handleColorChange}
             />
           </div>
@@ -127,21 +132,21 @@ export function ColorPlugin({
         <div>
           <p className="text-md font-semibold text-gray-200">Highlight Color</p>
           <div className="flex gap-4 flex-wrap w-full mt-2">
-            {textHighlight.map((item, index) => (
+            {textHighlight.map((item) => (
               <ColorItem
-                key={index}
+                key={item.backgroundColor}
                 backgroundColor={item.backgroundColor}
                 type="highlight"
-                onClick={handleBackgroundColorChange}
+                onClick={handleColorChange}
               />
             ))}
             <ColorItem
-              type="picker"
-              onClick={handleBackgroundColorChange}
+              type="picker-highlight"
+              onClick={handleColorChange}
             />
             <ColorItem
-              type="none"
-              onClick={handleBackgroundColorChange}
+              type="none-highlight"
+              onClick={handleColorChange}
             />
           </div>
         </div>
@@ -161,33 +166,60 @@ function ColorItem({
   backgroundColor?: ColorType['backgroundColor'];
   type?: ColorType['type'];
 }) {
+  const [open, setOpen] = useState(false);
+
   const renderContent = () => {
     switch (type) {
       case 'text':
         return 'A';
       case 'highlight':
         return '';
-      case 'picker':
-        return <BrushIcon size={14} />;
-      case 'none':
+      case 'none-text':
+      case 'none-highlight':
         return <BanIcon />;
-      case 'all':
+      case 'trigger':
         return 'A';
       default:
         return '';
     }
   };
   return (
-    <div
-      className="w-8 h-8 rounded-sm hover:bg-gray-300/30 flex items-center justify-center cursor-pointer"
-      onClick={() => onClick && onClick({ color, backgroundColor, type })}
-    >
-      <div
-        className="w-7 h-7 flex items-center justify-center rounded-full border-2 font-semibold"
-        style={{ color: color, borderColor: color, backgroundColor: backgroundColor }}
-      >
-        {renderContent()}
-      </div>
-    </div>
+    <>
+      {type === 'picker-text' || type === 'picker-highlight' ? (
+        <ModalColorPicker
+          open={open}
+          onClose={() => setOpen(false)}
+        />
+      ) : (
+        <div
+          className="w-8 h-8 rounded-sm hover:bg-gray-300/30 flex items-center justify-center cursor-pointer"
+          onClick={() => onClick && onClick({ color, backgroundColor, type })}
+        >
+          <div
+            className="w-7 h-7 flex items-center justify-center rounded-full border-2 font-semibold"
+            style={{ color: color, borderColor: color, backgroundColor: backgroundColor }}
+          >
+            {renderContent()}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
+
+const ModalColorPicker = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+  return (
+    <Popover>
+      <PopoverTrigger>
+        <div className="w-8 h-8 rounded-sm hover:bg-gray-300/30 flex items-center justify-center cursor-pointer">
+          <div className="w-7 h-7 flex items-center justify-center rounded-full border-2 font-semibold">
+            <BrushIcon size={14} />
+          </div>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent>
+        <ColorPicker />
+      </PopoverContent>
+    </Popover>
+  );
+};

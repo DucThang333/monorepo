@@ -1,7 +1,10 @@
 'use client';
 // src/Tiptap.tsx
-import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/react';
+import { useEditor, EditorContent } from '@tiptap/react';
 import { UndoRedo } from './extensions/extensions';
+import BubbleMenuCustom from './bubble-menu';
+import FloatingMenuCustom from './floating-menu';
+
 import Heading from './extensions/extension-heading';
 import Document from './extensions/extension-document';
 import Paragraph from './extensions/extension-paragraph';
@@ -9,14 +12,22 @@ import Text from './extensions/extension-text';
 import { cn } from '@package/ui/lib/utils';
 import { HeaderMenu } from './header-menu';
 import { ExtensionKey } from '@package/ui/components/editor/constants/extensionKey';
+import { EditorProvider } from '@package/ui/components/editor/provider/editorProvider';
+import { KeyboardShortcutInit } from './shortcut';
+
 import { BulletList, ListItem, OrderedList, TaskItem, TaskList } from './extensions/extension-list';
-import { FontFamily, TextStyle, FontSize } from './extensions/extension-text-style';
+import {
+  FontFamily,
+  TextStyle,
+  FontSize,
+  Color,
+  BackgroundColor,
+} from './extensions/extension-text-style';
 import Bold from './extensions/extension-bold';
 import Italic from './extensions/extension-italic';
 import Strike from './extensions/extension-strike';
 import Underline from './extensions/extension-underline';
-import { EditorProvider } from '@package/ui/components/editor/provider/editorProvider';
-import { KeyboardShortcutInit } from './shortcut';
+import { Placeholder } from '@tiptap/extensions/placeholder';
 
 type TiptapProps = {
   content?: string;
@@ -27,20 +38,22 @@ type TiptapProps = {
   enableFloatingMenu?: boolean;
   enableHeaderMenu?: boolean;
   tiptapKey: string;
+  placeholder?: string;
 };
 
-function Tiptap(props: TiptapProps) {
-  const {
-    className,
-    extensionKey,
-    classNameEditor,
-    content,
-    enableBubbleMenu,
-    enableFloatingMenu,
-    enableHeaderMenu,
-    tiptapKey,
-  } = props;
+function Tiptap({
+  className,
+  extensionKey,
+  classNameEditor,
+  content,
+  enableBubbleMenu,
+  enableFloatingMenu,
+  enableHeaderMenu,
+  tiptapKey,
+  placeholder,
+}: TiptapProps) {
   if (!tiptapKey) throw new Error('Tiptap editor key is missing. Please check initialization.');
+
   const editorKey = `tiptap-editor-${tiptapKey}`;
   const editor = useEditor({
     extensions: [
@@ -53,6 +66,8 @@ function Tiptap(props: TiptapProps) {
       TextStyle,
       FontFamily,
       FontSize,
+      Color.configure({ types: ['textStyle'] }),
+      BackgroundColor,
       Heading.configure({
         levels: [1, 2, 3, 4, 5, 6],
       }),
@@ -65,7 +80,10 @@ function Tiptap(props: TiptapProps) {
       TaskItem.configure({
         nested: true,
       }),
-    ], // define your extension array
+      Placeholder.configure({
+        placeholder: placeholder || 'Write something ...',
+      }),
+    ],
     content: content, // initial content
     immediatelyRender: false,
     editorProps: {
@@ -92,11 +110,11 @@ function Tiptap(props: TiptapProps) {
 
   return (
     <EditorProvider editorKey={editorKey}>
-      <div className={cn('relative border border-gray-300 rounded-md', className)}>
+      <div className={cn('relative border border-border rounded-md', className)}>
         {editor && (
           <>
             {enableHeaderMenu && (
-              <div className="border-b p-1 border-gray-300">
+              <div className="border-b border-border">
                 <HeaderMenu
                   editor={editor}
                   extensionKey={extensionKey}
@@ -104,22 +122,12 @@ function Tiptap(props: TiptapProps) {
               </div>
             )}
             {enableBubbleMenu && (
-              <BubbleMenu
+              <BubbleMenuCustom
                 editor={editor}
-                options={{ placement: 'bottom' }}
-                className="h-0"
-              >
-                bubble menu
-              </BubbleMenu>
+                extensionKey={extensionKey}
+              />
             )}
-            {enableFloatingMenu && (
-              <FloatingMenu
-                editor={editor}
-                className="h-0"
-              >
-                floating menu
-              </FloatingMenu>
-            )}
+            {enableFloatingMenu && <FloatingMenuCustom editor={editor} />}
             <KeyboardShortcutInit
               editor={editor}
               extensionKey={extensionKey}

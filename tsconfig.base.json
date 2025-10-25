@@ -13,7 +13,8 @@
       "@package/scripts/*": ["packages/scripts/*"],
       "@package/keyboard-shortcut/*": ["packages/shortcut/*"],
       "@package/stores/*": ["packages/stores/*"],
-      "@package/tiptap/*": ["packages/tiptap/src/*"]
+      "@package/tiptap/*": ["packages/tiptap/src/*"],
+      "@package/styles/*": ["packages/styles/*"],
     }
   }
 }

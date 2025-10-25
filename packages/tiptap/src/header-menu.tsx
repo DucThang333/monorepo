@@ -1,4 +1,4 @@
-import { Editor, useEditorState } from '@tiptap/react';
+import { Editor } from '@tiptap/react';
 import { ExtensionKey } from '@package/ui/components/editor/constants/extensionKey';
 import { HistoryPlugin } from '@package/ui/components/editor/plugins/historyPlugin';
 import { CollabsibleFormatTextPlugin } from '@package/ui/components/editor/plugins/collabsibleFormatTextPlugin';
@@ -18,10 +18,9 @@ type HeaderMenuProps = {
 
 export function HeaderMenu(props: HeaderMenuProps) {
   const { extensionKey, editor } = props;
-  console.log('rerender header menu component');
   return (
-    <div className="flex justify-between">
-      <div className="flex gap-2 overflow-auto">
+    <div className="flex justify-between gap-6">
+      <div className="flex flex-wrap gap-2 items-center p-2 rounded-tl-md">
         <HistoryPlugin
           extensionKeys={extensionKey.commons}
           editor={editor}
