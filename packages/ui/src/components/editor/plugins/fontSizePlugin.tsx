@@ -51,7 +51,7 @@ export function FontSizePlugin(props: FontSizePluginProps) {
         <Minus size={16} />
       </EditorButtton>
       <Input
-        className="h-8 w-20 text-center focus-visible:border-gray-200 focus-visible:ring-0"
+        className="h-8 w-20 text-center focus-visible:border-gray-200 focus-visible:ring-0 rounded-sm"
         value={fontSize ? fontSize + ' em' : '...'}
         readOnly
         type="text"

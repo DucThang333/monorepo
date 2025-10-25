@@ -1,2 +1,1 @@
-@import '@package/tailwind/style';
-@source "../**/*";
+@import '@package/styles/globals';

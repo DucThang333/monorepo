@@ -11,7 +11,6 @@ type BoldPluginProps = {
 export function BoldPlugin(props: BoldPluginProps) {
   const { extensionKeys, editor } = props;
   if (!editor || !extensionKeys.includes(ExtensionTextStyleKey.BOLD)) return;
-  console.log('loading button component');
 
   const { isBold } = useEditorState({
     editor,

@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from '@package/ui/components/button';
 import { Meta, StoryObj } from '@storybook/react-webpack5';
-import { GitBranch } from 'lucide-react';
+import { GitBranch, Settings2Icon, SettingsIcon } from 'lucide-react';
 
 const meta = {
   title: 'Component/Button',
@@ -70,5 +70,12 @@ export const WithIconButton: Story = {
         <GitBranch /> New Branch
       </div>
     ),
+  },
+};
+
+export const WithIconAndLoadingButton: Story = {
+  args: {
+    children: <SettingsIcon/>,
+    variant: 'outline',
   },
 };

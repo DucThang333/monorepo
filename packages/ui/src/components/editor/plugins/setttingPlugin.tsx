@@ -15,14 +15,16 @@ type SettingPluginProps = {};
 export function SettingPlugin({}: SettingPluginProps) {
   return (
     <Popover>
-      <PopoverTrigger>
-        <EllipsisVertical size={19} />
+      <PopoverTrigger className="p-2 h-fit ">
+          <div className='hover:text-highlight cursor-pointer w-8 h-8 flex items-center justify-center'>
+            <EllipsisVertical size={19} />
+          </div>
       </PopoverTrigger>
       <PopoverContent
         className="p-0 w-auto min-w-40"
         align="end"
       >
-        <Command>
+        <Command className="bg-transparent">
           <CommandList>
             <CommandGroup heading="Global">
               <CommandSeparator />
@@ -32,10 +34,6 @@ export function SettingPlugin({}: SettingPluginProps) {
               <CommandItem>
                 <HeadingSetting />
               </CommandItem>
-            </CommandGroup>
-            <CommandGroup heading="user">
-              <CommandSeparator />
-              <CommandItem></CommandItem>
             </CommandGroup>
           </CommandList>
         </Command>

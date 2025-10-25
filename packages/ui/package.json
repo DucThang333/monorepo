@@ -9,11 +9,10 @@
     "./components/*": "./components/*.tsx",
     "./lib/*": "./lib/*",
     "./hook/*": "./hooks/*",
-    "./style": "./src/styles/globals.css"
+    "./source": "./src/styles/source.css",
+    "./icons/*": "./icons/*.ts"
   },
   "dependencies": {
-    "@package/tiptap":"workspace:*",
-    "@package/keyboard-shortcut":"workspace:*",
     "@excalidraw/excalidraw": "^0.18.0",
     "@lexical/code": "^0.34.0",
     "@lexical/link": "^0.34.0",
@@ -24,7 +23,9 @@
     "@lexical/selection": "^0.34.0",
     "@lexical/table": "^0.34.0",
     "@lexical/utils": "^0.34.0",
+    "@package/keyboard-shortcut": "workspace:*",
     "@package/tailwind": "workspace:*",
+    "@package/tiptap": "workspace:*",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-aspect-ratio": "^1.1.7",
@@ -56,6 +57,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "color": "^5.0.2",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
@@ -72,6 +74,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@package/styles": "workspace:*",
     "@storybook/addon-styling-webpack": "^2.0.0",
     "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
     "@storybook/react-webpack5": "^9.1.1",
