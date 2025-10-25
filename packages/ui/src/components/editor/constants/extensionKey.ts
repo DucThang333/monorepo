@@ -37,6 +37,7 @@ export enum ExtensionCommonKey{
     CHECK_LIST="check-list",
     HISTORY="history",
     FONT_SIZE="font-size",
+    COLOR="color"
 }
 
 

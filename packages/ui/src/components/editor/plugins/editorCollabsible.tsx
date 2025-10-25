@@ -31,7 +31,7 @@ function EditorCollabsible(props: EditorCollabsibleProps) {
       >
         {selectValueNode ? selectValueNode : <SelectValue />}
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent position='popper' portal={false}>
         <SelectGroup>
           {items.map((item) => {
             return (
