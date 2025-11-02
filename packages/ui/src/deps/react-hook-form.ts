@@ -1,1 +1,3 @@
-export * from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+
+export { useForm };

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { cn } from '@package/ui/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-
 const inputVariants = cva(
   'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
   {
@@ -33,17 +32,37 @@ const inputVariants = cva(
   }
 );
 
-function Input({ className, type, variant, input_size, ...props }:
-  React.InputHTMLAttributes<HTMLInputElement> & VariantProps<typeof inputVariants>) {
+function Input({
+  className,
+  type,
+  variant,
+  input_size,
+  prefix,
+  suffix,
+  placeholder,
+  ...props
+}: React.InputHTMLAttributes<HTMLDivElement> &
+  React.InputHTMLAttributes<HTMLInputElement> &
+  VariantProps<typeof inputVariants> & {
+    prefix?: string | React.ReactNode;
+    suffix?: string | React.ReactNode;
+  }) {
   return (
-    <input
-      type={type}
-      data-slot="input"
+    <div
       className={cn(
-        inputVariants({ variant,input_size,className }),
+        'flex items-center gap-2 rounded-md border px-3',
+        inputVariants({ variant, input_size })
       )}
       {...props}
-    />
+    >
+      {prefix && <span className="text-gray-500">{prefix}</span>}
+      <input
+        type={type}
+        className={cn('flex-1 bg-transparent outline-none', className)}
+        placeholder={placeholder}
+      />
+      {suffix && <span className="text-gray-500">{suffix}</span>}
+    </div>
   );
 }
 

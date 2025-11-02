@@ -39,8 +39,8 @@ import {
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ReactNode, useState } from 'react';
-import ModalLogin from '@left-note/components/login/modalLogin';
+import { ReactNode } from 'react';
+import { useAuthModal } from '@left-note/providers/login-provider';
 import { getAuthState } from '@left-note/actions/auth';
 import { getNoteSettingState } from '@left-note/actions/note';
 
@@ -75,9 +75,13 @@ function Sidebar() {
   const { isMobile, setOpen, open } = useSidebar();
   const { setTheme, theme, themes } = useTheme();
   const path = usePathname();
-  const { isFullScreen } = getNoteSettingState();
   const { isLogin, user } = getAuthState();
-  const [openModalLogin, setOpenModalLogin] = useState(true);
+  const { isFullScreen } = getNoteSettingState();
+  console.log('user', user);
+  console.log('isLogin', isLogin);
+
+  const { setOpenModalLogin } = useAuthModal();
+
   return isFullScreen ? null : (
     <>
       <SidebarComp
@@ -148,7 +152,7 @@ function Sidebar() {
                         alt={user?.name}
                       />
                       <AvatarFallback className="rounded-lg">
-                        {user?.name.substring(0, 1) || 'N'}
+                        {user?.name?.substring(0, 1) || 'N'}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
@@ -171,7 +175,7 @@ function Sidebar() {
                           alt={user?.name}
                         />
                         <AvatarFallback className="rounded-lg">
-                          {user?.name.substring(0, 1) || 'N'}
+                          {user?.name?.substring(0, 1) || 'N'}
                         </AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">
@@ -232,10 +236,6 @@ function Sidebar() {
           </SidebarMenu>
         </SidebarFooter>
       </SidebarComp>
-      <ModalLogin
-        open={openModalLogin}
-        onClose={() => setOpenModalLogin(false)}
-      />
     </>
   );
 }

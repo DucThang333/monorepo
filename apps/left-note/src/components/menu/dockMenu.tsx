@@ -13,8 +13,8 @@ import {
 } from '@package/ui/icons/lucide-react';
 import { useMemo, useState } from 'react';
 
-import type { NoteSettingState } from '@left-note/providers/note';
-import { NoteSettingActionType } from '@left-note/providers/note';
+import type { NoteSettingState } from '@left-note/reducers/note';
+import { NoteSettingActionType } from '@left-note/reducers/note';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@left-note/deps/store';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@package/ui/components/shadcn/tooltip';

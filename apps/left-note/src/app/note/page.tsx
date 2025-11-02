@@ -9,13 +9,11 @@ import { Tiptap } from '@package/tiptap/tiptap';
 
 import { fullExtension } from '@left-note/constants/tiptapKey';
 import DockMenu from '@left-note/components/menu/dockMenu';
-import { makeStore } from '@left-note/deps/store';
-import { useSelector } from 'react-redux';
-import { RootState } from '@left-note/deps/store';
+import { withAuth } from '@left-note/hoocs/auth';
+import { getNoteSettingState } from '@left-note/actions/note';
 
-export default function NotePage() {
-  const store = makeStore();
-  const { isUpdate, isLocked } = useSelector((state: RootState) => state.noteSetting);
+const NotePage = () => {
+  const { isUpdate, isLocked } = getNoteSettingState();
 
   return (
     <div className="flex h-full w-full relative">
@@ -48,4 +46,6 @@ export default function NotePage() {
       />
     </div>
   );
-}
+};
+
+export default withAuth(NotePage);

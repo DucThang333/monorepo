@@ -16,9 +16,7 @@ import {
 import { cn } from '@package/ui/lib/utils';
 import { Label } from '@package/ui/components/shadcn/label';
 
-const Form = ({ ...props }: React.ComponentProps<typeof FormProvider>) => {
-  return <FormProvider {...props} />;
-};
+const Form = FormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -134,13 +132,6 @@ function FormLabel({ className, ...props }: React.ComponentProps<typeof LabelPri
 function FormControl({ className, ...props }: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId, contentCols, align } =
     useFormField();
-
-  const contentAlign = React.useMemo(() => {
-    if (align === 'between' || align === 'end') {
-      return 'end';
-    }
-    return 'start';
-  }, [align]);
 
   return (
     <Slot

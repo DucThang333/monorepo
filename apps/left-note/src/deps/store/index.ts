@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { noteSetting } from '@left-note/providers/note';
+import { noteSetting } from '@left-note/reducers/note';
 import { combineReducers } from 'redux';
-import { auth } from '@left-note/providers/auth';
+import { auth } from '@left-note/reducers/auth';
 
 export const makeStore = (preloadedState?: any) =>
   configureStore({

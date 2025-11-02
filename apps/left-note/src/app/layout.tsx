@@ -10,7 +10,10 @@ import { SidebarProvider } from '@package/ui/components/sidebar';
 import { Sidebar } from '@left-note/components/sidebar';
 import { Providers as ThemeProvider } from '@left-note/providers/theme-provider';
 import { ReduxProvider } from '@left-note/deps/store/providers';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { AuthProvider } from '@left-note/providers/login-provider';
+import { ToasterIOS } from '@package/ui/components/sonner';
+
+const QueryProvider = dynamic(() => import('@left-note/providers/query-provider'));
 const KeyboardShortcut = dynamic(() => import('@left-note/components/keyboardShortcut'));
 
 export default function RootLayout({
@@ -18,27 +21,31 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
-
   return (
     <html
       lang="en"
       suppressHydrationWarning
     >
       <body>
-        <QueryClientProvider client={queryClient}>
-          <ReduxProvider>
+        <ReduxProvider>
+          <QueryProvider>
             <ThemeProvider>
-              <SidebarProvider>
-                <div className="flex w-full">
-                  <KeyboardShortcut />
-                  <Sidebar />
-                  {children}
-                </div>
-              </SidebarProvider>
+              <AuthProvider>
+                <SidebarProvider>
+                  <div className="flex w-full">
+                    <KeyboardShortcut />
+                    <Sidebar />
+                    {children}
+                    <ToasterIOS
+                      position="top-right"
+                      richColors={true}
+                    />
+                  </div>
+                </SidebarProvider>
+              </AuthProvider>
             </ThemeProvider>
-          </ReduxProvider>
-        </QueryClientProvider>
+          </QueryProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
