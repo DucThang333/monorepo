@@ -4,30 +4,48 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '@package/ui/components/resizable';
+import { Input } from '@package/ui/components/input';
 import { Tiptap } from '@package/tiptap/tiptap';
+
 import { fullExtension } from '@left-note/constants/tiptapKey';
-import { Profiler } from 'react';
-export default function NotePage() {
+import DockMenu from '@left-note/components/menu/dockMenu';
+import { withAuth } from '@left-note/hoocs/auth';
+import { getNoteSettingState } from '@left-note/actions/note';
+
+const NotePage = () => {
+  const { isUpdate, isLocked } = getNoteSettingState();
+
   return (
-    <ResizablePanelGroup direction="horizontal">
-      <ResizablePanel className="min-w-40">Left Side</ResizablePanel>
-      <ResizableHandle />
-      <ResizablePanel className="min-w-1/2">
-        <div className=".menu" />
-        <Profiler
-          id="Tiptap"
-          onRender={() => {}}
-        >
+    <div className="flex h-full w-full relative">
+      <ResizablePanelGroup direction="horizontal">
+        <ResizablePanel className="min-w-0"></ResizablePanel>
+        <ResizableHandle disabled={isLocked} />
+        <ResizablePanel className="min-w-1/2">
+          <Input
+            variant="underline"
+            placeholder="Enter your note title"
+            input_size="lg"
+            className="my-5 rounded-none"
+            disabled={!isUpdate}
+          />
           <Tiptap
             extensionKey={fullExtension}
-            enableHeaderMenu
             tiptapKey="note-page"
-            className="mt-16"
+            className="rounded-none border-none"
+            enableBubbleMenu={isUpdate}
+            enableHeaderMenu={isUpdate}
           />
-        </Profiler>
-      </ResizablePanel>
-      <ResizableHandle />
-      <ResizablePanel className="min-w-40">Right Side</ResizablePanel>
-    </ResizablePanelGroup>
+        </ResizablePanel>
+        <ResizableHandle disabled={isLocked} />
+        <ResizablePanel className="min-w-0"></ResizablePanel>
+      </ResizablePanelGroup>
+      <DockMenu
+        positions={['right', 'top', 'bottom']}
+        hidden={false}
+        direction="vertical"
+      />
+    </div>
   );
-}
+};
+
+export default withAuth(NotePage);

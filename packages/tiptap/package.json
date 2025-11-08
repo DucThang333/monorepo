@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    ".":"./src/index.ts",
+    ".": "./src/index.ts",
     "./tiptap": "./src/tiptap.tsx",
     "./bubble-menu": "./src/bubble-menu.tsx",
     "./floating-menu": "./src/floating-menu.tsx",
     "./header-menu": "./src/header-menu.tsx",
-    "./style": "./src/styles/tiptap.css"
+    "./style": "./src/styles/tiptap.css",
+    "./source": "./src/styles/source.css"
   },
   "scripts": {
     "build:tailwind": "npx @tailwindcss/cli -i ./src/styles/tiptap.css -o ./src/styles/tiptap-output.css",
@@ -16,9 +17,9 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.3",
-    "@package/ui": "workspace:*",
     "@package/keyboard-shortcut": "workspace:*",
     "@package/lodash": "workspace:*",
+    "@package/ui": "workspace:*",
     "@tiptap/extensions": "^3.2.0",
     "@tiptap/pm": "^3.0.0",
     "@tiptap/react": "^3.0.0"

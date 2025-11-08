@@ -8,7 +8,12 @@ export const metadata: Metadata = {
 import '@left-note/styles/globals.css';
 import { SidebarProvider } from '@package/ui/components/sidebar';
 import { Sidebar } from '@left-note/components/sidebar';
-import { Providers } from '@left-note/providers/theme-provider';
+import { Providers as ThemeProvider } from '@left-note/providers/theme-provider';
+import { ReduxProvider } from '@left-note/deps/store/providers';
+import { AuthProvider } from '@left-note/providers/auth-provider';
+import { ToasterIOS } from '@package/ui/components/sonner';
+
+const QueryProvider = dynamic(() => import('@left-note/providers/query-provider'));
 const KeyboardShortcut = dynamic(() => import('@left-note/components/keyboardShortcut'));
 
 export default function RootLayout({
@@ -22,15 +27,25 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <Providers>
-          <SidebarProvider>
-            <div className="flex w-full">
-              <KeyboardShortcut />
-              <Sidebar />
-              {children}
-            </div>
-          </SidebarProvider>
-        </Providers>
+        <ReduxProvider>
+          <QueryProvider>
+            <ThemeProvider>
+              <AuthProvider>
+                <SidebarProvider>
+                  <div className="flex w-full">
+                    <KeyboardShortcut />
+                    <Sidebar />
+                    {children}
+                    <ToasterIOS
+                      position="top-right"
+                      richColors={true}
+                    />
+                  </div>
+                </SidebarProvider>
+              </AuthProvider>
+            </ThemeProvider>
+          </QueryProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -1,0 +1,9 @@
+{
+    "name": "@package/styles",
+    "version": "0.0.0",
+    "private": true,
+    "exports": {
+        "./globals": "./globals.css",
+        "./theme": "./theme.css"
+    }
+}

@@ -172,6 +172,40 @@ input[type='checkbox'] {
   /* "1. ", "1.1. ", "1.1.1. " */
 }
 
+.tiptap p.is-empty::before {
+  color: var(--placeholder);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Bubble menu */
+.bubble-menu {
+  background-color: var(--white);
+  border: 1px solid var(--gray-1);
+  border-radius: 0.7rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  padding: 0.2rem;
+}
+
+.bubble-menu button {
+  background-color: unset;
+}
+
+.bubble-menu button:hover {
+  background-color: var(--gray-3);
+}
+
+.bubble-menu button.is-active {
+  background-color: var(--purple);
+}
+
+.bubble-menu button.is-active:hover {
+  background-color: var(--purple-contrast);
+}
+
 @media (width >= 40rem) {
   .tiptap {
     font-size: var(--font-size-tiptap-sm);
