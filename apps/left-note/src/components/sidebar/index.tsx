@@ -40,9 +40,10 @@ import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-import { useAuthModal } from '@left-note/providers/login-provider';
-import { getAuthState } from '@left-note/actions/auth';
+import { useAuthModal } from '@left-note/providers/auth-provider';
+import { getAuthState, logout } from '@left-note/actions/auth';
 import { getNoteSettingState } from '@left-note/actions/note';
+import { toast } from '@package/ui/components/sonner';
 
 type MenuItemsType = {
   label?: string;
@@ -77,8 +78,6 @@ function Sidebar() {
   const path = usePathname();
   const { isLogin, user } = getAuthState();
   const { isFullScreen } = getNoteSettingState();
-  console.log('user', user);
-  console.log('isLogin', isLogin);
 
   const { setOpenModalLogin } = useAuthModal();
 
@@ -222,7 +221,13 @@ function Sidebar() {
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   {isLogin ? (
-                    <DropdownMenuItem>
+                    <DropdownMenuItem
+                      onSelect={(e) =>
+                        logout().then(() => {
+                          toast.success('Logout successfully');
+                        })
+                      }
+                    >
                       <LogOut /> Log out
                     </DropdownMenuItem>
                   ) : (

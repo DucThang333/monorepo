@@ -1,4 +1,4 @@
-import { useAuthModal } from '@left-note/providers/login-provider';
+import { useAuthModal } from '@left-note/providers/auth-provider';
 import { Button } from '@package/ui/components/button';
 import { goBack } from '@left-note/utils/history';
 import { useRouter } from 'next/navigation';

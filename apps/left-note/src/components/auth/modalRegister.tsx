@@ -23,7 +23,7 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from '@package/ui/components/sonner';
 import { register, RegisterPayload } from '@left-note/actions/auth';
 import { useForm } from '@package/ui/deps/react-hook-form';
-import { useAuthModal } from '@left-note/providers/login-provider';
+import { useAuthModal } from '@left-note/providers/auth-provider';
 import { useState } from 'react';
 import { EyeIcon, EyeOffIcon } from '@package/ui/icons/lucide-react';
 

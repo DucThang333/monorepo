@@ -1,11 +1,17 @@
 import ENV from '@left-note/config/env';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Response } from '@left-note/models/response';
-
+import { getLocalStore} from '@left-note/localstore';
+import { LOCALSTORE_KEY } from '@left-note/constants/localstore';
 
 const instance = axios.create({
   baseURL: ENV.API_URL,
   timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${getLocalStore(LOCALSTORE_KEY.TOKEN)}`,
+  },
 });
 
 // Add a request interceptor

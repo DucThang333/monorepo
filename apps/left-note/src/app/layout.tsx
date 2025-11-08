@@ -10,7 +10,7 @@ import { SidebarProvider } from '@package/ui/components/sidebar';
 import { Sidebar } from '@left-note/components/sidebar';
 import { Providers as ThemeProvider } from '@left-note/providers/theme-provider';
 import { ReduxProvider } from '@left-note/deps/store/providers';
-import { AuthProvider } from '@left-note/providers/login-provider';
+import { AuthProvider } from '@left-note/providers/auth-provider';
 import { ToasterIOS } from '@package/ui/components/sonner';
 
 const QueryProvider = dynamic(() => import('@left-note/providers/query-provider'));

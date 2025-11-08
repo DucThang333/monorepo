@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@left-note/deps/store";
 import http from "@left-note/deps/axios";
 import { User } from "@left-note/models/users";
+import { removeLocalStore } from "@left-note/localstore";
+import { LOCALSTORE_KEY } from "@left-note/constants/localstore";
 
 export const getAuthState = () => {
   const auth = useSelector((state: RootState) => state.auth);
@@ -25,7 +27,14 @@ export const login = (payload: LoginPayload) => {
 }
 
 export const logout = () => {
-  return http.post<User>('/v1/auth/logout');
+  return http.post<string>('/v1/auth/logout').then((res) => {
+    if(res.success) {
+      // remove token from local storage
+      removeLocalStore(LOCALSTORE_KEY.TOKEN);
+      return res;
+    }
+    return res;
+  });
 }
 
 export type RegisterPayload = {

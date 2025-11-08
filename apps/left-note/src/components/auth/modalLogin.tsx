@@ -23,11 +23,13 @@ import { login } from '@left-note/actions/auth';
 import { z } from '@package/ui/deps/zod';
 import { zodResolver } from '@package/ui/deps/resolvers/zod';
 import { toast } from '@package/ui/components/sonner';
-import { useAuthModal } from '@left-note/providers/login-provider';
+import { useAuthModal } from '@left-note/providers/auth-provider';
 import { useState } from 'react';
 import { EyeIcon, EyeOffIcon } from '@package/ui/icons/lucide-react';
 import { useDispatch } from 'react-redux';
 import { AuthActionType } from '@left-note/reducers/auth';
+import { setLocalStore } from '@left-note/localstore';
+import { LOCALSTORE_KEY } from '@left-note/constants/localstore';
 
 const loginSchema = z.object({
   username: z.string(),
@@ -60,6 +62,7 @@ export default function ModalLogin({ open, onClose }: { open: boolean; onClose: 
           user: data.data.user,
         },
       });
+      setLocalStore(LOCALSTORE_KEY.TOKEN, data.data.token);
       toast.success('Login successfully');
       onClose();
     },
@@ -159,8 +162,8 @@ export default function ModalLogin({ open, onClose }: { open: boolean; onClose: 
               </Button>
             </DialogFooter>
           </form>
-        </Form>
-      </DialogContent>
+        </Form>{' '}
+      </DialogContent>{' '}
     </Dialog>
   );
 }
