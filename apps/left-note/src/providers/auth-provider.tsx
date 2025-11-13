@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { toast } from '@package/ui/components/sonner';
 import { AuthActionType } from '@left-note/reducers/auth';
 import { LOCALSTORE_KEY } from '@left-note/constants/localstore';
+import { StateEnum } from '@left-note/types/state';
 
 export const AuthContext = createContext<AuthContextType>({
   setOpenModalLogin: () => {},
@@ -25,39 +26,41 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
 
-  const token = getLocalStore(LOCALSTORE_KEY.TOKEN);
-
   const dispatch = useDispatch();
 
-  dispatch({
-    type: AuthActionType.SET_LOADING,
-    payload: {
-      isLoading: true,
-    },
-  });
   useQuery({
-    queryKey: ['user'],
-    queryFn: () =>
-      getMe()
+    queryKey: ['authentication'],
+    queryFn: () => {
+      dispatch({
+        type: AuthActionType.SET_AUTH,
+        payload: {
+          state: StateEnum.LOADING,
+        },
+      });
+      return getMe()
         .then((res) => {
           dispatch({
             type: AuthActionType.SET_AUTH,
             payload: {
               isLogin: true,
+              state: StateEnum.SUCCESS,
               user: res.data.user,
             },
           });
           toast.success('Login successfully');
+          return res.data.user;
         })
-        .finally(() => {
+        .catch((err) => {
           dispatch({
-            type: AuthActionType.SET_LOADING,
+            type: AuthActionType.SET_AUTH,
             payload: {
-              isLoading: false,
+              state: StateEnum.ERROR,
             },
           });
-        }),
-    enabled: !!token,
+          return null;
+        });
+    },
+    enabled: !!getLocalStore(LOCALSTORE_KEY.TOKEN),
   });
 
   return (

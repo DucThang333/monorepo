@@ -32,34 +32,33 @@ const inputVariants = cva(
   }
 );
 
+interface InputProps {
+  prefix?: string | React.ReactNode;
+  suffix?: string | React.ReactNode;
+  inputClassName?: string;
+}
+
 function Input({
   className,
-  type,
   variant,
   input_size,
-  prefix,
   suffix,
-  placeholder,
+  prefix,
+  inputClassName,
   ...props
-}: React.InputHTMLAttributes<HTMLDivElement> &
-  React.InputHTMLAttributes<HTMLInputElement> &
-  VariantProps<typeof inputVariants> & {
-    prefix?: string | React.ReactNode;
-    suffix?: string | React.ReactNode;
-  }) {
+}: React.InputHTMLAttributes<HTMLInputElement> & VariantProps<typeof inputVariants> & InputProps) {
   return (
     <div
       className={cn(
         'flex items-center gap-2 rounded-md border px-3',
-        inputVariants({ variant, input_size })
+        inputVariants({ variant, input_size }),
+        className
       )}
-      {...props}
     >
       {prefix && <span className="text-gray-500">{prefix}</span>}
       <input
-        type={type}
-        className={cn('flex-1 bg-transparent outline-none', className)}
-        placeholder={placeholder}
+        className={cn('flex-1 bg-transparent outline-none', inputClassName)}
+        {...props}
       />
       {suffix && <span className="text-gray-500">{suffix}</span>}
     </div>

@@ -1,16 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@left-note/deps/store";
 import http from "@left-note/deps/axios";
 import { User } from "@left-note/models/users";
-import { removeLocalStore } from "@left-note/localstore";
+import { setLocalStore, removeLocalStore, setLocalStoreLongLive, removeLocalStoreLongLive, getLocalStoreLongLive } from "@left-note/localstore";
 import { LOCALSTORE_KEY } from "@left-note/constants/localstore";
+import { AuthActionType } from "@left-note/reducers/auth";
+import { StateEnum } from "@left-note/types/state";
 
 export const getAuthState = () => {
   const auth = useSelector((state: RootState) => state.auth);
   return auth
 }
-
-
 
 type LoginPayload = {
   email: string;
@@ -20,20 +20,32 @@ type LoginPayload = {
 type LoginResponse = {
   user: User;
   token: string;
+  refresh_token: string;
 }
 
 export const login = (payload: LoginPayload) => {
-  return http.post<LoginResponse>('/v1/auth/login', payload);
+  return http.post<LoginResponse>('/v1/auth/login', payload)
 }
 
-export const logout = () => {
-  return http.post<string>('/v1/auth/logout').then((res) => {
-    if(res.success) {
-      // remove token from local storage
-      removeLocalStore(LOCALSTORE_KEY.TOKEN);
-      return res;
-    }
+export const logout = (dispatch: ReturnType<typeof useDispatch>) => {
+  return http.post<string>('/v1/auth/logout', {
+    refresh_token: getLocalStoreLongLive(LOCALSTORE_KEY.REFRESH_TOKEN),
+  }).then((res) => {
+    // update store
+    dispatch({
+      type: AuthActionType.RESET_AUTH,
+    });
+
     return res;
+  }).catch((err) => {
+    dispatch({
+      type: AuthActionType.SET_AUTH,
+      payload: {
+        isLogin: false,
+        state: StateEnum.ERROR,
+      },
+    });
+    throw Error(err);
   });
 }
 

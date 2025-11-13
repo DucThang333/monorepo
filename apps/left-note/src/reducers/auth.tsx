@@ -1,23 +1,25 @@
 import { User } from '@left-note/models/users';
+import { StateEnum } from '@left-note/types/state';
+import { removeLocalStore, removeLocalStoreLongLive } from '@left-note/localstore';
+import { LOCALSTORE_KEY } from '@left-note/constants/localstore';
 
 const key = 'AUTH';
 
 enum AuthActionType {
   SET_AUTH = key + '/SET_AUTH',
   RESET_AUTH = key + '/RESET_AUTH',
-  SET_LOADING = key + '/SET_LOADING',
 }
 
 type AuthState = {
   isLogin: boolean;
   user: User | null;
-  isLoading: boolean;
+  state: StateEnum;
 };
 
 const initialState: AuthState = {
   isLogin: false,
   user: null,
-  isLoading: false,
+  state: StateEnum.IDLE,
 };
 
 function auth(state = initialState, action: { type: AuthActionType; payload: Partial<AuthState> }) {
@@ -29,13 +31,13 @@ function auth(state = initialState, action: { type: AuthActionType; payload: Par
       };
 
     case AuthActionType.RESET_AUTH:
-      return initialState;
+      // remove token from local storage
+      removeLocalStore(LOCALSTORE_KEY.TOKEN);
+      // remove refresh token from local storage long live
+      removeLocalStoreLongLive(LOCALSTORE_KEY.REFRESH_TOKEN);
+      // remove user from local storage
 
-    case AuthActionType.SET_LOADING:
-      return {
-        ...state,
-        isLoading: action.payload.isLoading,
-      };
+      return initialState;
 
     default:
       return state;

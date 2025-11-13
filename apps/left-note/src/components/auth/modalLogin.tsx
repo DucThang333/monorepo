@@ -26,9 +26,7 @@ import { toast } from '@package/ui/components/sonner';
 import { useAuthModal } from '@left-note/providers/auth-provider';
 import { useState } from 'react';
 import { EyeIcon, EyeOffIcon } from '@package/ui/icons/lucide-react';
-import { useDispatch } from 'react-redux';
-import { AuthActionType } from '@left-note/reducers/auth';
-import { setLocalStore } from '@left-note/localstore';
+import { setLocalStore, setLocalStoreLongLive } from '@left-note/localstore';
 import { LOCALSTORE_KEY } from '@left-note/constants/localstore';
 
 const loginSchema = z.object({
@@ -46,24 +44,19 @@ export default function ModalLogin({ open, onClose }: { open: boolean; onClose: 
   const [viewPassword, setViewPassword] = useState(false);
 
   const { setOpenModalRegister } = useAuthModal();
-  const dispatch = useDispatch();
 
   const form = useForm({
     resolver: zodResolver(loginSchema),
   });
 
   const mutateLogin = useMutation({
-    mutationFn: (data: { email: string; password: string }) => login(data),
-    onSuccess: (data) => {
-      dispatch({
-        type: AuthActionType.SET_AUTH,
-        payload: {
-          isLogin: true,
-          user: data.data.user,
-        },
-      });
-      setLocalStore(LOCALSTORE_KEY.TOKEN, data.data.token);
+    mutationFn: (params: { email: string; password: string }) => login(params),
+    onSuccess: (res) => {
+      setLocalStore(LOCALSTORE_KEY.TOKEN, res.data.token);
+      setLocalStoreLongLive(LOCALSTORE_KEY.REFRESH_TOKEN, res.data.refresh_token);
+
       toast.success('Login successfully');
+
       onClose();
     },
     onError: (error: any) => {
