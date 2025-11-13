@@ -22,64 +22,54 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@package/ui/components/sidebar';
-import {
-  Bell,
-  LaptopMinimal,
-  LayoutDashboardIcon,
-  LogOut,
-  LogInIcon,
-  Moon,
-  PanelLeftOpen,
-  PanelRightOpen,
-  PencilLine,
-  Settings,
-  Sun,
-  User,
-} from 'lucide-react';
+import { Bell, LaptopMinimal, LogOut, LogInIcon, Moon, PanelLeftOpen, PanelRightOpen, Settings, Sun, User } from '@package/ui/icons/lucide-react';
 import { useTheme } from 'next-themes';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ReactNode } from 'react';
+import { useContext, useEffect } from 'react';
 import { useAuthModal } from '@left-note/providers/auth-provider';
 import { getAuthState, logout } from '@left-note/actions/auth';
 import { getNoteSettingState } from '@left-note/actions/note';
 import { toast } from '@package/ui/components/sonner';
-
-type MenuItemsType = {
-  label?: string;
-  icon?: ReactNode;
-  url?: string;
-  childrent?: MenuItemsType;
-};
-
-type MenuType = {
-  main: MenuItemsType[];
-  footer: MenuItemsType[];
-};
-
-const menuItems: MenuType = {
-  main: [
-    {
-      label: 'Dashboard',
-      icon: <LayoutDashboardIcon />,
-    },
-    {
-      label: 'Note',
-      icon: <PencilLine />,
-      url: 'note',
-    },
-  ],
-  footer: [],
-};
+import { useDispatch } from 'react-redux';
+import { useMutation } from '@tanstack/react-query';
+import { getNotebooks } from '@left-note/actions/notebook';
+import { MenuContextProvider } from './menu';
+import { MenuContext } from './menu';
+import { MenuItem, MenuNoteItem } from './menuItem';
 
 function Sidebar() {
+  return (
+    <MenuContextProvider>
+      <SidebarInit />
+    </MenuContextProvider>
+  );
+}
+
+export enum NoteType {
+  NOTE = 'note',
+  NOTEBOOK = 'notebook',
+}
+
+function SidebarInit() {
   const { isMobile, setOpen, open } = useSidebar();
   const { setTheme, theme, themes } = useTheme();
   const path = usePathname();
   const { isLogin, user } = getAuthState();
   const { isFullScreen } = getNoteSettingState();
-
+  const dispatch = useDispatch();
+  const { menuItems } = useContext(MenuContext);
   const { setOpenModalLogin } = useAuthModal();
+  const mutateLogout = useMutation({
+    mutationFn: () =>
+      logout(dispatch).then(() => {
+        toast.success('Logout successfully');
+      }),
+  });
+
+  // Init component
+  useEffect(() => {
+    getNotebooks(dispatch);
+  }, []);
 
   return isFullScreen ? null : (
     <>
@@ -98,12 +88,12 @@ function Sidebar() {
                   {open ? (
                     <PanelRightOpen
                       onClick={() => setOpen(false)}
-                      className="cursor-pointer"
+                      className="cursor-pointer mr-0.5"
                     />
                   ) : (
                     <PanelLeftOpen
                       onClick={() => setOpen(true)}
-                      className="cursor-pointer"
+                      className="cursor-pointer mr-0.5"
                     />
                   )}
                   <span className="text-base font-semibold ">LEFT NOTE</span>
@@ -118,19 +108,24 @@ function Sidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 {menuItems.main.map((item) => {
-                  return (
-                    <SidebarMenuItem key={item.label}>
-                      <Link href={item.url ?? '#'}>
-                        <SidebarMenuButton
-                          isActive={path === '/' + item.url}
-                          className="rounded-[0.2rem]"
-                        >
-                          {item.icon}
-                          {item.label}
-                        </SidebarMenuButton>
-                      </Link>
-                    </SidebarMenuItem>
-                  );
+                  switch (item.id) {
+                    case 'note':
+                      return (
+                        <MenuNoteItem
+                          key={item.id}
+                          item={item}
+                          path={path}
+                        />
+                      );
+                    default:
+                      return (
+                        <MenuItem
+                          key={item.id}
+                          item={item}
+                          path={path}
+                        />
+                      );
+                  }
                 })}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -150,9 +145,7 @@ function Sidebar() {
                         src={user?.avatar}
                         alt={user?.name}
                       />
-                      <AvatarFallback className="rounded-lg">
-                        {user?.name?.substring(0, 1) || 'N'}
-                      </AvatarFallback>
+                      <AvatarFallback className="rounded-lg">{user?.name?.substring(0, 1) || 'N'}</AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-medium">{user?.name}</span>
@@ -173,15 +166,11 @@ function Sidebar() {
                           src={user?.avatar}
                           alt={user?.name}
                         />
-                        <AvatarFallback className="rounded-lg">
-                          {user?.name?.substring(0, 1) || 'N'}
-                        </AvatarFallback>
+                        <AvatarFallback className="rounded-lg">{user?.name?.substring(0, 1) || 'N'}</AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">
                         <span className="truncate font-medium">{user?.name}</span>
-                        <span className="text-muted-foreground truncate text-xs">
-                          {user?.email}
-                        </span>
+                        <span className="text-muted-foreground truncate text-xs">{user?.email}</span>
                       </div>
                     </div>
                   </DropdownMenuLabel>
@@ -221,13 +210,7 @@ function Sidebar() {
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   {isLogin ? (
-                    <DropdownMenuItem
-                      onSelect={(e) =>
-                        logout().then(() => {
-                          toast.success('Logout successfully');
-                        })
-                      }
-                    >
+                    <DropdownMenuItem onSelect={(e) => mutateLogout.mutate()}>
                       <LogOut /> Log out
                     </DropdownMenuItem>
                   ) : (

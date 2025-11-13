@@ -14,7 +14,7 @@ export default function QueryProvider({ children }: { children: React.ReactNode 
           mutations: {
             onError(error: any) {
               console.log('error', error);
-              toast(error?.response?.data?.message || error.message);
+              toast.error(error?.response?.data?.message || error.message);
             },
           },
         },

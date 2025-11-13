@@ -2,14 +2,13 @@ import React from 'react';
 import {
   SHORTCUT_FEATURE,
   KEYBOARD_SHORTCUT,
-  SHORTCUT_MODEL,
   SHORTCUT_SCOPE,
 } from './constants/shortcut';
 import { isShortcutPressed } from './utils';
 
 type RegisteredShortcut = {
   scope: SHORTCUT_SCOPE;
-  model: SHORTCUT_MODEL;
+  model: string;
   feature: SHORTCUT_FEATURE;
   handler: () => void;
   keyboardShortcuts: KEYBOARD_SHORTCUT[][];

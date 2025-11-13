@@ -3,7 +3,7 @@ import { Button } from '@package/ui/components/button';
 import { goBack } from '@left-note/utils/history';
 import { useRouter } from 'next/navigation';
 
-export default function NotAuthentication() {
+export function NotAuthentication() {
   const { setOpenModalLogin } = useAuthModal();
   const router = useRouter();
   return (

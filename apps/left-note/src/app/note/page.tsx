@@ -1,9 +1,5 @@
 'use client';
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from '@package/ui/components/resizable';
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@package/ui/components/resizable';
 import { Input } from '@package/ui/components/input';
 import { Tiptap } from '@package/tiptap/tiptap';
 
