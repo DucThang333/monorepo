@@ -1,17 +1,25 @@
-import { useContext } from 'react';
-import { MenuContext } from './menu';
+import { useMenuContext } from './menu';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@package/ui/components/shadcn/collapsible';
-import { SidebarMenuItem, SidebarMenuButton, SidebarMenuSub, SidebarMenuSubButton } from '@package/ui/components/sidebar';
+import {
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+} from '@package/ui/components/sidebar';
 import { useState } from 'react';
 import { ReactNode } from 'react';
 import { ChevronDownIcon, ChevronRightIcon } from '@package/ui/icons/lucide-react';
-import { NoteBook } from '@left-note/models/notebooks';
+import { Notebook } from '@left-note/models/notebooks';
 import { SidebarMenuSubItem } from '@package/ui/components/sidebar';
 import { Input } from '@package/ui/components/input';
 import { cn } from '@package/ui/lib/utils';
 import { useRouter } from 'next/navigation';
 import { Note } from '@left-note/models/note';
 import { NoteType } from './index';
+import { updateNotebook } from '@left-note/actions/notebook';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateNote } from '@left-note/actions/note';
 
 export type MenuItemsType = {
   id: string;
@@ -21,7 +29,7 @@ export type MenuItemsType = {
   suffixItem?: ReactNode;
   prefixItem?: ReactNode;
   items?: MenuItemsType[];
-  record?: NoteBook | Note;
+  record?: Notebook | Note;
   type?: NoteType;
 };
 
@@ -31,9 +39,16 @@ export type MenuType = {
 };
 
 export function MenuItem({ item, path }: { item: MenuItemsType; path: string }) {
-  const { focusItem, openItems, setOpenItems } = useContext(MenuContext);
+  const { focusItem, openItems, setOpenItems, setFocusItem } = useMenuContext();
+  const router = useRouter();
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    setFocusItem({
+      type: NoteType.NOTEBOOK,
+      record: item.record,
+    });
+    router.push(`/${item.url}`);
+  };
 
   return (
     <Collapsible
@@ -83,7 +98,7 @@ export function MenuItem({ item, path }: { item: MenuItemsType; path: string }) 
 }
 
 function MenuSubItem({ item, path }: { item: MenuItemsType; path: string }) {
-  const { focusItem, openItems, setOpenItems } = useContext(MenuContext);
+  const { focusItem, openItems, setOpenItems } = useMenuContext();
 
   const handleClick = () => {};
 
@@ -140,7 +155,7 @@ function MenuSubItem({ item, path }: { item: MenuItemsType; path: string }) {
 }
 
 export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string }) {
-  const { focusItem, setFocusItem, openItems, setOpenItems, dragItem, setDragItem } = useContext(MenuContext);
+  const { focusItem, setFocusItem, openItems, setOpenItems, dragItem, setDragItem } = useMenuContext();
 
   const router = useRouter();
 
@@ -149,19 +164,17 @@ export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string
       type: NoteType.NOTEBOOK,
       record: item.record,
     });
-    focusItem === item.id && router.push(`/${item.url}`);
+    if (openItems.includes(item.id)) {
+      path === '/' + item.url && setOpenItems(openItems.filter((id) => id !== item.id));
+      router.push(`/${item.url}`);
+    } else {
+      setOpenItems([...openItems, item.id]);
+    }
   };
 
   return (
     <Collapsible
       open={openItems.includes(item.id)}
-      onOpenChange={(open) => {
-        if (open) {
-          setOpenItems([...openItems, item.id]);
-        } else {
-          setOpenItems(openItems.filter((id) => id !== item.id));
-        }
-      }}
       key={item.id}
     >
       <SidebarMenuItem>
@@ -216,11 +229,16 @@ export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string
 }
 
 function MenuNoteSubItem({ item, path }: { item: MenuItemsType; path: string }) {
-  const { focusItem, setFocusItem, openItems, setOpenItems, dragItem, setDragItem, updateNotebook, openEditName, setOpenEditName } =
-    useContext(MenuContext);
+  const { focusItem, setFocusItem, openItems, setOpenItems, dragItem, setDragItem, openEditName, setOpenEditName } =
+    useMenuContext();
 
-  const router = useRouter();
   const [label, setLabel] = useState(item.label);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const updateNotebookAction = bindActionCreators(updateNotebook, dispatch);
+  const updateNoteAction = bindActionCreators(updateNote, dispatch);
 
   const handleClick = () => {
     setFocusItem({
@@ -250,12 +268,8 @@ function MenuNoteSubItem({ item, path }: { item: MenuItemsType; path: string }) 
             className="p-0"
           >
             <SidebarMenuSubButton
-              className="rounded-[0.2rem] px-2 py-0.5"
-              isActive={
-                path === '/' + item.url ||
-                (focusItem?.record?.id === item.id && focusItem?.type === NoteType.NOTE) ||
-                dragItem?.notebook_id === item.id
-              }
+              className={cn('rounded-[0.2rem] px-2 py-0.5', path === '/' + item.url && 'text-highlight')}
+              isActive={focusItem?.record?.id === item.id || dragItem?.notebook_id === item.id}
               onClick={handleClick}
               draggable
               onDragOver={() => {
@@ -283,17 +297,24 @@ function MenuNoteSubItem({ item, path }: { item: MenuItemsType; path: string }) 
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  updateNotebook({
-                    id: item.id,
-                    title: label,
-                  });
+                  if (item.type === NoteType.NOTEBOOK) {
+                    updateNotebookAction({
+                      id: item.id,
+                      title: label || '',
+                    });
+                  } else {
+                    updateNoteAction({
+                      id: item.id,
+                      title: label || '',
+                    });
+                  }
                   setOpenEditName(false);
                 }}
               >
                 <Input
                   id={item.id}
                   value={label}
-                  readOnly={!openEditName || item.id !== focusItem}
+                  readOnly={!openEditName || item.id !== focusItem?.record?.id}
                   inputClassName={cn(
                     openEditName && item.id === focusItem ? '' : 'pointer-events-none',
                     'w-full overflow-hidden text-ellipsis whitespace-nowrap'

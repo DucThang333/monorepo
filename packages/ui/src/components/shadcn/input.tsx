@@ -7,16 +7,11 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          'border focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-        outline:
-          'border-2 border-input focus-visible:border-ring focus-visible:ring-ring/40 focus-visible:ring-[2px]',
-        ghost:
-          'border-transparent bg-transparent hover:bg-muted/30 focus-visible:ring-2 focus-visible:ring-ring/40',
-        borderless:
-          'border-0 shadow-none bg-transparent focus-visible:ring-2 focus-visible:ring-ring/40',
-        underline:
-          'border-0 border-b border-input bg-transparent rounded-none focus-visible:border-ring focus-visible:ring-0',
+        default: 'border focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+        outline: 'border-2 border-input focus-visible:border-ring focus-visible:ring-ring/40 focus-visible:ring-[2px]',
+        ghost: 'border-transparent bg-transparent hover:bg-muted/30 focus-visible:ring-2 focus-visible:ring-ring/40',
+        borderless: 'border-0 shadow-none bg-transparent focus-visible:ring-2 focus-visible:ring-ring/40',
+        underline: 'border-0 border-b border-input bg-transparent rounded-none focus-visible:border-ring focus-visible:ring-0',
       },
       input_size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3 text-md',
@@ -48,17 +43,12 @@ function Input({
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement> & VariantProps<typeof inputVariants> & InputProps) {
   return (
-    <div
-      className={cn(
-        'flex items-center gap-2 rounded-md border px-3',
-        inputVariants({ variant, input_size }),
-        className
-      )}
-    >
+    <div className={cn('flex items-center gap-2 rounded-md border px-3', inputVariants({ variant, input_size }), className)}>
       {prefix && <span className="text-gray-500">{prefix}</span>}
       <input
         className={cn('flex-1 bg-transparent outline-none', inputClassName)}
         {...props}
+        value={props.value || ''}
       />
       {suffix && <span className="text-gray-500">{suffix}</span>}
     </div>

@@ -12,6 +12,7 @@ import { Providers as ThemeProvider } from '@left-note/providers/theme-provider'
 import { ReduxProvider } from '@left-note/deps/store/providers';
 import { AuthProvider } from '@left-note/providers/auth-provider';
 import { ToasterIOS } from '@package/ui/components/sonner';
+import MenuContextProvider from '@left-note/components/sidebar/menu';
 
 const QueryProvider = dynamic(() => import('@left-note/providers/query-provider'));
 const KeyboardShortcut = dynamic(() => import('@left-note/components/keyboardShortcut'));
@@ -31,17 +32,19 @@ export default function RootLayout({
           <QueryProvider>
             <ThemeProvider>
               <AuthProvider>
-                <SidebarProvider>
-                  <div className="flex w-full">
-                    <KeyboardShortcut />
-                    <Sidebar />
-                    {children}
-                    <ToasterIOS
-                      position="top-right"
-                      richColors={true}
-                    />
-                  </div>
-                </SidebarProvider>
+                <MenuContextProvider>
+                  <SidebarProvider>
+                    <div className="flex w-full">
+                      <KeyboardShortcut />
+                      <Sidebar />
+                      {children}
+                      <ToasterIOS
+                        position="top-right"
+                        richColors={true}
+                      />
+                    </div>
+                  </SidebarProvider>
+                </MenuContextProvider>
               </AuthProvider>
             </ThemeProvider>
           </QueryProvider>

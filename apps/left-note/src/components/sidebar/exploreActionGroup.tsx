@@ -1,34 +1,24 @@
 'use client';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { MenuContext } from './menu';
 import { useDispatch } from 'react-redux';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from '@package/ui/components/sonner';
-import { deleteNoteBook, getNotebooks } from '@left-note/actions/notebook';
+import { deleteNotebook } from '@left-note/actions/notebook';
 import { ConfirmModal } from '../modal/confirmModal';
 import { FilePlusIcon, CopyMinusIcon, Trash2Icon, SearchIcon, FolderIcon } from '@package/ui/icons/lucide-react';
 import { InseartModal } from './insertNotebook';
 import { SearchInputModal } from './search';
 import { NoteType } from './index';
+import { useMenuContext } from './menu';
+import { bindActionCreators } from 'redux';
 
 export function ExplorerActionGroup() {
   const [openAdd, setOpenAdd] = useState<NoteType | null>(null);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
-  const { setOpenItems, focusItem, openSearch, setOpenSearch } = useContext(MenuContext);
+  const { setOpenItems, focusItem, openSearch, setOpenSearch } = useMenuContext();
 
   const dispatch = useDispatch();
 
-  const mutateDeleteNoteBook = useMutation({
-    mutationFn: (id: string) => deleteNoteBook(id),
-    onSuccess: () => {
-      // reload notebooks
-      getNotebooks(dispatch);
-      setOpenConfirmDelete(false);
-      toast.success(`Archived notebook successfully`);
-    },
-  });
+  const deleteNotebookAction = bindActionCreators(deleteNotebook, dispatch);
 
   return (
     <>
@@ -79,8 +69,8 @@ export function ExplorerActionGroup() {
         title={`Archive Notebook`}
         description="Are you sure you want to archive this notebook?"
         onConfirm={() => {
-          if (!focusItem?.record) return;
-          mutateDeleteNoteBook.mutate(focusItem.record?.id as string);
+          if (!focusItem?.record?.id) return;
+          deleteNotebookAction(focusItem.record.id);
         }}
       />
     </>

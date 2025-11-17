@@ -1,11 +1,11 @@
 import { Note } from "./note";
 
-export interface NoteBook {
+export interface Notebook {
     id: string;
     user_id: string;
     notebook_id?: string;
-    notebook?: NoteBook;
-    notes?: Note[];
+    notebook?: Notebook;
+    notes: Note[];
     title: string;
     description: string;
     created_at: string;

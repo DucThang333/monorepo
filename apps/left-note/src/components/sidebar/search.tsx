@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import { MenuContext } from './menu';
+import { useMenuContext } from './menu';
 import { Dialog, DialogContent, DialogTitle } from '@package/ui/components/dialog';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '@package/ui/components/shadcn/command';
 
 export function SearchInputModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { notebookContext } = useContext(MenuContext);
+  const { notebookContext } = useMenuContext();
 
   const handleOnsubmit = () => {
     onClose();

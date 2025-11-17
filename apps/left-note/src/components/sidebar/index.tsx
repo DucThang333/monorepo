@@ -22,10 +22,21 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@package/ui/components/sidebar';
-import { Bell, LaptopMinimal, LogOut, LogInIcon, Moon, PanelLeftOpen, PanelRightOpen, Settings, Sun, User } from '@package/ui/icons/lucide-react';
+import {
+  Bell,
+  LaptopMinimal,
+  LogOut,
+  LogInIcon,
+  Moon,
+  PanelLeftOpen,
+  PanelRightOpen,
+  Settings,
+  Sun,
+  User,
+} from '@package/ui/icons/lucide-react';
 import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAuthModal } from '@left-note/providers/auth-provider';
 import { getAuthState, logout } from '@left-note/actions/auth';
 import { getNoteSettingState } from '@left-note/actions/note';
@@ -33,32 +44,27 @@ import { toast } from '@package/ui/components/sonner';
 import { useDispatch } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
 import { getNotebooks } from '@left-note/actions/notebook';
-import { MenuContextProvider } from './menu';
-import { MenuContext } from './menu';
+import { useMenuContext } from './menu';
 import { MenuItem, MenuNoteItem } from './menuItem';
-
-function Sidebar() {
-  return (
-    <MenuContextProvider>
-      <SidebarInit />
-    </MenuContextProvider>
-  );
-}
+import { bindActionCreators } from 'redux';
 
 export enum NoteType {
   NOTE = 'note',
   NOTEBOOK = 'notebook',
 }
 
-function SidebarInit() {
+function Sidebar() {
   const { isMobile, setOpen, open } = useSidebar();
   const { setTheme, theme, themes } = useTheme();
   const path = usePathname();
   const { isLogin, user } = getAuthState();
   const { isFullScreen } = getNoteSettingState();
   const dispatch = useDispatch();
-  const { menuItems } = useContext(MenuContext);
+  const { menuItems } = useMenuContext();
   const { setOpenModalLogin } = useAuthModal();
+
+  const getNotebooksAction = bindActionCreators(getNotebooks, dispatch);
+
   const mutateLogout = useMutation({
     mutationFn: () =>
       logout(dispatch).then(() => {
@@ -66,9 +72,8 @@ function SidebarInit() {
       }),
   });
 
-  // Init component
   useEffect(() => {
-    getNotebooks(dispatch);
+    getNotebooksAction();
   }, []);
 
   return isFullScreen ? null : (
