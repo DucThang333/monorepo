@@ -1,12 +1,6 @@
 'use client';
 import { Button } from '@package/ui/components/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@package/ui/components/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@package/ui/components/dialog';
 import {
   Form,
   FormItem,
@@ -176,6 +170,7 @@ export default function ModalRegister({ open, onClose }: { open: boolean; onClos
               <Button
                 className="cursor-pointer"
                 type="submit"
+                isLoading={mutateRegister.isPending}
               >
                 Register
               </Button>

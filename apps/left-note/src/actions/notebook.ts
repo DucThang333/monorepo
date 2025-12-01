@@ -11,22 +11,19 @@ type GetNotebooksResponse = {
 };
 
 export const getNotebooks = () => (dispatch: AppDispatch) => {
-  dispatch({ type: NotebookActionType.SET_LOADING });
+  dispatch({ type: NotebookActionType.LOAD_NOTEBOOK });
   return http
     .get<GetNotebooksResponse>('/v1/notebook')
     .then((res) => {
       dispatch({
-        type: NotebookActionType.LOAD_NOTEBOOK,
+        type: NotebookActionType.LOAD_NOTEBOOK_SUCCESS,
         payload: { notebooks: res.data.notebooks },
       });
 
       return res;
     })
     .catch((err) => {
-      dispatch({
-        type: NotebookActionType.SET_ERROR,
-        payload: { state: StateEnum.ERROR },
-      });
+      dispatch({ type: NotebookActionType.LOAD_NOTEBOOK_ERROR });
 
       throw Error(err);
     });
@@ -42,21 +39,21 @@ export type CreateNotebookResponse = {
   notebook: Notebook;
 };
 
-export const createNotebook = (payload: CreateNotebookPayload) => (dispatch: AppDispatch) => {
-  dispatch({ type: NotebookActionType.SET_LOADING });
+export const createNotebook = (dispatch: AppDispatch, payload: CreateNotebookPayload) => {
+  dispatch({ type: NotebookActionType.ADD_NOTEBOOK });
 
   return http
     .post<CreateNotebookResponse>('/v1/notebook', payload)
     .then((res) => {
       dispatch({
-        type: NotebookActionType.ADD_NOTEBOOK,
+        type: NotebookActionType.ADD_NOTEBOOK_SUCCESS,
         payload: { notebooks: [res.data.notebook] },
       });
 
       return res;
     })
     .catch((err) => {
-      dispatch({ type: NotebookActionType.SET_ERROR });
+      dispatch({ type: NotebookActionType.ADD_NOTEBOOK_ERROR });
 
       throw Error(err);
     });
@@ -73,21 +70,22 @@ export type UpdateNotebookResponse = {
   notebook: Notebook;
 };
 
-export const updateNotebook = (payload: UpdateNotebookPayload) => (dispatch: AppDispatch) => {
-  dispatch({ type: NotebookActionType.SET_LOADING });
+export const updateNotebook = (dispatch: AppDispatch, payload: UpdateNotebookPayload) => {
+  console.log('updateNotebook payload:', payload);
+  dispatch({ type: NotebookActionType.UPDATE_NOTEBOOK });
 
   return http
     .put<UpdateNotebookResponse>(`/v1/notebook/${payload.id}`, payload)
     .then((res) => {
       dispatch({
-        type: NotebookActionType.UPDATE_NOTEBOOK,
+        type: NotebookActionType.UPDATE_NOTEBOOK_SUCCESS,
         payload: { notebooks: [res.data.notebook] },
       });
 
       return res;
     })
     .catch((err) => {
-      dispatch({ type: NotebookActionType.SET_ERROR });
+      dispatch({ type: NotebookActionType.UPDATE_NOTEBOOK_ERROR });
 
       throw Error(err);
     });
@@ -98,21 +96,21 @@ export type DeleteNotebookResponse = {
   notebook_ids: string[];
 };
 
-export const deleteNotebook = (id: string) => (dispatch: AppDispatch) => {
-  dispatch({ type: NotebookActionType.SET_LOADING });
+export const deleteNotebook = (dispatch: AppDispatch, id: string) => {
+  dispatch({ type: NotebookActionType.DELETE_NOTEBOOK });
 
   return http
     .delete<DeleteNotebookResponse>(`/v1/notebook/${id}`)
     .then((res) => {
       dispatch({
-        type: NotebookActionType.DELETE_NOTEBOOK,
+        type: NotebookActionType.DELETE_NOTEBOOK_SUCCESS,
         payload: { notebook_ids: res.data.notebook_ids },
       });
 
       return res;
     })
     .catch((err) => {
-      dispatch({ type: NotebookActionType.SET_ERROR });
+      dispatch({ type: NotebookActionType.DELETE_NOTEBOOK_ERROR });
 
       throw Error(err);
     });

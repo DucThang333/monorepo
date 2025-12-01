@@ -8,6 +8,8 @@ export function isShortcutPressed(event: KeyboardEvent, combo: KEYBOARD_SHORTCUT
   if (event.altKey) pressed.push(KEYBOARD_SHORTCUT.ALT.toLowerCase());
   if (event.shiftKey) pressed.push(KEYBOARD_SHORTCUT.SHIFT.toLowerCase());
 
+  if (!event.key) return false;
+
   pressed.push(event.key.toLowerCase()); // capture actual pressed key
 
   return combo.every((key) => pressed.includes(key.toLowerCase()));

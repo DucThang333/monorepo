@@ -14,18 +14,33 @@ export type CreateNotePayload = {
   title: string;
   notebook_id: string;
 };
-export const createNote = (params: CreateNotePayload) => (dispatch: AppDispatch) => {
-  return http.post<{ note: Note }>('/v1/note', params);
+export const createNote = (dispatch: AppDispatch, params: CreateNotePayload) => {
+  dispatch({ type: NotebookActionType.ADD_NOTE });
+  return http
+    .post<{ note: Note }>('/v1/note', params)
+    .then((res) => {
+      dispatch({
+        type: NotebookActionType.ADD_NOTE_SUCCESS,
+        payload: {
+          notes: [res.data.note],
+        },
+      });
+      return res;
+    })
+    .catch((err) => {
+      dispatch({ type: NotebookActionType.ADD_NOTE_ERROR });
+      throw err;
+    });
 };
 
 export const getNote = (id: string) => (dispatch: AppDispatch) => {
-  dispatch({ type: NotebookActionType.SET_LOADING });
+  dispatch({ type: NotebookActionType.LOAD_NOTE });
 
   return http
     .get<{ note: Note }>(`/v1/note/${id}`)
     .then((res) => {
       dispatch({
-        type: NotebookActionType.UPDATE_NOTE,
+        type: NotebookActionType.LOAD_NOTE_SUCCESS,
         payload: {
           notes: [res.data.note],
         },
@@ -34,7 +49,7 @@ export const getNote = (id: string) => (dispatch: AppDispatch) => {
       return res;
     })
     .catch((err) => {
-      dispatch({ type: NotebookActionType.SET_ERROR });
+      dispatch({ type: NotebookActionType.LOAD_NOTE_ERROR });
 
       throw Error(err);
     });
@@ -42,21 +57,24 @@ export const getNote = (id: string) => (dispatch: AppDispatch) => {
 
 export type UpdateNotePayload = {
   id: string;
-  title: string;
+  title?: string;
   description?: string;
   is_archived?: boolean;
+  notebook_id?: string | null;
 };
 
 type UpdateNoteResponse = {
   note: Note;
 };
 
-export const updateNote = (params: UpdateNotePayload) => (dispatch: AppDispatch) => {
+export const updateNote = (dispatch: AppDispatch, params: UpdateNotePayload) => {
+  dispatch({ type: NotebookActionType.UPDATE_NOTE });
+
   return http
     .put<UpdateNoteResponse>(`/v1/note/${params.id}`, params)
     .then((res) => {
       dispatch({
-        type: NotebookActionType.UPDATE_NOTE,
+        type: NotebookActionType.UPDATE_NOTE_SUCCESS,
         payload: {
           notes: [res.data.note],
         },
@@ -65,28 +83,24 @@ export const updateNote = (params: UpdateNotePayload) => (dispatch: AppDispatch)
       return res;
     })
     .catch((err) => {
-      dispatch({ type: NotebookActionType.SET_ERROR });
+      dispatch({ type: NotebookActionType.UPDATE_NOTE_ERROR });
 
       throw Error(err);
     });
-};
-
-export type DeleteNotePayload = {
-  id: string;
 };
 
 type DeleteNoteResponse = {
   note_ids: string[];
 };
 
-export const deleteNote = (params: DeleteNotePayload) => (dispatch: AppDispatch) => {
-  dispatch({ type: NotebookActionType.SET_LOADING });
+export const deleteNote = (dispatch: AppDispatch, id: string) => {
+  dispatch({ type: NotebookActionType.DELETE_NOTE });
 
   return http
-    .delete<DeleteNoteResponse>(`/v1/note/${params.id}`)
+    .delete<DeleteNoteResponse>(`/v1/note/${id}`)
     .then((res) => {
       dispatch({
-        type: NotebookActionType.DELETE_NOTE,
+        type: NotebookActionType.DELETE_NOTE_SUCCESS,
         payload: {
           note_ids: res.data.note_ids,
         },
@@ -95,7 +109,7 @@ export const deleteNote = (params: DeleteNotePayload) => (dispatch: AppDispatch)
       return res;
     })
     .catch((err) => {
-      dispatch({ type: NotebookActionType.SET_ERROR });
+      dispatch({ type: NotebookActionType.DELETE_NOTE_ERROR });
 
       throw Error(err);
     });

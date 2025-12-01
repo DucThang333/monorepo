@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();``
 
   useQuery({
     queryKey: ['authentication'],

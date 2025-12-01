@@ -13,11 +13,12 @@ type ConfirmModalProps = {
   open: boolean;
   onClose: () => void;
   title?: string;
+  isPending?: boolean;
   description?: string;
   onConfirm: () => void;
 };
 
-export function ConfirmModal({ open, onClose, title, description, onConfirm }: ConfirmModalProps) {
+export function ConfirmModal({ open, onClose, title, isPending, description, onConfirm }: ConfirmModalProps) {
   return (
     <Dialog
       open={open}
@@ -35,7 +36,12 @@ export function ConfirmModal({ open, onClose, title, description, onConfirm }: C
           >
             Cancel
           </Button>
-          <Button onClick={onConfirm}>Confirm</Button>
+          <Button
+            onClick={onConfirm}
+            isLoading={isPending}
+          >
+            Confirm
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

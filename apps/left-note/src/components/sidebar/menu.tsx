@@ -6,7 +6,7 @@ import { renderTreeMap } from '@left-note/utils';
 import { toast } from '@package/ui/components/sonner';
 import { useMutation } from '@tanstack/react-query';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { updateNotebook, UpdateNotebookPayload, UpdateNotebookResponse } from '@left-note/actions/notebook';
+import { getNotebookState, updateNotebook, UpdateNotebookPayload } from '@left-note/actions/notebook';
 import { SHORTCUT_FEATURE, SHORTCUT_SCOPE } from '@package/keyboard-shortcut/src/constants/shortcut';
 import { SHORTCUT_MODEL } from '@left-note/shortcuts/constant';
 import shortcutManager from '@package/keyboard-shortcut/src';
@@ -19,8 +19,7 @@ import { StateEnum } from '@left-note/types/state';
 import { parseStateEnum } from '@left-note/utils/query';
 import { Note } from '@left-note/models/note';
 import { NoteType } from './index';
-import { RootState } from '@left-note/deps/store';
-import { Response } from '@left-note/models/response';
+import { useRouter } from 'next/navigation';
 
 const menuInitItems: MenuType = {
   main: [
@@ -72,15 +71,23 @@ type FocusItemType = {
   record?: Notebook | Note;
 };
 
+type NotebookContext = {
+  id: string;
+  type: NoteType;
+  title: string;
+  record: Notebook | Note;
+  path: string[];
+};
+
 const MenuContext = createContext<{
   focusItem: FocusItemType | null;
   setFocusItem: (item: FocusItemType) => void;
   openItems: string[];
   setOpenItems: (items: string[]) => void;
   menuItems: MenuType;
-  notebookContext: string[];
-  dragItem: { tab: string; notebook_id: string | null } | null;
-  setDragItem: (item: { tab: string; notebook_id: string | null } | null) => void;
+  notebookContext: NotebookContext[];
+  dragItem: { tab: string; type: NoteType; notebook_id: string | null } | null;
+  setDragItem: (item: { tab: string; type: NoteType; notebook_id: string | null } | null) => void;
   openEditName: boolean;
   setOpenEditName: (open: boolean) => void;
   updateNotebookState: StateEnum;
@@ -102,22 +109,20 @@ const MenuContext = createContext<{
   setOpenSearch: () => {},
 });
 
-const MenuContextProvider = ({
-  notebooks,
-  updateNotebook,
-  children,
-}: {
-  notebooks: Notebook[];
-  updateNotebook: (payload: UpdateNotebookPayload) => Promise<Response<UpdateNotebookResponse>>;
-  children: React.ReactNode;
-}) => {
+const MenuContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [focusItem, setFocusItem] = useState<FocusItemType | null>(null);
   const [openItems, setOpenItems] = useState<string[]>([]);
-  const [dragItem, setDragItem] = useState<{ tab: string; notebook_id: string | null } | null>(null);
+  const [dragItem, setDragItem] = useState<{ tab: string; type: NoteType; notebook_id: string | null } | null>(null);
   const [openSearch, setOpenSearch] = useState(false);
   const [openEditName, setOpenEditName] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const { notebooks } = getNotebookState();
+
   const notebooksTree = useMemo(() => renderTreeMap(notebooks, 'id', 'notebook_id'), [notebooks]);
+
+  const router = useRouter();
 
   const menuItems = useMemo(() => {
     return {
@@ -137,20 +142,46 @@ const MenuContextProvider = ({
   }, [notebooksTree]);
 
   const notebookContext = useMemo(() => {
-    function render(tree: NotebookTreeType[], parent: string | null): string[] {
-      return tree.reduce((acc: string[], notebook: NotebookTreeType) => {
+    function render(tree: NotebookTreeType[], path: string[], parent: string | null): NotebookContext[] {
+      return tree.reduce((acc: NotebookContext[], notebook: NotebookTreeType) => {
+        const newPath = [...path, notebook.id];
         const title = `${parent ? parent + '/' : ''}${notebook.title}`;
-        if (notebook.children) {
-          return [...acc, title, ...render(notebook.children, title)];
+        const newContext: NotebookContext[] = [
+          {
+            id: notebook.id,
+            type: NoteType.NOTEBOOK,
+            title,
+            record: notebook,
+            path: newPath,
+          },
+        ];
+        // case have notes => add note tocontext
+        if (notebook.notes && notebook.notes.length > 0) {
+          // add notes to context
+          notebook.notes.forEach((note) => {
+            newContext.push({
+              id: note.id,
+              type: NoteType.NOTE,
+              title: note.title,
+              record: note,
+              path: [...newPath, note.id],
+            });
+          });
         }
-        return [...acc, title];
+
+        // case have children inside => continue recursion
+        if (notebook.children) {
+          return [...acc, ...newContext, ...render(notebook.children, newPath, title)];
+        }
+        // return notebook as leaf node
+        return [...acc, ...newContext];
       }, []);
     }
-    return render(notebooksTree, null);
+    return render(notebooksTree, ['note'], null).sort((a, b) => a.title.localeCompare(b.title));
   }, [notebooksTree]);
 
   const mutateUpdateNotebook = useMutation({
-    mutationFn: (params: UpdateNotebookPayload) => updateNotebook(params),
+    mutationFn: (params: UpdateNotebookPayload) => updateNotebook(dispatch, params),
     onSuccess: (res) => {
       // reload notebooks
       setFocusItem({
@@ -165,6 +196,7 @@ const MenuContextProvider = ({
   });
 
   useEffect(() => {
+    console.log('register short cut');
     shortcutManager.register({
       scope: SHORTCUT_SCOPE.APP,
       model: SHORTCUT_MODEL.NOTEBOOK,
@@ -181,6 +213,7 @@ const MenuContextProvider = ({
       feature: SHORTCUT_FEATURE.TOGGLE,
       keyboardShortcuts: [[KEYBOARD_SHORTCUT.CTRL, KEYBOARD_SHORTCUT.P]],
       handler: () => {
+        console.log('search');
         setOpenSearch((prev) => !prev);
       },
     });
@@ -196,11 +229,33 @@ const MenuContextProvider = ({
     }
   }, [openEditName]);
 
+  function setFocusItemCustom(item: NotebookContext) {
+    // need open this file
+    const context = notebookContext.find((c) => c.id === item.record?.id);
+
+    if (context) {
+      setOpenItems((prev) => [
+        ...prev,
+        ...(context.type === NoteType.NOTEBOOK ? context.path : [context.id, ...context.path]),
+      ]);
+    } else {
+      setOpenItems((prev) => [...prev, 'note']);
+    }
+
+    // access route if it is note
+    if (item.type === NoteType.NOTE) {
+      router.push(`/note/${item.record?.id}`);
+    }
+
+    //set focus item
+    setFocusItem(item);
+  }
+
   return (
     <MenuContext.Provider
       value={{
         focusItem,
-        setFocusItem,
+        setFocusItem: setFocusItemCustom,
         openItems,
         setOpenItems,
         menuItems,
@@ -221,6 +276,4 @@ const MenuContextProvider = ({
 
 export const useMenuContext = () => useContext(MenuContext);
 
-const store = (state: RootState) => ({ notebooks: state.notebook.notebooks });
-
-export default connect(store, { updateNotebook })(MenuContextProvider);
+export default MenuContextProvider;

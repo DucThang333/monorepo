@@ -18,7 +18,6 @@ import { Note } from '@left-note/models/note';
 import { NoteType } from './index';
 import { updateNotebook } from '@left-note/actions/notebook';
 import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { updateNote } from '@left-note/actions/note';
 
 export type MenuItemsType = {
@@ -157,21 +156,6 @@ function MenuSubItem({ item, path }: { item: MenuItemsType; path: string }) {
 export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string }) {
   const { focusItem, setFocusItem, openItems, setOpenItems, dragItem, setDragItem } = useMenuContext();
 
-  const router = useRouter();
-
-  const handleClick = () => {
-    setFocusItem({
-      type: NoteType.NOTEBOOK,
-      record: item.record,
-    });
-    if (openItems.includes(item.id)) {
-      path === '/' + item.url && setOpenItems(openItems.filter((id) => id !== item.id));
-      router.push(`/${item.url}`);
-    } else {
-      setOpenItems([...openItems, item.id]);
-    }
-  };
-
   return (
     <Collapsible
       open={openItems.includes(item.id)}
@@ -182,7 +166,12 @@ export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string
           <SidebarMenuButton
             isActive={path === '/' + item.url || focusItem === item.id || dragItem?.tab === item.id}
             className="rounded-[0.2rem]"
-            onClick={handleClick}
+            onClick={() =>
+              setFocusItem({
+                type: NoteType.NOTEBOOK,
+                record: item.record,
+              })
+            }
             onDragOver={() => {
               if (!openItems.includes(item.id)) {
                 setOpenItems([...openItems, item.id]);
@@ -190,13 +179,9 @@ export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string
               if (dragItem?.notebook_id !== item.id) {
                 setDragItem({
                   tab: 'note',
-                  notebook_id: null,
+                  type: NoteType.NOTEBOOK,
+                  notebook_id: item.id,
                 });
-              }
-            }}
-            onDragLeave={() => {
-              if (dragItem?.notebook_id === item.id) {
-                setDragItem(null);
               }
             }}
           >
@@ -211,7 +196,12 @@ export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string
               ))}
           </SidebarMenuButton>
         </CollapsibleTrigger>
-        <CollapsibleContent>
+        <CollapsibleContent
+          className={cn(
+            'pl-0',
+            dragItem?.notebook_id === item.id && focusItem?.type === NoteType.NOTEBOOK && 'bg-gray-500/5'
+          )}
+        >
           {item.suffixItem}
           {item.items &&
             item.items.map((item) => (
@@ -235,23 +225,9 @@ function MenuNoteSubItem({ item, path }: { item: MenuItemsType; path: string }) 
   const [label, setLabel] = useState(item.label);
 
   const dispatch = useDispatch();
-  const router = useRouter();
-
-  const updateNotebookAction = bindActionCreators(updateNotebook, dispatch);
-  const updateNoteAction = bindActionCreators(updateNote, dispatch);
-
-  const handleClick = () => {
-    setFocusItem({
-      type: item.type,
-      record: item.record,
-    });
-    if (item?.type === NoteType.NOTE) {
-      router.push(`/${item.url}`);
-    }
-  };
 
   return (
-    <SidebarMenuSub className="mr-0 ml-2 pl-2 pr-0 cursor-pointer">
+    <SidebarMenuSub className="mr-0 ml-4 pl-0 pr-0 cursor-pointer border-l-0">
       <Collapsible
         open={openItems.includes(item.id)}
         onOpenChange={(open) => {
@@ -268,29 +244,49 @@ function MenuNoteSubItem({ item, path }: { item: MenuItemsType; path: string }) 
             className="p-0"
           >
             <SidebarMenuSubButton
-              className={cn('rounded-[0.2rem] px-2 py-0.5', path === '/' + item.url && 'text-highlight')}
+              className={cn('rounded-[0.2rem] px-0 py-0.5', path === '/' + item.url && 'text-highlight')}
               isActive={focusItem?.record?.id === item.id || dragItem?.notebook_id === item.id}
-              onClick={handleClick}
+              onClick={() => {
+                setFocusItem({
+                  type: item.type,
+                  record: item.record,
+                });
+              }}
               draggable
+              onDragStart={() => {
+                setFocusItem({
+                  type: item.type,
+                  record: item.record,
+                });
+              }}
               onDragOver={() => {
                 if (!openItems.includes(item.id)) {
                   setOpenItems([...openItems, item.id]);
                 }
-                if (dragItem?.notebook_id !== item.id) {
+                if (dragItem?.notebook_id !== (item.type === NoteType.NOTEBOOK ? item.id : item.record?.notebook_id)) {
                   setDragItem({
                     tab: 'note',
-                    notebook_id: item.id,
+                    type: item.type as NoteType,
+                    notebook_id: item.type === NoteType.NOTEBOOK ? item.id : (item?.record?.notebook_id ?? null),
                   });
                 }
               }}
               onDragEnd={() => {
-                if (dragItem?.notebook_id === item.id || dragItem?.notebook_id === item.record?.notebook_id) {
-                  return;
+                setDragItem(null);
+                // in case target item is note => not need update move to same notebook
+                if (item.type === NoteType.NOTEBOOK) {
+                  if (dragItem?.notebook_id !== item.id) return;
+                  updateNotebook(dispatch, {
+                    id: item.id,
+                    notebook_id: dragItem?.notebook_id === 'note' ? null : dragItem?.notebook_id,
+                  });
+                } else {
+                  if (dragItem?.notebook_id === 'note' || dragItem?.notebook_id === item?.record?.notebook_id) return;
+                  updateNote(dispatch, {
+                    id: item.id,
+                    notebook_id: dragItem?.notebook_id,
+                  });
                 }
-                updateNotebook({
-                  id: item.id,
-                  notebook_id: dragItem?.notebook_id || null,
-                });
               }}
             >
               {item.icon}
@@ -298,14 +294,14 @@ function MenuNoteSubItem({ item, path }: { item: MenuItemsType; path: string }) 
                 onSubmit={(e) => {
                   e.preventDefault();
                   if (item.type === NoteType.NOTEBOOK) {
-                    updateNotebookAction({
+                    updateNotebook(dispatch, {
                       id: item.id,
-                      title: label || '',
+                      title: label,
                     });
                   } else {
-                    updateNoteAction({
+                    updateNote(dispatch, {
                       id: item.id,
-                      title: label || '',
+                      title: label,
                     });
                   }
                   setOpenEditName(false);
@@ -339,7 +335,7 @@ function MenuNoteSubItem({ item, path }: { item: MenuItemsType; path: string }) 
                 ))}
             </SidebarMenuSubButton>
           </CollapsibleTrigger>
-          <CollapsibleContent>
+          <CollapsibleContent className={cn('pl-0 border-l-1', dragItem?.notebook_id === item.id && 'bg-gray-500/10')}>
             {item.suffixItem}
             {item.items &&
               item.items.length > 0 &&

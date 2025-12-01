@@ -12,6 +12,7 @@ export const makeStore = (preloadedState?: any) =>
       notebook,
     }),
     preloadedState,
+    devTools: true,
   });
 
 export type AppStore = ReturnType<typeof makeStore>;

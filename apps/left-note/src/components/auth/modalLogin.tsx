@@ -1,11 +1,5 @@
 'use client';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@package/ui/components/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@package/ui/components/dialog';
 import { Button } from '@package/ui/components/button';
 import {
   Form,
@@ -150,6 +144,7 @@ export default function ModalLogin({ open, onClose }: { open: boolean; onClose: 
               <Button
                 className="cursor-pointer"
                 type="submit"
+                isLoading={mutateLogin.isPending}
               >
                 Login
               </Button>

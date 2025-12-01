@@ -1,12 +1,14 @@
-import { LOCALSTORE_KEY } from "@left-note/constants/localstore";
-import Cookies from 'js-cookie'
+import { LOCALSTORE_KEY } from '@left-note/constants/localstore';
+import Cookies from 'js-cookie';
+
+const EXPIRES_TIME = 30;
 
 export const setLocalStore = (key: LOCALSTORE_KEY, value: string) => {
   localStorage.setItem(key, value);
 };
 
 export const getLocalStore = (key: LOCALSTORE_KEY) => {
-  if (typeof window === "undefined") return null;
+  if (typeof window === 'undefined') return null;
   return localStorage.getItem(key) || null;
 };
 
@@ -15,7 +17,7 @@ export const removeLocalStore = (key: LOCALSTORE_KEY) => {
 };
 
 export const setLocalStoreLongLive = (key: LOCALSTORE_KEY, value: string) => {
-  Cookies.set(key, value);
+  Cookies.set(key, value, { expires: EXPIRES_TIME, sameSite: 'strict' });
 };
 
 export const getLocalStoreLongLive = (key: LOCALSTORE_KEY) => {
