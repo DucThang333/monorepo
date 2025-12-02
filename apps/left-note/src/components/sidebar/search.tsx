@@ -20,7 +20,7 @@ export function SearchInputModal({ open, onClose }: { open: boolean; onClose: ()
               <CommandItem
                 key={item.id}
                 onSelect={() => {
-                  setFocusItem(item);
+                  setFocusItem({ type: item.type, record: item.record });
                   onClose();
                 }}
               >

@@ -196,7 +196,6 @@ const MenuContextProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   useEffect(() => {
-    console.log('register short cut');
     shortcutManager.register({
       scope: SHORTCUT_SCOPE.APP,
       model: SHORTCUT_MODEL.NOTEBOOK,
@@ -229,7 +228,7 @@ const MenuContextProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [openEditName]);
 
-  function setFocusItemCustom(item: NotebookContext) {
+  function setFocusItemCustom(item: FocusItemType) {
     // need open this file
     const context = notebookContext.find((c) => c.id === item.record?.id);
 
@@ -239,6 +238,7 @@ const MenuContextProvider = ({ children }: { children: React.ReactNode }) => {
         ...(context.type === NoteType.NOTEBOOK ? context.path : [context.id, ...context.path]),
       ]);
     } else {
+      // if context not found, open default note
       setOpenItems((prev) => [...prev, 'note']);
     }
 

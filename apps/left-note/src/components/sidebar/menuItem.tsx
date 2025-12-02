@@ -156,9 +156,18 @@ function MenuSubItem({ item, path }: { item: MenuItemsType; path: string }) {
 export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string }) {
   const { focusItem, setFocusItem, openItems, setOpenItems, dragItem, setDragItem } = useMenuContext();
 
+  const open = openItems.includes(item.id);
+
   return (
     <Collapsible
-      open={openItems.includes(item.id)}
+      open={open}
+      onOpenChange={(open) => {
+        if (open) {
+          setOpenItems([...openItems, item.id]);
+        } else {
+          setOpenItems(openItems.filter((id) => id !== item.id));
+        }
+      }}
       key={item.id}
     >
       <SidebarMenuItem>
@@ -197,8 +206,10 @@ export function MenuNoteItem({ item, path }: { item: MenuItemsType; path: string
           </SidebarMenuButton>
         </CollapsibleTrigger>
         <CollapsibleContent
+          forceMount
           className={cn(
             'pl-0',
+            open ? 'block' : 'hidden',
             dragItem?.notebook_id === item.id && focusItem?.type === NoteType.NOTEBOOK && 'bg-gray-500/5'
           )}
         >
